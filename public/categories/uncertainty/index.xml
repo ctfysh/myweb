@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uncertainty on Catfish</title>
+    <link>/categories/uncertainty/</link>
+    <description>Recent content in uncertainty on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/uncertainty/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>基于泰勒展开的不确定性传递</title>
+      <link>/post/2016-10-07-taylor-series-for-uncertainty/</link>
+      <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-10-07-taylor-series-for-uncertainty/</guid>
+      <description>
+
+
+&lt;div class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 两个输入变量&lt;/h1&gt;
+&lt;p&gt;假设随机变量&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;是随机变量&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和随机变量&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的函数，函数关系如下&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的均值分别为&lt;span class=&#34;math inline&#34;&gt;\(\overline{X}\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(\overline{Y}\)&lt;/span&gt;，方差分别为&lt;span class=&#34;math inline&#34;&gt;\(D_{X}\)&lt;/span&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;和&lt;span class=&#34;math inline&#34;&gt;\(D_{Y}\)&lt;/span&gt;，协方差为&lt;span class=&#34;math inline&#34;&gt;\(D_{XY}\)&lt;/span&gt;。对&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;进行关于&lt;span class=&#34;math inline&#34;&gt;\(\overline{X}\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(\overline{Y}\)&lt;/span&gt;泰勒展开可以得到&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(\overline{X},\overline{Y})+f_{X}^{\prime}(\overline{X},\overline{Y})(X-\overline{X})+f_{Y}^{\prime}(\overline{X},\overline{Y})(Y-\overline{Y})+o(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果忽略高阶项&lt;span class=&#34;math inline&#34;&gt;\(o(X,Y)\)&lt;/span&gt;，那么根据随机变量求和的期望和方差计算公式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\text{cov}(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;可以得到&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;的期望值与方差值分别如下&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\overline{Z}=f(\overline{X},\overline{Y})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[D_{Z}=f_{X}^{\prime}(\overline{X},\overline{Y})^{2}D_{X}+f_{Y}^{\prime}(\overline{X},\overline{Y})^{2}D_{Y}+2f_{X}^{\prime}(\overline{X},\overline{Y})f_{Y}^{\prime}(\overline{X},\overline{Y})D_{XY}\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

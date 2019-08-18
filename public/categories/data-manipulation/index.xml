@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data manipulation on Catfish</title>
+    <link>/categories/data-manipulation/</link>
+    <description>Recent content in Data manipulation on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 Feb 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/data-manipulation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>生产复杂表格的R软件包：tables</title>
+      <link>/post/2017-02-06-tables-package-usage/</link>
+      <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-02-06-tables-package-usage/</guid>
+      <description>
+
+
+&lt;p&gt;数据的输入输出一直是数据处理比较重要的问题。我们常见的数据表格的表头设计一般都比较复杂，存在着表头套表头的现象，而这种表格的结构对于一个数据分析软件来说是没法理解的。数据软件所能理解的表格是那种标准化的表格，也就是第一行是字段名（也就是变量名），从第二行到表格结束就是具体的内容（也就是变量的取值，或者叫实例）。这样除去第一行后，每一行表示一个实例（统计上叫一个观测，或者某个对象的属性），每一列表示一个变量的取值。如我们经常用到的&lt;code&gt;iris&lt;/code&gt;数据表（为了简便，随机从每个Species类别中选取了1个数据）：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Width&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Width&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Species&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;实际上，在R中我们一般以&lt;code&gt;data.frame&lt;/code&gt;的形式储存数据，实际上所面对的就是上面这种数据表格。这种数据表格对于编程人员来说很实用很方便，但对于一般人而言，就会觉得很不直观，比如我们将上面表格中的&lt;code&gt;iris&lt;/code&gt;数据等价地变换一下，就会发现这样的问题：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Species&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Type&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Shape&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

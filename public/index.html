@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Catfish</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="./css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="./css/poole.css">
+  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="./css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./catfish.png">
+  <link rel="shortcut icon" href="./favicon.ico">
+
+  
+  <link href="./index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
+  
+</head>
+
+  <body class="theme-base-0d ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="./"><h1>Catfish</h1></a>
+      <p class="lead">
+       R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a class="sidebar-nav-item" href="./">Home</a>
+        <a class="sidebar-nav-item" href="./post/"> Posts </a><a class="sidebar-nav-item" href="./about/"> About </a><a class="sidebar-nav-item" href="./categories/"> Categories </a><a class="sidebar-nav-item" href="./resume/"> Resume </a><a class="sidebar-nav-item" href="https://github.com/ctfysh"> GitHub </a>
+    </nav>
+
+    
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="posts">
+
+<article class="post">
+  <h1 class="post-title">
+    <a href="./post/2017-02-06-tables-package-usage/">生产复杂表格的R软件包：tables</a>
+  </h1>
+  <time datetime="2017-02-06T00:00:00Z" class="post-date">2017年2月6日</time>
+  
+
+
+<p>数据的输入输出一直是数据处理比较重要的问题。我们常见的数据表格的表头设计一般都比较复杂，存在着表头套表头的现象，而这种表格的结构对于一个数据分析软件来说是没法理解的。数据软件所能理解的表格是那种标准化的表格，也就是第一行是字段名（也就是变量名），从第二行到表格结束就是具体的内容（也就是变量的取值，或者叫实例）。这样除去第一行后，每一行表示一个实例（统计上叫一个观测，或者某个对象的属性），每一列表示一个变量的取值。如我们经常用到的<code>iris</code>数据表（为了简便，随机从每个Species类别中选取了1个数据）：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.1</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.6</td>
+<td align="right">2.9</td>
+<td align="right">3.6</td>
+<td align="right">1.3</td>
+<td align="left">versicolor</td>
+</tr>
+<tr class="odd">
+<td align="right">5.7</td>
+<td align="right">2.5</td>
+<td align="right">5.0</td>
+<td align="right">2.0</td>
+<td align="left">virginica</td>
+</tr>
+</tbody>
+</table>
+<p>实际上，在R中我们一般以<code>data.frame</code>的形式储存数据，实际上所面对的就是上面这种数据表格。这种数据表格对于编程人员来说很实用很方便，但对于一般人而言，就会觉得很不直观，比如我们将上面表格中的<code>iris</code>数据等价地变换一下，就会发现这样的问题：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Species</th>
+<th align="left">Type</th>
+<th align="left">Shape</th>
+<th align="right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">setosa</td>
+<td align="left">Sepal</td>
+<td align="left">Length</td>
+<td align="right">4.8</td>
+</tr>
+<tr class="even">
+<td align="left">versicolor</td>
+<td align="left">Sepal</td>
+<td align="left">Length</td>
+<td align="right">5.6</td>
+</tr>
+<tr class="odd">
+<td align="left">virginica</td>
+<td align="left">Sepal</td>
+<td align="left">Length</td>
+<td align="right">5.7</td>
+</tr>
+<tr class="even">
+<td align="left">setosa</td>
+<td align="left">Sepal</td>
+<td align="left">Width</td>
+<td align="right">3.1</td>
+</tr>
+<tr class="odd">
+<td align="left">versicolor</td>
+<td align="left">Sepal</td>
+<td align="left">Width</td>
+<td align="right">2.9</td>
+</tr>
+<tr class="even">
+<td align="left">virginica</td>
+<td align="left">Sepal</td>
+<td align="left">Width</td>
+<td align="right">2.5</td>
+</tr>
+<tr class="odd">
+<td align="left">setosa</td>
+<td align="left">Petal</td>
+<td align="left">Length</td>
+<td align="right">1.6</td>
+</tr>
+<tr class="even">
+<td align="left">versicolor</td>
+<td align="left">Petal</td>
+<td align="left">Length</td>
+<td align="right">3.6</td>
+</tr>
+<tr class="odd">
+<td align="left">virginica</td>
+<td align="left">Petal</td>
+<td align="left">Length</td>
+<td align="right">5.0</td>
+</tr>
+<tr class="even">
+<td align="left">setosa</td>
+<td align="left">Petal</td>
+<td align="left">Width</td>
+<td align="right">0.2</td>
+</tr>
+<tr class="odd">
+<td align="left">versicolor</td>
+<td align="left">Petal</td>
+<td align="left">Width</td>
+<td align="right">1.3</td>
+</tr>
+<tr class="even">
+<td align="left">virginica</td>
+<td align="left">Petal</td>
+<td align="left">Width</td>
+<td align="right">2.0</td>
+</tr>
+</tbody>
+</table>
+
+  
+  <div class="read-more-link">
+    <a href="./post/2017-02-06-tables-package-usage/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="./post/2016-10-07-taylor-series-for-uncertainty/">基于泰勒展开的不确定性传递</a>
+  </h1>
+  <time datetime="2016-10-07T00:00:00Z" class="post-date">2016年10月7日</time>
+  
+
+
+<div class="section level1">
+<h1>1 两个输入变量</h1>
+<p>假设随机变量<span class="math inline">\(Z\)</span>是随机变量<span class="math inline">\(X\)</span>和随机变量<span class="math inline">\(Y\)</span>的函数，函数关系如下</p>
+<p><span class="math display">\[Z=f(X,Y)\]</span></p>
+<p>其中<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的均值分别为<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>，方差分别为<span class="math inline">\(D_{X}\)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>和<span class="math inline">\(D_{Y}\)</span>，协方差为<span class="math inline">\(D_{XY}\)</span>。对<span class="math inline">\(Z\)</span>进行关于<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>泰勒展开可以得到</p>
+<p><span class="math display">\[Z=f(\overline{X},\overline{Y})+f_{X}^{\prime}(\overline{X},\overline{Y})(X-\overline{X})+f_{Y}^{\prime}(\overline{X},\overline{Y})(Y-\overline{Y})+o(X,Y)\]</span></p>
+<p>如果忽略高阶项<span class="math inline">\(o(X,Y)\)</span>，那么根据随机变量求和的期望和方差计算公式</p>
+<p><span class="math display">\[\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\]</span></p>
+<p>和</p>
+<p><span class="math display">\[\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\text{cov}(X,Y)\]</span></p>
+<p>可以得到<span class="math inline">\(Z\)</span>的期望值与方差值分别如下</p>
+<p><span class="math display">\[\overline{Z}=f(\overline{X},\overline{Y})\]</span></p>
+<p>和</p>
+<p><span class="math display">\[D_{Z}=f_{X}^{\prime}(\overline{X},\overline{Y})^{2}D_{X}+f_{Y}^{\prime}(\overline{X},\overline{Y})^{2}D_{Y}+2f_{X}^{\prime}(\overline{X},\overline{Y})f_{Y}^{\prime}(\overline{X},\overline{Y})D_{XY}\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="./post/2016-10-07-taylor-series-for-uncertainty/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="./post/2016-08-27-sfc-package-manual/">sfc软件包中文说明</a>
+  </h1>
+  <time datetime="2016-08-27T00:00:00Z" class="post-date">2016年8月27日</time>
+  
+
+
+<p><a href="https://cran.r-project.org/web/packages/sfc/index.html">sfc</a>软件包于2016年8月25日正式出现在<a href="https://cran.r-project.org/">CRAN</a>上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。</p>
+<div id="sfc" class="section level1">
+<h1>1 安装sfc</h1>
+<p>sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：</p>
+<pre class="r"><code>install.packages(&quot;sfc&quot;)</code></pre>
+<p>如果要安装sfc软件包的最新开发版，则可以通过以下方式：</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>2 数据文件</h1>
+<p>物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的<code>sfc</code>函数调用。</p>
+
+  
+  <div class="read-more-link">
+    <a href="./post/2016-08-27-sfc-package-manual/">Read More →</a>
+  </div>
+  
+</article>
+
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="./" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="./">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="./page/2/">2</a></li>
+    
+    
+    <li class="page-item">
+    <a href="./page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="./page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+</div>
+    </main>
+<script src="./js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+  </body>
+</html>

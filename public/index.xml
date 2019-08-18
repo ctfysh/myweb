@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Catfish</title>
+    <link>/</link>
+    <description>Recent content on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 06 Feb 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>生产复杂表格的R软件包：tables</title>
+      <link>/post/2017-02-06-tables-package-usage/</link>
+      <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-02-06-tables-package-usage/</guid>
+      <description>
+
+
+&lt;p&gt;数据的输入输出一直是数据处理比较重要的问题。我们常见的数据表格的表头设计一般都比较复杂，存在着表头套表头的现象，而这种表格的结构对于一个数据分析软件来说是没法理解的。数据软件所能理解的表格是那种标准化的表格，也就是第一行是字段名（也就是变量名），从第二行到表格结束就是具体的内容（也就是变量的取值，或者叫实例）。这样除去第一行后，每一行表示一个实例（统计上叫一个观测，或者某个对象的属性），每一列表示一个变量的取值。如我们经常用到的&lt;code&gt;iris&lt;/code&gt;数据表（为了简便，随机从每个Species类别中选取了1个数据）：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Width&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Width&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Species&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;实际上，在R中我们一般以&lt;code&gt;data.frame&lt;/code&gt;的形式储存数据，实际上所面对的就是上面这种数据表格。这种数据表格对于编程人员来说很实用很方便，但对于一般人而言，就会觉得很不直观，比如我们将上面表格中的&lt;code&gt;iris&lt;/code&gt;数据等价地变换一下，就会发现这样的问题：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Species&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Type&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Shape&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sepal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Length&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;versicolor&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;virginica&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Petal&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Width&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>基于泰勒展开的不确定性传递</title>
+      <link>/post/2016-10-07-taylor-series-for-uncertainty/</link>
+      <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-10-07-taylor-series-for-uncertainty/</guid>
+      <description>
+
+
+&lt;div class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 两个输入变量&lt;/h1&gt;
+&lt;p&gt;假设随机变量&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;是随机变量&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和随机变量&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的函数，函数关系如下&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的均值分别为&lt;span class=&#34;math inline&#34;&gt;\(\overline{X}\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(\overline{Y}\)&lt;/span&gt;，方差分别为&lt;span class=&#34;math inline&#34;&gt;\(D_{X}\)&lt;/span&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;和&lt;span class=&#34;math inline&#34;&gt;\(D_{Y}\)&lt;/span&gt;，协方差为&lt;span class=&#34;math inline&#34;&gt;\(D_{XY}\)&lt;/span&gt;。对&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;进行关于&lt;span class=&#34;math inline&#34;&gt;\(\overline{X}\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(\overline{Y}\)&lt;/span&gt;泰勒展开可以得到&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(\overline{X},\overline{Y})+f_{X}^{\prime}(\overline{X},\overline{Y})(X-\overline{X})+f_{Y}^{\prime}(\overline{X},\overline{Y})(Y-\overline{Y})+o(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果忽略高阶项&lt;span class=&#34;math inline&#34;&gt;\(o(X,Y)\)&lt;/span&gt;，那么根据随机变量求和的期望和方差计算公式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\text{cov}(X,Y)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;可以得到&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;的期望值与方差值分别如下&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\overline{Z}=f(\overline{X},\overline{Y})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[D_{Z}=f_{X}^{\prime}(\overline{X},\overline{Y})^{2}D_{X}+f_{Y}^{\prime}(\overline{X},\overline{Y})^{2}D_{Y}+2f_{X}^{\prime}(\overline{X},\overline{Y})f_{Y}^{\prime}(\overline{X},\overline{Y})D_{XY}\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>sfc软件包中文说明</title>
+      <link>/post/2016-08-27-sfc-package-manual/</link>
+      <pubDate>Sat, 27 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-27-sfc-package-manual/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/sfc/index.html&#34;&gt;sfc&lt;/a&gt;软件包于2016年8月25日正式出现在&lt;a href=&#34;https://cran.r-project.org/&#34;&gt;CRAN&lt;/a&gt;上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。&lt;/p&gt;
+&lt;div id=&#34;sfc&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 安装sfc&lt;/h1&gt;
+&lt;p&gt;sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果要安装sfc软件包的最新开发版，则可以通过以下方式：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;devtools&amp;quot;)
+devtools::install_github(&amp;quot;ctfysh/sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;2 数据文件&lt;/h1&gt;
+&lt;p&gt;物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的&lt;code&gt;sfc&lt;/code&gt;函数调用。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>与Lorenz曲线相关的指标</title>
+      <link>/post/2016-07-15-index-of-lorenz-curve/</link>
+      <pubDate>Fri, 15 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-07-15-index-of-lorenz-curve/</guid>
+      <description>
+
+
+&lt;p&gt;在前面一篇博客“&lt;a href=&#34;./post/2016-07-12-weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。&lt;/p&gt;
+&lt;div id=&#34;hoover&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 Hoover指数&lt;/h1&gt;
+&lt;p&gt;Hoover指数的想法是十分简单的，假设有&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人的收入分别为&lt;span class=&#34;math inline&#34;&gt;\(x_1,x_2,\cdots,x_n\)&lt;/span&gt;，其平均数为&lt;span class=&#34;math inline&#34;&gt;\(\bar{x}\)&lt;/span&gt;，考虑到最公平的分配方式是这&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人的收入都是&lt;span class=&#34;math inline&#34;&gt;\(\bar{x}\)&lt;/span&gt;，那么每个人的缺口就是&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;。这时我们可以计算出总的缺口占总收入的比例：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{HI}=\dfrac{\sum_{i=1}^n\|x_i-\bar{x}\|}{2\sum_{i=1}^n{x_i}}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以&lt;span class=&#34;math inline&#34;&gt;\(2\)&lt;/span&gt;，其原因是&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;lt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和与&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;gt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“&lt;a href=&#34;./post/2016-07-12-weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中第一个表格中数据的Hoover指数，其结果为
+&lt;span class=&#34;math inline&#34;&gt;\(0.206\)&lt;/span&gt;。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>对加权Gini系数的理解</title>
+      <link>/post/2016-07-12-weighted-gini-coeficient/</link>
+      <pubDate>Tue, 12 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-07-12-weighted-gini-coeficient/</guid>
+      <description>
+
+
+&lt;div id=&#34;gini&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 Gini系数&lt;/h1&gt;
+&lt;p&gt;Gini系数是研究不公平性(或者说公平性)的一个重要指标。它的计算可以通过Lorenz曲线来实现。假如我们研究一个群体内部收入分配的公平性问题，那么首先可以刻画这个群体内部收入分配的Lorenz曲线，具体方式如下：假设这个群体内部共有&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人，每个人的收入分别为&lt;span class=&#34;math inline&#34;&gt;\(x_1,x_2,\cdots,x_n\)&lt;/span&gt;，然后我们可以对这&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人的收入按照从小到大的顺序进行排序，得到&lt;span class=&#34;math inline&#34;&gt;\(x_１^\prime,x_2^\prime,\cdots,x_n^\prime\)&lt;/span&gt;，这时我们可以构造一组坐标&lt;span class=&#34;math inline&#34;&gt;\((h/n,L_h/L_n)\)&lt;/span&gt;，这里&lt;span class=&#34;math inline&#34;&gt;\(h=0,1,\cdots,n\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(L_0=0\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(L_h=\sum_{i=0}^hx_i^\prime\)&lt;/span&gt;。我们将这些坐标点绘制在平面直角坐标系中并依次相连，所得到的曲线就是Lorenz曲线。为了说明这一过程，假设&lt;span class=&#34;math inline&#34;&gt;\(n=10\)&lt;/span&gt;，具体的收入状况如下表所示：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;id&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;income&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.76&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;78.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40.90&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;88.30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;94.05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4.56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52.81&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;89.24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;55.14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.66&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;绘制的Lorenz曲线如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Less is more. Study is new entertainment. I think, therefore I am. 一个喜欢用数学来描述世界的环境科学工作者。喜欢跟数据打交道，擅长数据处理、数据可视化与不确定分析。对空间化数据分析与复杂网络数据分析十分感兴趣。现在南京大学袁增伟教授课题组从事环境规划与管理方向的研究工作，具体方法为物质流分析与生命周期评估。
+ 课题组网站: http://www.njumce.com/ 微信公众号: Material_Cycles 个人邮箱: shenghu@nju.edu.cn 个人主页: https://ctfysh.github.io/  </description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>盛虎  联系方式：E-mail: shenghu@nju.edu.cn 通讯地址：南京市仙林大道163号南京大学仙林校区环境学院（210023）  教育经历  2008&amp;frasl;09 – 2013/07，北京大学，环境科学与工程学院环境科学系，理学博士（直博），导师：郭怀成教授 2004&amp;frasl;09 – 2008/07，武汉理工大学，资源与环境工程学院环境工程系，工学学士  工作经历  2016&amp;frasl;08 – 至今，南京大学，环境学院环境科学系，副研究员 2013&amp;frasl;08 – 2016/07，南京大学，环境学院环境科学系，助理研究员  研究领域  磷循环及其资源环境效应 物质流网络分析 生命周期评估方法 环境大数据建模分析 环境空间统计分析   主持项目  国家自然科学基金青年项目，41401652，流域磷流格局表征与解析方法研究，2015.01 – 2017.12 江苏省科技计划青年基金项目，BK20140605，武宜运河流域磷流路径与入湖水质响应研究，2014.07 – 2017.06  参与项目  滇池水专项（十一五、十二五），2008.09 – 2013.12 滇池生态安全调查与评估，2008.09 – 2008.12 全国重点湖库生态安全综合治理方案编制指南，2009.01 – 2009.06 滇池流域水污染防治“十二五”规划，2010.04 – 2010.06 滇池流域水环境安全评价与预警系统研究，2010.02 – 2010.06 郑州航空港区规划环评，2008.09 – 2009.09 郑州新区环境保护规划，2009.11 – 2010.01 郑州马寨工业园区环评，2008.11 – 2009.11 晋城市沁河流域水环境保护规划，2010.11 – 2011.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Substance flow analysis on Catfish</title>
+    <link>/categories/substance-flow-analysis/</link>
+    <description>Recent content in Substance flow analysis on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Aug 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/substance-flow-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>sfc软件包中文说明</title>
+      <link>/post/2016-08-27-sfc-package-manual/</link>
+      <pubDate>Sat, 27 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-27-sfc-package-manual/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/sfc/index.html&#34;&gt;sfc&lt;/a&gt;软件包于2016年8月25日正式出现在&lt;a href=&#34;https://cran.r-project.org/&#34;&gt;CRAN&lt;/a&gt;上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。&lt;/p&gt;
+&lt;div id=&#34;sfc&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 安装sfc&lt;/h1&gt;
+&lt;p&gt;sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果要安装sfc软件包的最新开发版，则可以通过以下方式：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;devtools&amp;quot;)
+devtools::install_github(&amp;quot;ctfysh/sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;2 数据文件&lt;/h1&gt;
+&lt;p&gt;物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的&lt;code&gt;sfc&lt;/code&gt;函数调用。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
