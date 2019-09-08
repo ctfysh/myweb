@@ -9,6 +9,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/post/:year/:month/:day/:slug/"
 
 [params]
+    title = "Tiger's home"
 	description = "R is the brush, math is the pigment, nature is the scenery, and science is the picture."
 	themeColor = "theme-base-0d"
 	dateformat = "2006年1月2日"
