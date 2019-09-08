@@ -14,6 +14,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 	dateformat = "2006年1月2日"
 	MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
+    # https://highlightjs.org
+    highlightjs = true
+    highlightjsstyle = "github"
 
 ## Main Menu
 [[menu.main]]

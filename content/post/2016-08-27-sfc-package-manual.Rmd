@@ -86,7 +86,7 @@ read_chunk(fp, labels = "model_text")
 fp <- system.file("extdata", "model_utf8.csv", package = "sfc")
 m <- read.csv(fp)
 m$FUN <- gsub("\\*", "\\\\*", m$FUN)
-kable(m)
+kable(m, "html")
 ```
 
 # 4 计算方法
