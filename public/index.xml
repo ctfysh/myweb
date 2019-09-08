@@ -13,10 +13,10 @@
     
     <item>
       <title>生产复杂表格的R软件包：tables</title>
-      <link>/post/2017-02-06-tables-package-usage/</link>
+      <link>/post/2017/02/06/tables-package-usage/</link>
       <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/2017-02-06-tables-package-usage/</guid>
+      <guid>/post/2017/02/06/tables-package-usage/</guid>
       <description>
 
 
@@ -145,14 +145,14 @@
     
     <item>
       <title>基于泰勒展开的不确定性传递</title>
-      <link>/post/2016-10-07-taylor-series-for-uncertainty/</link>
+      <link>/post/2016/10/07/taylor-series-for-uncertainty/</link>
       <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/2016-10-07-taylor-series-for-uncertainty/</guid>
+      <guid>/post/2016/10/07/taylor-series-for-uncertainty/</guid>
       <description>
 
 
-&lt;div class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;1 两个输入变量&lt;/h1&gt;
 &lt;p&gt;假设随机变量&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;是随机变量&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和随机变量&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的函数，函数关系如下&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(X,Y)\]&lt;/span&gt;&lt;/p&gt;
@@ -171,10 +171,10 @@
     
     <item>
       <title>sfc软件包中文说明</title>
-      <link>/post/2016-08-27-sfc-package-manual/</link>
+      <link>/post/2016/08/27/sfc-package-manual/</link>
       <pubDate>Sat, 27 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/2016-08-27-sfc-package-manual/</guid>
+      <guid>/post/2016/08/27/sfc-package-manual/</guid>
       <description>
 
 
@@ -195,29 +195,29 @@ devtools::install_github(&amp;quot;ctfysh/sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt
     
     <item>
       <title>与Lorenz曲线相关的指标</title>
-      <link>/post/2016-07-15-index-of-lorenz-curve/</link>
+      <link>/post/2016/07/15/index-of-lorenz-curve/</link>
       <pubDate>Fri, 15 Jul 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/2016-07-15-index-of-lorenz-curve/</guid>
+      <guid>/post/2016/07/15/index-of-lorenz-curve/</guid>
       <description>
 
 
-&lt;p&gt;在前面一篇博客“&lt;a href=&#34;./post/2016-07-12-weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。&lt;/p&gt;
+&lt;p&gt;在前面一篇博客“&lt;a href=&#34;/post/2016/07/12/weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。&lt;/p&gt;
 &lt;div id=&#34;hoover&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;1 Hoover指数&lt;/h1&gt;
 &lt;p&gt;Hoover指数的想法是十分简单的，假设有&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人的收入分别为&lt;span class=&#34;math inline&#34;&gt;\(x_1,x_2,\cdots,x_n\)&lt;/span&gt;，其平均数为&lt;span class=&#34;math inline&#34;&gt;\(\bar{x}\)&lt;/span&gt;，考虑到最公平的分配方式是这&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;个人的收入都是&lt;span class=&#34;math inline&#34;&gt;\(\bar{x}\)&lt;/span&gt;，那么每个人的缺口就是&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;。这时我们可以计算出总的缺口占总收入的比例：&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{HI}=\dfrac{\sum_{i=1}^n\|x_i-\bar{x}\|}{2\sum_{i=1}^n{x_i}}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以&lt;span class=&#34;math inline&#34;&gt;\(2\)&lt;/span&gt;，其原因是&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;lt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和与&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;gt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“&lt;a href=&#34;./post/2016-07-12-weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中第一个表格中数据的Hoover指数，其结果为
+&lt;p&gt;这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以&lt;span class=&#34;math inline&#34;&gt;\(2\)&lt;/span&gt;，其原因是&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;lt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和与&lt;span class=&#34;math inline&#34;&gt;\(x_i-\bar{x}&amp;gt;0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(\|x_i-\bar{x}\|\)&lt;/span&gt;的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“&lt;a href=&#34;/post/2016/07/12/weighted-Gini-coeficient/&#34;&gt;对加权Gini系数的理解&lt;/a&gt;”中第一个表格中数据的Hoover指数，其结果为
 &lt;span class=&#34;math inline&#34;&gt;\(0.206\)&lt;/span&gt;。&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>对加权Gini系数的理解</title>
-      <link>/post/2016-07-12-weighted-gini-coeficient/</link>
+      <link>/post/2016/07/12/weighted-gini-coeficient/</link>
       <pubDate>Tue, 12 Jul 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/2016-07-12-weighted-gini-coeficient/</guid>
+      <guid>/post/2016/07/12/weighted-gini-coeficient/</guid>
       <description>
 
 
@@ -275,7 +275,7 @@ devtools::install_github(&amp;quot;ctfysh/sfc&amp;quot;)&lt;/code&gt;&lt;/pre&gt
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;绘制的Lorenz曲线如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

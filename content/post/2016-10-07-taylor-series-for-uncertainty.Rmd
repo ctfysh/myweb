@@ -3,6 +3,7 @@ layout: post
 comments:  true
 title: "基于泰勒展开的不确定性传递"
 date: 2016-10-07
+slug: taylor series for uncertainty
 categories: [uncertainty]
 published:  true
 ---

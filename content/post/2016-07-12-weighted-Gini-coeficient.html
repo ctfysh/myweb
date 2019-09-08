@@ -3,6 +3,7 @@ layout: post
 comments:  true
 title: "对加权Gini系数的理解"
 date: 2016-07-12
+slug: weighted Gini coeficient
 categories: [inequality]
 published:  true
 ---
@@ -83,7 +84,7 @@ L(x)=\int_{0}^{x}t\text{d}F(t)/\int_{0}^{+\infty}t\text{d}F(t)
 \end{cases}\]</span></p>
 <p>这里<span class="math inline">\(F(0)=0\)</span>。<span class="math inline">\(L(x)\)</span>实际上就是不大于<span class="math inline">\(x\)</span>那部分数据加权和占所有数据加权和的比例，其中<span class="math inline">\(\text{d}F(x)\)</span>就是权重。</p>
 </div>
-<div id="gini" class="section level1">
+<div id="gini-1" class="section level1">
 <h1>3 加权Gini系数</h1>
 <p>在实际情况中，我们往往只知道一个团体总的收入状况和团体的人口数，而不知道团体内部每个人的收入状况。在我们分析所有团体的收入分配公平性问题时，一个十分必要的假设就是在每个团体内部收入分配是完全公平的(即按人口平均分配)。为了说明加权Gini系数的计算过程，同样我们也可以假设以下数据：</p>
 <table>

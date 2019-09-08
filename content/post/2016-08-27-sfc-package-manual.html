@@ -3,6 +3,7 @@ layout: post
 comments:  true
 title: "sfc软件包中文说明"
 date: 2016-08-27
+slug: sfc package manual
 categories: [Substance flow analysis, R package]
 published:  true
 ---
@@ -439,12 +440,12 @@ PF_11 A W PF_07-PF_10</p>
 <p>Human consumption<br />
 PF_12 H W PF_04+PF_08+PF_10</p>
 </div>
-<div class="section level1">
+<div id="section" class="section level1">
 <h1>4 计算方法</h1>
 <p>有了<a href="#data">数据文件</a>和<a href="#model">模型文件</a>之后，我们就可以用<code>sfc</code>函数来进行计算了。<code>sfc</code>函数包括六个主要参数，分别是<code>data</code>、<code>model</code>、<code>sample.size</code>、<code>rand.seed</code>、<code>check</code>和<code>inner</code>。其中前两个参数是必填参数，而后四个参数都有默认值的设置。如果不需要做不确定性分析，则只要填<code>data</code>和<code>model</code>这两个参数即可，因为后四个变量都是针对不确定性分析的。这里，<code>sample.size</code>指的是样本量，如果样本量为1，那么就执行普通单次计算；如果样本量大于1，那么就执行Monte Carlo不确定性分析。<code>rand.seed</code>设置的是随机数种子，为任意整数，设置后能够保证每次不确定性分析的结果都是一样的。如果随机数种子取值为NULL，那么每次不确定性分析的结果就会不一样。<code>check</code>判断是否执行模型检查的开关，如果设置为TRUE，那么就执行；反之设置为FALSE，那么就不执行。设置这个开关的目的在于进行有约束的Monte Carlo不确定性分析。因为原则上我们在验证了普通单次计算结果的有效性后(包括物质流的大小和正负号)，至少我们要保证Monte Carlo不确定性分析过程中所抽取的每个样本计算的物质流的方向(正负号)与普通单次计算结果是一致的，否则抽样无效。这样做的结果是有效的样本量少于我们设定的样本量。<code>inner</code>判断是否返回Monte Carlo不确定性分析的中间结果，如果设置为TRUE，那么就返回；反之设置为FALSE，那么就不返回。这种设置的最大目的是降低计算过程中的内存消耗，特别是在大规模计算的时候。<code>sfc</code>函数调用方式如下：</p>
 <pre class="r"><code>sfc(data, model, sample.size, rand.seed, check, inner)</code></pre>
 </div>
-<div class="section level1">
+<div id="section-1" class="section level1">
 <h1>5 计算结果</h1>
 <p>采用<code>sfc</code>函数计算的结果可能返回四个值：<code>result</code>、<code>sample.size</code>、<code>sample</code>和<code>inner.result</code>。其中，<code>result</code>表示物质流核算结果，如果<code>sample.size = 1</code>，则可以得到普通单次计算结果(表4)，同时<code>sample.size</code>的返回值为1；如果<code>sample.size = n</code>(n&gt;1)，则可以得到Monte Carlo不确定性分析计算结果(表5)，同时<code>sample.size</code>的返回值为m，这里m为有效的样本量。另外两个结果是在<code>inner = TRUE</code>时才返回的，其中<code>sample</code>表示每个变量的抽样结果，<code>inner.result</code>表示抽样后计算出来的物质流的结果。这两个结果一般没有必要返回，只有在我们要对计算进行过程进一步分析的时候才有可能用到这两个结果。</p>
 <p><strong>表4 普通单次计算结果</strong></p>
@@ -626,318 +627,318 @@ PF_12 H W PF_04+PF_08+PF_10</p>
 <td align="left">Y2000</td>
 <td align="left">R</td>
 <td align="left">Ch</td>
-<td align="right">9.270</td>
-<td align="right">9.137</td>
-<td align="right">1.452</td>
-<td align="right">0.157</td>
-<td align="right">6.978</td>
-<td align="right">8.298</td>
-<td align="right">10.198</td>
-<td align="right">11.662</td>
-</tr>
-<tr class="even">
-<td align="left">Y2000</td>
-<td align="left">R</td>
-<td align="left">W</td>
-<td align="right">1.327</td>
-<td align="right">1.004</td>
-<td align="right">1.125</td>
-<td align="right">0.848</td>
-<td align="right">0.106</td>
-<td align="right">0.474</td>
-<td align="right">1.931</td>
-<td align="right">3.534</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2000</td>
-<td align="left">Ch</td>
-<td align="left">Cr</td>
-<td align="right">5.799</td>
-<td align="right">5.737</td>
-<td align="right">0.971</td>
-<td align="right">0.167</td>
-<td align="right">4.200</td>
-<td align="right">5.128</td>
-<td align="right">6.536</td>
-<td align="right">7.411</td>
-</tr>
-<tr class="even">
-<td align="left">Y2000</td>
-<td align="left">Ch</td>
-<td align="left">H</td>
-<td align="right">1.427</td>
-<td align="right">1.418</td>
-<td align="right">0.466</td>
-<td align="right">0.327</td>
-<td align="right">0.699</td>
-<td align="right">1.076</td>
-<td align="right">1.727</td>
-<td align="right">2.237</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2000</td>
-<td align="left">Ch</td>
-<td align="left">W</td>
-<td align="right">4.334</td>
-<td align="right">3.849</td>
-<td align="right">3.161</td>
-<td align="right">0.730</td>
-<td align="right">0.520</td>
-<td align="right">1.622</td>
-<td align="right">6.084</td>
-<td align="right">10.585</td>
-</tr>
-<tr class="even">
-<td align="left">Y2000</td>
-<td align="left">Cr</td>
-<td align="left">H</td>
-<td align="right">2.204</td>
-<td align="right">2.205</td>
-<td align="right">0.431</td>
-<td align="right">0.196</td>
-<td align="right">1.487</td>
-<td align="right">1.898</td>
-<td align="right">2.511</td>
-<td align="right">2.952</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2000</td>
-<td align="left">Cr</td>
-<td align="left">A</td>
-<td align="right">1.959</td>
-<td align="right">1.960</td>
-<td align="right">0.384</td>
-<td align="right">0.196</td>
-<td align="right">1.322</td>
-<td align="right">1.687</td>
-<td align="right">2.232</td>
-<td align="right">2.624</td>
-</tr>
-<tr class="even">
-<td align="left">Y2000</td>
-<td align="left">Cr</td>
-<td align="left">W</td>
-<td align="right">1.637</td>
-<td align="right">1.561</td>
-<td align="right">1.041</td>
-<td align="right">0.636</td>
-<td align="right">0.197</td>
-<td align="right">0.783</td>
-<td align="right">2.402</td>
-<td align="right">3.432</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2000</td>
-<td align="left">H</td>
-<td align="left">W</td>
-<td align="right">4.761</td>
-<td align="right">4.810</td>
-<td align="right">0.748</td>
-<td align="right">0.157</td>
-<td align="right">3.594</td>
-<td align="right">4.224</td>
-<td align="right">5.251</td>
-<td align="right">5.841</td>
-</tr>
-<tr class="even">
-<td align="left">Y2000</td>
-<td align="left">A</td>
-<td align="left">H</td>
-<td align="right">1.131</td>
-<td align="right">1.131</td>
-<td align="right">0.313</td>
-<td align="right">0.277</td>
-<td align="right">0.609</td>
-<td align="right">0.929</td>
+<td align="right">9.191</td>
+<td align="right">9.102</td>
 <td align="right">1.315</td>
-<td align="right">1.680</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2000</td>
-<td align="left">A</td>
-<td align="left">W</td>
-<td align="right">0.828</td>
-<td align="right">0.767</td>
-<td align="right">0.466</td>
-<td align="right">0.563</td>
-<td align="right">0.141</td>
-<td align="right">0.471</td>
-<td align="right">1.145</td>
-<td align="right">1.707</td>
+<td align="right">0.143</td>
+<td align="right">7.266</td>
+<td align="right">8.247</td>
+<td align="right">9.969</td>
+<td align="right">11.374</td>
 </tr>
 <tr class="even">
 <td align="left">Y2000</td>
-<td align="left">W</td>
-<td align="left">Ch</td>
-<td align="right">2.290</td>
-<td align="right">1.884</td>
-<td align="right">1.965</td>
-<td align="right">0.858</td>
-<td align="right">0.221</td>
-<td align="right">0.779</td>
-<td align="right">3.062</td>
-<td align="right">6.326</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2005</td>
-<td align="left">R</td>
-<td align="left">Ch</td>
-<td align="right">18.157</td>
-<td align="right">18.149</td>
-<td align="right">2.564</td>
-<td align="right">0.141</td>
-<td align="right">14.245</td>
-<td align="right">16.375</td>
-<td align="right">20.115</td>
-<td align="right">22.089</td>
-</tr>
-<tr class="even">
-<td align="left">Y2005</td>
 <td align="left">R</td>
 <td align="left">W</td>
-<td align="right">2.584</td>
-<td align="right">2.010</td>
-<td align="right">2.110</td>
-<td align="right">0.817</td>
-<td align="right">0.150</td>
-<td align="right">0.925</td>
-<td align="right">3.868</td>
-<td align="right">6.860</td>
+<td align="right">1.309</td>
+<td align="right">0.997</td>
+<td align="right">1.068</td>
+<td align="right">0.816</td>
+<td align="right">0.111</td>
+<td align="right">0.483</td>
+<td align="right">1.918</td>
+<td align="right">3.545</td>
 </tr>
 <tr class="odd">
-<td align="left">Y2005</td>
+<td align="left">Y2000</td>
 <td align="left">Ch</td>
 <td align="left">Cr</td>
-<td align="right">11.515</td>
-<td align="right">11.301</td>
-<td align="right">1.815</td>
-<td align="right">0.158</td>
-<td align="right">8.716</td>
-<td align="right">10.207</td>
-<td align="right">12.802</td>
-<td align="right">14.601</td>
+<td align="right">5.892</td>
+<td align="right">5.736</td>
+<td align="right">1.014</td>
+<td align="right">0.172</td>
+<td align="right">4.438</td>
+<td align="right">5.188</td>
+<td align="right">6.637</td>
+<td align="right">7.613</td>
 </tr>
 <tr class="even">
-<td align="left">Y2005</td>
+<td align="left">Y2000</td>
 <td align="left">Ch</td>
 <td align="left">H</td>
-<td align="right">2.840</td>
-<td align="right">2.826</td>
-<td align="right">0.917</td>
-<td align="right">0.323</td>
-<td align="right">1.363</td>
-<td align="right">2.227</td>
-<td align="right">3.569</td>
-<td align="right">4.248</td>
+<td align="right">1.468</td>
+<td align="right">1.480</td>
+<td align="right">0.465</td>
+<td align="right">0.317</td>
+<td align="right">0.741</td>
+<td align="right">1.175</td>
+<td align="right">1.755</td>
+<td align="right">2.325</td>
 </tr>
 <tr class="odd">
-<td align="left">Y2005</td>
+<td align="left">Y2000</td>
 <td align="left">Ch</td>
 <td align="left">W</td>
-<td align="right">8.032</td>
-<td align="right">7.355</td>
-<td align="right">5.426</td>
-<td align="right">0.676</td>
-<td align="right">0.818</td>
-<td align="right">4.088</td>
-<td align="right">10.976</td>
-<td align="right">17.781</td>
+<td align="right">3.726</td>
+<td align="right">3.355</td>
+<td align="right">3.122</td>
+<td align="right">0.838</td>
+<td align="right">0.218</td>
+<td align="right">1.280</td>
+<td align="right">5.644</td>
+<td align="right">8.682</td>
 </tr>
 <tr class="even">
-<td align="left">Y2005</td>
+<td align="left">Y2000</td>
 <td align="left">Cr</td>
 <td align="left">H</td>
-<td align="right">4.331</td>
-<td align="right">4.307</td>
-<td align="right">0.814</td>
-<td align="right">0.188</td>
-<td align="right">3.030</td>
-<td align="right">3.729</td>
-<td align="right">4.951</td>
-<td align="right">5.596</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2005</td>
-<td align="left">Cr</td>
-<td align="left">A</td>
-<td align="right">3.850</td>
-<td align="right">3.828</td>
-<td align="right">0.724</td>
-<td align="right">0.188</td>
-<td align="right">2.693</td>
-<td align="right">3.314</td>
-<td align="right">4.401</td>
-<td align="right">4.974</td>
-</tr>
-<tr class="even">
-<td align="left">Y2005</td>
-<td align="left">Cr</td>
-<td align="left">W</td>
-<td align="right">3.334</td>
-<td align="right">3.091</td>
-<td align="right">2.107</td>
-<td align="right">0.632</td>
-<td align="right">0.333</td>
-<td align="right">1.638</td>
-<td align="right">4.578</td>
-<td align="right">7.562</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2005</td>
-<td align="left">H</td>
-<td align="left">W</td>
-<td align="right">9.519</td>
-<td align="right">9.460</td>
-<td align="right">1.503</td>
-<td align="right">0.158</td>
-<td align="right">6.840</td>
-<td align="right">8.564</td>
-<td align="right">10.565</td>
-<td align="right">12.087</td>
-</tr>
-<tr class="even">
-<td align="left">Y2005</td>
-<td align="left">A</td>
-<td align="left">H</td>
-<td align="right">2.348</td>
-<td align="right">2.372</td>
-<td align="right">0.659</td>
-<td align="right">0.281</td>
-<td align="right">1.257</td>
-<td align="right">1.943</td>
-<td align="right">2.755</td>
-<td align="right">3.433</td>
-</tr>
-<tr class="odd">
-<td align="left">Y2005</td>
-<td align="left">A</td>
-<td align="left">W</td>
-<td align="right">1.502</td>
-<td align="right">1.337</td>
-<td align="right">0.827</td>
-<td align="right">0.551</td>
-<td align="right">0.396</td>
-<td align="right">0.860</td>
-<td align="right">1.988</td>
-<td align="right">2.976</td>
-</tr>
-<tr class="even">
-<td align="left">Y2005</td>
-<td align="left">W</td>
-<td align="left">Ch</td>
-<td align="right">4.231</td>
-<td align="right">3.776</td>
-<td align="right">3.434</td>
-<td align="right">0.812</td>
-<td align="right">0.387</td>
+<td align="right">2.202</td>
+<td align="right">2.186</td>
+<td align="right">0.402</td>
+<td align="right">0.183</td>
+<td align="right">1.597</td>
 <td align="right">1.953</td>
-<td align="right">5.356</td>
-<td align="right">9.675</td>
+<td align="right">2.446</td>
+<td align="right">2.916</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2000</td>
+<td align="left">Cr</td>
+<td align="left">A</td>
+<td align="right">1.957</td>
+<td align="right">1.943</td>
+<td align="right">0.358</td>
+<td align="right">0.183</td>
+<td align="right">1.420</td>
+<td align="right">1.736</td>
+<td align="right">2.174</td>
+<td align="right">2.592</td>
+</tr>
+<tr class="even">
+<td align="left">Y2000</td>
+<td align="left">Cr</td>
+<td align="left">W</td>
+<td align="right">1.732</td>
+<td align="right">1.602</td>
+<td align="right">1.064</td>
+<td align="right">0.614</td>
+<td align="right">0.226</td>
+<td align="right">0.862</td>
+<td align="right">2.394</td>
+<td align="right">3.676</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2000</td>
+<td align="left">H</td>
+<td align="left">W</td>
+<td align="right">4.833</td>
+<td align="right">4.789</td>
+<td align="right">0.751</td>
+<td align="right">0.155</td>
+<td align="right">3.681</td>
+<td align="right">4.269</td>
+<td align="right">5.365</td>
+<td align="right">6.009</td>
+</tr>
+<tr class="even">
+<td align="left">Y2000</td>
+<td align="left">A</td>
+<td align="left">H</td>
+<td align="right">1.163</td>
+<td align="right">1.146</td>
+<td align="right">0.354</td>
+<td align="right">0.305</td>
+<td align="right">0.634</td>
+<td align="right">0.901</td>
+<td align="right">1.398</td>
+<td align="right">1.768</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2000</td>
+<td align="left">A</td>
+<td align="left">W</td>
+<td align="right">0.795</td>
+<td align="right">0.748</td>
+<td align="right">0.451</td>
+<td align="right">0.567</td>
+<td align="right">0.195</td>
+<td align="right">0.463</td>
+<td align="right">1.084</td>
+<td align="right">1.548</td>
+</tr>
+<tr class="even">
+<td align="left">Y2000</td>
+<td align="left">W</td>
+<td align="left">Ch</td>
+<td align="right">1.894</td>
+<td align="right">1.557</td>
+<td align="right">1.801</td>
+<td align="right">0.951</td>
+<td align="right">0.083</td>
+<td align="right">0.559</td>
+<td align="right">2.749</td>
+<td align="right">4.738</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">R</td>
+<td align="left">Ch</td>
+<td align="right">18.107</td>
+<td align="right">17.751</td>
+<td align="right">2.929</td>
+<td align="right">0.162</td>
+<td align="right">13.634</td>
+<td align="right">16.222</td>
+<td align="right">20.366</td>
+<td align="right">23.073</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">R</td>
+<td align="left">W</td>
+<td align="right">2.704</td>
+<td align="right">2.220</td>
+<td align="right">2.142</td>
+<td align="right">0.792</td>
+<td align="right">0.243</td>
+<td align="right">1.096</td>
+<td align="right">3.995</td>
+<td align="right">6.900</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">Ch</td>
+<td align="left">Cr</td>
+<td align="right">11.350</td>
+<td align="right">11.426</td>
+<td align="right">1.955</td>
+<td align="right">0.172</td>
+<td align="right">8.336</td>
+<td align="right">10.018</td>
+<td align="right">12.672</td>
+<td align="right">14.450</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">Ch</td>
+<td align="left">H</td>
+<td align="right">2.945</td>
+<td align="right">2.913</td>
+<td align="right">0.929</td>
+<td align="right">0.316</td>
+<td align="right">1.355</td>
+<td align="right">2.310</td>
+<td align="right">3.636</td>
+<td align="right">4.502</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">Ch</td>
+<td align="left">W</td>
+<td align="right">8.026</td>
+<td align="right">6.378</td>
+<td align="right">6.318</td>
+<td align="right">0.787</td>
+<td align="right">0.668</td>
+<td align="right">3.169</td>
+<td align="right">11.024</td>
+<td align="right">22.457</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">Cr</td>
+<td align="left">H</td>
+<td align="right">4.326</td>
+<td align="right">4.324</td>
+<td align="right">0.811</td>
+<td align="right">0.188</td>
+<td align="right">3.127</td>
+<td align="right">3.797</td>
+<td align="right">4.852</td>
+<td align="right">5.686</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">Cr</td>
+<td align="left">A</td>
+<td align="right">3.845</td>
+<td align="right">3.844</td>
+<td align="right">0.721</td>
+<td align="right">0.188</td>
+<td align="right">2.779</td>
+<td align="right">3.375</td>
+<td align="right">4.313</td>
+<td align="right">5.054</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">Cr</td>
+<td align="left">W</td>
+<td align="right">3.179</td>
+<td align="right">2.995</td>
+<td align="right">2.074</td>
+<td align="right">0.653</td>
+<td align="right">0.244</td>
+<td align="right">1.495</td>
+<td align="right">4.457</td>
+<td align="right">6.700</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">H</td>
+<td align="left">W</td>
+<td align="right">9.551</td>
+<td align="right">9.454</td>
+<td align="right">1.472</td>
+<td align="right">0.154</td>
+<td align="right">7.375</td>
+<td align="right">8.565</td>
+<td align="right">10.633</td>
+<td align="right">11.864</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">A</td>
+<td align="left">H</td>
+<td align="right">2.280</td>
+<td align="right">2.227</td>
+<td align="right">0.688</td>
+<td align="right">0.302</td>
+<td align="right">1.279</td>
+<td align="right">1.760</td>
+<td align="right">2.727</td>
+<td align="right">3.493</td>
+</tr>
+<tr class="odd">
+<td align="left">Y2005</td>
+<td align="left">A</td>
+<td align="left">W</td>
+<td align="right">1.565</td>
+<td align="right">1.456</td>
+<td align="right">0.914</td>
+<td align="right">0.584</td>
+<td align="right">0.188</td>
+<td align="right">0.878</td>
+<td align="right">2.155</td>
+<td align="right">3.077</td>
+</tr>
+<tr class="even">
+<td align="left">Y2005</td>
+<td align="left">W</td>
+<td align="left">Ch</td>
+<td align="right">4.213</td>
+<td align="right">3.064</td>
+<td align="right">3.880</td>
+<td align="right">0.921</td>
+<td align="right">0.331</td>
+<td align="right">1.404</td>
+<td align="right">5.634</td>
+<td align="right">12.191</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section level1">
+<div id="section-2" class="section level1">
 <h1>6 图形化界面</h1>
 <p>由于sfc软件包是基于R开发的，所以对于非R用户则不容易使用。为此，我们基于shiny平台，开发了一个sfc的图形化界面。界面的链接为<a href="https://ctfysh.shinyapps.io/sample_app/">https://ctfysh.shinyapps.io/sample_app/</a>。
 非R用户只需要知道<a href="#data">数据文件</a>和简化版的<a href="#model">模型文件</a>如何整理即可使用这个平台进行计算。这也说明了，如何有效管理我们核算数据，以及我们核算方法，是物质流核算关键之所在。至于如何计算，以及在什么平台上，用什么软件来计算，这些都是次要的。而sfc软件包的最大突破口，恰好是建立在对数据与模型的分开管理上的。至于核算本身，未来还有很多问题等着我们去解决，需要大家共同的努力。</p>
@@ -945,7 +946,7 @@ PF_12 H W PF_04+PF_08+PF_10</p>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>实际上最小核算单元对应的字段所起的作用是标识，为此最保险的做法就是全部用字符型变量。<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>常用的分布函数参数一般都不超过3个(见表2)，当然如果要超过3个也可以继续编号下去。<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>实际上最小核算单元对应的字段所起的作用是标识，为此最保险的做法就是全部用字符型变量。<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>常用的分布函数参数一般都不超过3个(见表2)，当然如果要超过3个也可以继续编号下去。<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

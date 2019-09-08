@@ -5,73 +5,65 @@
   <url>
     <loc>/categories/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/data-manipulation/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r-package/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/2017-02-06-tables-package-usage/</loc>
+    <loc>/post/2017/02/06/tables-package-usage/</loc>
     <lastmod>2017-02-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/uncertainty/</loc>
     <lastmod>2016-10-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/2016-10-07-taylor-series-for-uncertainty/</loc>
+    <loc>/post/2016/10/07/taylor-series-for-uncertainty/</loc>
     <lastmod>2016-10-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/substance-flow-analysis/</loc>
+    <loc>/post/2016/08/27/sfc-package-manual/</loc>
     <lastmod>2016-08-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/2016-08-27-sfc-package-manual/</loc>
+    <loc>/categories/substance-flow-analysis/</loc>
     <lastmod>2016-08-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/inequality/</loc>
     <lastmod>2016-07-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/2016-07-15-index-of-lorenz-curve/</loc>
+    <loc>/post/2016/07/15/index-of-lorenz-curve/</loc>
     <lastmod>2016-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2016-07-12-weighted-gini-coeficient/</loc>
+    <loc>/post/2016/07/12/weighted-gini-coeficient/</loc>
     <lastmod>2016-07-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -85,7 +77,6 @@
   
   <url>
     <loc>/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

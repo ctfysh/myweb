@@ -13,14 +13,14 @@
     
     <item>
       <title>基于泰勒展开的不确定性传递</title>
-      <link>/post/2016-10-07-taylor-series-for-uncertainty/</link>
+      <link>/post/2016/10/07/taylor-series-for-uncertainty/</link>
       <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/2016-10-07-taylor-series-for-uncertainty/</guid>
+      <guid>/post/2016/10/07/taylor-series-for-uncertainty/</guid>
       <description>
 
 
-&lt;div class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;1 两个输入变量&lt;/h1&gt;
 &lt;p&gt;假设随机变量&lt;span class=&#34;math inline&#34;&gt;\(Z\)&lt;/span&gt;是随机变量&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;和随机变量&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;的函数，函数关系如下&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Z=f(X,Y)\]&lt;/span&gt;&lt;/p&gt;

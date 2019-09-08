@@ -3,6 +3,7 @@ layout: post
 comments:  true
 title: "对加权Gini系数的理解"
 date: 2016-07-12
+slug: weighted Gini coeficient
 categories: [inequality]
 published:  true
 ---

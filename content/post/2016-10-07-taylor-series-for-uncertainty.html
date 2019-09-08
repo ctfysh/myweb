@@ -3,13 +3,14 @@ layout: post
 comments:  true
 title: "基于泰勒展开的不确定性传递"
 date: 2016-10-07
+slug: taylor series for uncertainty
 categories: [uncertainty]
 published:  true
 ---
 
 
 
-<div class="section level1">
+<div id="section" class="section level1">
 <h1>1 两个输入变量</h1>
 <p>假设随机变量<span class="math inline">\(Z\)</span>是随机变量<span class="math inline">\(X\)</span>和随机变量<span class="math inline">\(Y\)</span>的函数，函数关系如下</p>
 <p><span class="math display">\[Z=f(X,Y)\]</span></p>
@@ -45,7 +46,7 @@ D_{\ln Z} &amp; =S_{X}(\overline{X},\overline{Y})^{2}D_{\ln X}+S_{Y}(\overline{X
  &amp; 2S_{X}(\overline{X},\overline{Y})S_{Y}(\overline{X},\overline{Y})D_{\ln X\ln Y}
 \end{align}\]</span></p>
 </div>
-<div class="section level1">
+<div id="section-1" class="section level1">
 <h1>2 多个输入变量</h1>
 <p>对于更一般的情况，假设<span class="math inline">\(Z\)</span>是变量<span class="math inline">\(X_{1},X_{2},\cdots,X_{n}\)</span>的函数</p>
 <p><span class="math display">\[Z=f(X_{1},X_{2},\cdots,X_{n})\]</span></p>
@@ -66,7 +67,7 @@ D_{\ln Z} &amp; =\sum_{i=1}^{n}S_{X_{i}}(\overline{X}_{1},\overline{X}_{2},\cdot
  &amp; \sum_{i=1}^{n}\sum_{j=1}^{n}S_{X_{i}}(\overline{X}_{1},\overline{X}_{2},\cdots,\overline{X}_{n})S_{X_{j}}(\overline{X}_{1},\overline{X}_{2},\cdots,\overline{X}_{n})D_{\ln X_{i}\ln X_{j}}
 \end{align}\]</span></p>
 </div>
-<div class="section level1">
+<div id="section-2" class="section level1">
 <h1>3 举个例子</h1>
 <p>假设随机变量<span class="math inline">\(Z\)</span>与随机变量<span class="math inline">\(X\)</span>和随机变量<span class="math inline">\(Y\)</span>满足如下的函数关系</p>
 <p><span class="math display">\[Z=e^X\sin^2Y\]</span></p>
@@ -96,13 +97,13 @@ D_{\ln Z} &amp; =\sum_{i=1}^{n}S_{X_{i}}(\overline{X}_{1},\overline{X}_{2},\cdot
 <p>如果采用Monte Carlo随机模拟，估算出的<span class="math inline">\(\overline{\ln Z}=1.617\)</span>，<span class="math inline">\(D_{\ln Z}=0.119\)</span>。</p>
 <p><img src="/post/2016-10-07-taylor-series-for-uncertainty_files/figure-html/mc_plot_ln-1.png" width="768" /></p>
 </div>
-<div class="section level1">
+<div id="section-3" class="section level1">
 <h1>脚注</h1>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><span class="math inline">\(D_{X}\)</span>实际上是<span class="math inline">\(D_{XX}\)</span>的简写。<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>注意这里用到了变量替换的方法。<span class="math inline">\(g_{\ln X}^{\prime}\)</span>是<span class="math inline">\(\overline{\ln X}\)</span>和<span class="math inline">\(\overline{\ln Y}\)</span>的函数，而<span class="math inline">\(S_{X}\)</span>是<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>的函数。<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><span class="math inline">\(D_{X}\)</span>实际上是<span class="math inline">\(D_{XX}\)</span>的简写。<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>注意这里用到了变量替换的方法。<span class="math inline">\(g_{\ln X}^{\prime}\)</span>是<span class="math inline">\(\overline{\ln X}\)</span>和<span class="math inline">\(\overline{\ln Y}\)</span>的函数，而<span class="math inline">\(S_{X}\)</span>是<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>的函数。<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

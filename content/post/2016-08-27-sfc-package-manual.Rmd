@@ -3,6 +3,7 @@ layout: post
 comments:  true
 title: "sfc软件包中文说明"
 date: 2016-08-27
+slug: sfc package manual
 categories: [Substance flow analysis, R package]
 published:  true
 ---
