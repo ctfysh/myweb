@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>national flag on Catfish</title>
+    <link>/categories/national-flag/</link>
+    <description>Recent content in national flag on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/national-flag/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何绘制国旗？</title>
+      <link>/post/2019/10/01/how-to-make-national-flag/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/10/01/how-to-make-national-flag/</guid>
+      <description>
+
+
+&lt;p&gt;今天是新中国70华诞，是全中国人民最重要的节日。在这个特殊的日子，作为一个伪码农，我选择了这样一种方式，表达对祖国最诚挚的爱。&lt;/p&gt;
+&lt;div id=&#34;section&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 准备工作&lt;/h1&gt;
+&lt;p&gt;“工欲善其事，必先利其器。”作为一个R的重度发烧友，用R绘图是一项基本技能。我们通常的绘图思路是先构图，然后绘制。然而，自从&lt;code&gt;tidyverse&lt;/code&gt;包出现后，绘图与数据分析就紧密结合在一起。可以说，图形只是数据的一种可视化方式，所以在绘图前做好数据处理工作是十分必要的。那么，如何构建绘图的数据呢？答案很简单，就是利用&lt;code&gt;sf&lt;/code&gt;包，因为它能够提供一个基于WKT的几何图形数据格式（见&lt;a href=&#34;https://cran.r-project.org/web/packages/sf/vignettes/sf1.html&#34;&gt;Simple Features for R&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;接下来，我们需要了解五星红旗的绘制标准，包括：国旗（GB 12982-2004）和国旗颜色标准样品（GB 12983-2004）。看过标准后我才发现，看似简单的国旗其实有许多细节需要注意：五角星的大小、位置、角度、颜色以及红旗旗面的尺寸与颜色都是有讲究的。&lt;/p&gt;
+&lt;p&gt;在对绘图工具和绘图规范有了比较好的理解后，我们就可以着手绘图数据的设计与处理。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-1&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;2 五角星和旗面绘制&lt;/h1&gt;
+&lt;p&gt;如何绘制五角星和旗面？对于一个熟悉WKT格式的人来说，这个问题可以转化为一个数据问题。我们可以用&lt;code&gt;LINESTRING&lt;/code&gt;（多段线）或者&lt;code&gt;POLYGON&lt;/code&gt;（多边形）这两种格式来处理数据，也就是确定好五角星和旗面矩形的每个顶点的横纵坐标并按顺序排列即可。为了保证线条闭合，必须首尾的横纵坐标是一致的。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -11,19 +11,19 @@
   <title>Catfish &middot; Tiger&#39;s home</title>
 
   
-  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
-  <link type="text/css" rel="stylesheet" href="/css/custom.css">
-    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
+  <link type="text/css" rel="stylesheet" href="./css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="./css/poole.css">
+  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="./css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="./css/custom.css">
+    <link type="text/css" rel="stylesheet" href="./css/fonts.css">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./catfish.png">
+  <link rel="shortcut icon" href="./favicon.ico">
 
   
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
+  <link href="./index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
   
 
 
@@ -52,7 +52,7 @@
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="/"><h1>Catfish</h1></a>
+      <a href="./"><h1>Catfish</h1></a>
       <p class="lead">
        R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
       </p>
@@ -61,8 +61,8 @@
     <nav class="sidebar-nav">
       
       
-        <a class="sidebar-nav-item active" href="/">Home</a>
-        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+        <a class="sidebar-nav-item active" href="./">Home</a>
+        <a class="sidebar-nav-item " href="./about/"> About </a><a class="sidebar-nav-item " href="./post/"> Archives </a><a class="sidebar-nav-item " href="./categories/"> Categories </a><a class="sidebar-nav-item " href="./resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
     </nav>
 
     
@@ -74,7 +74,31 @@
 
 <article class="post">
   <h1 class="post-title">
-    <a href="/post/2017/02/06/tables-package-usage/">生产复杂表格的R软件包：tables</a>
+    <a href="./post/2019/10/01/how-to-make-national-flag/">如何绘制国旗？</a>
+  </h1>
+  <time datetime="2019-10-01T00:00:00Z" class="post-date">2019年10月1日</time>
+  
+
+
+<p>今天是新中国70华诞，是全中国人民最重要的节日。在这个特殊的日子，作为一个伪码农，我选择了这样一种方式，表达对祖国最诚挚的爱。</p>
+<div id="section" class="section level1">
+<h1>1 准备工作</h1>
+<p>“工欲善其事，必先利其器。”作为一个R的重度发烧友，用R绘图是一项基本技能。我们通常的绘图思路是先构图，然后绘制。然而，自从<code>tidyverse</code>包出现后，绘图与数据分析就紧密结合在一起。可以说，图形只是数据的一种可视化方式，所以在绘图前做好数据处理工作是十分必要的。那么，如何构建绘图的数据呢？答案很简单，就是利用<code>sf</code>包，因为它能够提供一个基于WKT的几何图形数据格式（见<a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">Simple Features for R</a>）。</p>
+<p>接下来，我们需要了解五星红旗的绘制标准，包括：国旗（GB 12982-2004）和国旗颜色标准样品（GB 12983-2004）。看过标准后我才发现，看似简单的国旗其实有许多细节需要注意：五角星的大小、位置、角度、颜色以及红旗旗面的尺寸与颜色都是有讲究的。</p>
+<p>在对绘图工具和绘图规范有了比较好的理解后，我们就可以着手绘图数据的设计与处理。</p>
+</div>
+<div id="section-1" class="section level1">
+<h1>2 五角星和旗面绘制</h1>
+<p>如何绘制五角星和旗面？对于一个熟悉WKT格式的人来说，这个问题可以转化为一个数据问题。我们可以用<code>LINESTRING</code>（多段线）或者<code>POLYGON</code>（多边形）这两种格式来处理数据，也就是确定好五角星和旗面矩形的每个顶点的横纵坐标并按顺序排列即可。为了保证线条闭合，必须首尾的横纵坐标是一致的。</p>
+
+  
+  <div class="read-more-link">
+    <a href="./post/2019/10/01/how-to-make-national-flag/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="./post/2017/02/06/tables-package-usage/">生产复杂表格的R软件包：tables</a>
   </h1>
   <time datetime="2017-02-06T00:00:00Z" class="post-date">2017年2月6日</time>
   
@@ -203,12 +227,12 @@
 
   
   <div class="read-more-link">
-    <a href="/post/2017/02/06/tables-package-usage/">Read More →</a>
+    <a href="./post/2017/02/06/tables-package-usage/">Read More →</a>
   </div>
   
 </article><article class="post">
   <h1 class="post-title">
-    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">基于泰勒展开的不确定性传递</a>
+    <a href="./post/2016/10/07/taylor-series-for-uncertainty/">基于泰勒展开的不确定性传递</a>
   </h1>
   <time datetime="2016-10-07T00:00:00Z" class="post-date">2016年10月7日</time>
   
@@ -231,33 +255,7 @@
 
   
   <div class="read-more-link">
-    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">Read More →</a>
-  </div>
-  
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="/post/2016/08/27/sfc-package-manual/">sfc软件包中文说明</a>
-  </h1>
-  <time datetime="2016-08-27T00:00:00Z" class="post-date">2016年8月27日</time>
-  
-
-
-<p><a href="https://cran.r-project.org/web/packages/sfc/index.html">sfc</a>软件包于2016年8月25日正式出现在<a href="https://cran.r-project.org/">CRAN</a>上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。</p>
-<div id="sfc" class="section level1">
-<h1>1 安装sfc</h1>
-<p>sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：</p>
-<pre class="r"><code>install.packages(&quot;sfc&quot;)</code></pre>
-<p>如果要安装sfc软件包的最新开发版，则可以通过以下方式：</p>
-<pre class="r"><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
-</div>
-<div id="data" class="section level1">
-<h1>2 数据文件</h1>
-<p>物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的<code>sfc</code>函数调用。</p>
-
-  
-  <div class="read-more-link">
-    <a href="/post/2016/08/27/sfc-package-manual/">Read More →</a>
+    <a href="./post/2016/10/07/taylor-series-for-uncertainty/">Read More →</a>
   </div>
   
 </article>
@@ -266,7 +264,7 @@ devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
 <ul class="pagination">
     
     <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+        <a href="./" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
     <li class="page-item disabled">
@@ -283,7 +281,7 @@ devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
         
     
     
-    <li class="page-item active"><a class="page-link" href="/">1</a></li>
+    <li class="page-item active"><a class="page-link" href="./">1</a></li>
     
     
     
@@ -294,15 +292,15 @@ devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    <li class="page-item"><a class="page-link" href="./page/2/">2</a></li>
     
     
     <li class="page-item">
-    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <a href="./page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li class="page-item">
-        <a href="/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="./page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -310,7 +308,7 @@ devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
 
 </div>
     </main>
-<script src="/js/math-code.js"></script>
+<script src="./js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     
   </body>

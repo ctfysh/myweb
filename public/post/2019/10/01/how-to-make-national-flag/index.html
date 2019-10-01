@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.57.2" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>如何绘制国旗？ &middot; Catfish</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="../../../../../css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="../../../../../css/poole.css">
+  <link type="text/css" rel="stylesheet" href="../../../../../css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="../../../../../css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="../../../../../css/custom.css">
+    <link type="text/css" rel="stylesheet" href="../../../../../css/fonts.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../../catfish.png">
+  <link rel="shortcut icon" href="../../../../../favicon.ico">
+
+  
+  
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+</head>
+
+  <body class="theme-base-0d ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="../../../../../"><h1>Catfish</h1></a>
+      <p class="lead">
+       R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      
+      
+        <a class="sidebar-nav-item " href="../../../../../">Home</a>
+        <a class="sidebar-nav-item " href="../../../../../about/"> About </a><a class="sidebar-nav-item " href="../../../../../post/"> Archives </a><a class="sidebar-nav-item " href="../../../../../categories/"> Categories </a><a class="sidebar-nav-item " href="../../../../../resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+    </nav>
+
+    
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>如何绘制国旗？</h1>
+  
+  <time datetime=2019-10-01T00:00:00Z class="post-date">2019年10月1日</time>
+  
+  
+    
+
+
+<p>今天是新中国70华诞，是全中国人民最重要的节日。在这个特殊的日子，作为一个伪码农，我选择了这样一种方式，表达对祖国最诚挚的爱。</p>
+<div id="section" class="section level1">
+<h1>1 准备工作</h1>
+<p>“工欲善其事，必先利其器。”作为一个R的重度发烧友，用R绘图是一项基本技能。我们通常的绘图思路是先构图，然后绘制。然而，自从<code>tidyverse</code>包出现后，绘图与数据分析就紧密结合在一起。可以说，图形只是数据的一种可视化方式，所以在绘图前做好数据处理工作是十分必要的。那么，如何构建绘图的数据呢？答案很简单，就是利用<code>sf</code>包，因为它能够提供一个基于WKT的几何图形数据格式（见<a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">Simple Features for R</a>）。</p>
+<p>接下来，我们需要了解五星红旗的绘制标准，包括：国旗（GB 12982-2004）和国旗颜色标准样品（GB 12983-2004）。看过标准后我才发现，看似简单的国旗其实有许多细节需要注意：五角星的大小、位置、角度、颜色以及红旗旗面的尺寸与颜色都是有讲究的。</p>
+<p>在对绘图工具和绘图规范有了比较好的理解后，我们就可以着手绘图数据的设计与处理。</p>
+</div>
+<div id="section-1" class="section level1">
+<h1>2 五角星和旗面绘制</h1>
+<p>如何绘制五角星和旗面？对于一个熟悉WKT格式的人来说，这个问题可以转化为一个数据问题。我们可以用<code>LINESTRING</code>（多段线）或者<code>POLYGON</code>（多边形）这两种格式来处理数据，也就是确定好五角星和旗面矩形的每个顶点的横纵坐标并按顺序排列即可。为了保证线条闭合，必须首尾的横纵坐标是一致的。</p>
+
+  
+  <p>假设五角星是一个正立的五角星，且坐标原点（<span class="math inline">\((0,0)\)</span>）设在五角星的对称中心，原点到每个角的距离为1（五角星内接于一个单位圆）。如果我们将五角星的10个顶点与原点连接起来，那么得到的10条连线正好平分圆周，相邻两条线的夹角为<span class="math inline">\(2\pi/10\)</span>或者<span class="math inline">\(36^\circ\)</span>，连线的长度分别为1和<span class="math inline">\(\cos(2\pi/5)/\cos(2\pi/10)\)</span>（通过解方程<span class="math inline">\(r\cos(2\pi/10)+r\sin(2\pi/10)/\tan(2\pi/20)=1\)</span>求得，未知数为<span class="math inline">\(r\)</span>）。如果我们用极坐标（<span class="math inline">\((\rho,\theta)\)</span>）来表示五角星上的点，那么五角星最高点的坐标为（<span class="math inline">\((1,\pi/2)\)</span>），最高点左边的一个内凹的点的坐标为（<span class="math inline">\((\cos(2\pi/5)/\cos(2\pi/10),\pi/2+2\pi/10)\)</span>）。由于绘图用的是直角坐标系，所以我们需要对极坐标系作如下变换：</p>
+<p><span class="math display">\[
+\begin{cases}
+x=\rho\cos(\theta)\\
+y=\rho\sin(\theta)
+\end{cases}
+\]</span></p>
+<p>根据以上分析，我们可以得到如下五角星坐标数据：</p>
+<pre class="r"><code>## 五角星坐标
+star &lt;- function(pt = c(0, 0),
+                 sz = 1,
+                 rt = pi / 2) {
+  n &lt;- 10
+  pts &lt;- (1:n - 1) / n * 2 * pi + rt
+  r &lt;- rep(c(1, cos(2 * pi / 5) / cos(2 * pi / 10)), 5)
+  (cbind(cos(pts), sin(pts)) * r * sz)[c(1:10, 1), ] +
+    t(replicate(n + 1, pt))
+}</code></pre>
+<p>如果配上颜色（RGB:252,209,022或者#FCD116）可以得到如下的图</p>
+<pre class="r"><code>star() %&gt;% list() %&gt;% st_polygon() %&gt;%
+  ggplot() + geom_sf(fill = yellow) + theme_void()</code></pre>
+<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>同样的方式，我们很容易得到旗面矩形的绘制数据：</p>
+<pre class="r"><code>## 矩形坐标
+sq &lt;- function(pt = c(0, 0),
+               sz = 1,
+               w2l = 1) {
+  rbind(
+    c(pt - sz * c(1, w2l)),
+    c(pt[1] + sz, pt[2] - sz * w2l),
+    c(pt + sz * c(1, w2l)),
+    c(pt[1] - sz, pt[2] + sz * w2l),
+    c(pt - sz * c(1, w2l))
+  )
+}</code></pre>
+<p>旗面长宽比为3:2，如果配上颜色（RGB:206,17,38或者#CE1126）可以得到如下的图</p>
+<pre class="r"><code>sq(c(1, 0), w2l = 2 / 3) %&gt;% list() %&gt;% st_polygon() %&gt;%
+  ggplot() + geom_sf(fill = red) + theme_void()</code></pre>
+<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="section-2" class="section level1">
+<h1>3 五角星的大小、位置和角度</h1>
+<p>我们知道，五星红旗最大的一颗五角星象征着中国共产党，其余四颗同样大小的分别象征着中国共产党领导下的全国各族人民。每个五角星的大小、位置和角度可以参照如下的墨迹图。从墨迹图不难看出：国旗旗面被均分为4份，其中左上部分又被分成<span class="math inline">\(10\times 15\)</span>个网格。大五角星外接圆半径为3个格子的长度，而小五角星外接圆半径为1个格子的长度。每个小五角星的一个角刚好指向大五角星的中心，即位于大小五角星中心的连线上。如果假设旗面中心的坐标为<span class="math inline">\((1.5, 0)\)</span>，旗面的长宽分别为3和2，那么每个小格子的长度为0.1。按照这种方式，我们可以分别写出每个五角星的直角坐标。另外，五角星的旋转角度可以用反余弦函数<span class="math inline">\(\arctan\)</span>计算出来。</p>
+<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="section-3" class="section level1">
+<h1>4 五星红旗的绘制</h1>
+<p>按照上述方法，我们可以写出如下五星红旗的代码，并采用<code>ggplot2</code>包将其绘制出来。</p>
+<pre class="r"><code>## 五星红旗
+p &lt;- list(list(sq(c(1.5, 0), 1.5, 2 / 3)),
+          list(star(c(0.5, 0.5), 0.3)),
+          list(star(c(1, 0.1), 0.1, atan2(-0.4, 0.5) + pi)),
+          list(star(c(1.2, 0.3), 0.1, atan2(-0.2, 0.7) + pi)),
+          list(star(c(1.2, 0.6), 0.1, atan2(0.1, 0.7) - pi)),
+          list(star(c(1, 0.8), 0.1, atan2(0.3, 0.5) - pi))) %&gt;%
+  st_multipolygon() %&gt;% st_sfc() %&gt;% st_cast(&quot;POLYGON&quot;) %&gt;%
+  st_sf() %&gt;% mutate(color = c(red, rep(yellow, 5)))</code></pre>
+<pre class="r"><code>ggplot(p) + geom_sf() +
+  aes(fill = color, color = color) + theme_void() +
+  theme(legend.position = &quot;none&quot;) +
+  scale_fill_manual(values = c(red, yellow)) +
+  scale_color_manual(values = c(red, yellow))</code></pre>
+<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>由于<code>sf</code>包本来是一种处理GIS数据的软件包，同时我们也可以将上述绘图结果以GIS数据格式输出，代码如下</p>
+<pre class="r"><code>st_write(p, &quot;flag.shp&quot;)</code></pre>
+<p>这时，我们就可以在ArcGIS或者QGIS等GIS软件平台上做出中国国旗了。</p>
+</div>
+
+</div>
+
+
+    </main>
+<script src="../../../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+  </body>
+</html>

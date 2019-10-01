@@ -11,19 +11,19 @@
   <title>Catfish &middot; Tiger&#39;s home</title>
 
   
-  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
-  <link type="text/css" rel="stylesheet" href="/css/custom.css">
-    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
+  <link type="text/css" rel="stylesheet" href="../../css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="../../css/poole.css">
+  <link type="text/css" rel="stylesheet" href="../../css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="../../css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="../../css/custom.css">
+    <link type="text/css" rel="stylesheet" href="../../css/fonts.css">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../catfish.png">
+  <link rel="shortcut icon" href="../../favicon.ico">
 
   
-  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
   
 
 
@@ -52,7 +52,7 @@
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="/"><h1>Catfish</h1></a>
+      <a href="../../"><h1>Catfish</h1></a>
       <p class="lead">
        R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
       </p>
@@ -61,8 +61,8 @@
     <nav class="sidebar-nav">
       
       
-        <a class="sidebar-nav-item active" href="/">Home</a>
-        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+        <a class="sidebar-nav-item active" href="../../">Home</a>
+        <a class="sidebar-nav-item " href="../../about/"> About </a><a class="sidebar-nav-item " href="../../post/"> Archives </a><a class="sidebar-nav-item " href="../../categories/"> Categories </a><a class="sidebar-nav-item " href="../../resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
     </nav>
 
     
@@ -74,28 +74,54 @@
 
 <article class="post">
   <h1 class="post-title">
-    <a href="/post/2016/07/15/index-of-lorenz-curve/">与Lorenz曲线相关的指标</a>
+    <a href="../../post/2016/08/27/sfc-package-manual/">sfc软件包中文说明</a>
+  </h1>
+  <time datetime="2016-08-27T00:00:00Z" class="post-date">2016年8月27日</time>
+  
+
+
+<p><a href="https://cran.r-project.org/web/packages/sfc/index.html">sfc</a>软件包于2016年8月25日正式出现在<a href="https://cran.r-project.org/">CRAN</a>上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。</p>
+<div id="sfc" class="section level1">
+<h1>1 安装sfc</h1>
+<p>sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：</p>
+<pre class="r"><code>install.packages(&quot;sfc&quot;)</code></pre>
+<p>如果要安装sfc软件包的最新开发版，则可以通过以下方式：</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>2 数据文件</h1>
+<p>物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的<code>sfc</code>函数调用。</p>
+
+  
+  <div class="read-more-link">
+    <a href="../../post/2016/08/27/sfc-package-manual/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="../../post/2016/07/15/index-of-lorenz-curve/">与Lorenz曲线相关的指标</a>
   </h1>
   <time datetime="2016-07-15T00:00:00Z" class="post-date">2016年7月15日</time>
   
 
 
-<p>在前面一篇博客“<a href="/post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。</p>
+<p>在前面一篇博客“<a href="../../post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。</p>
 <div id="hoover" class="section level1">
 <h1>1 Hoover指数</h1>
 <p>Hoover指数的想法是十分简单的，假设有<span class="math inline">\(n\)</span>个人的收入分别为<span class="math inline">\(x_1,x_2,\cdots,x_n\)</span>，其平均数为<span class="math inline">\(\bar{x}\)</span>，考虑到最公平的分配方式是这<span class="math inline">\(n\)</span>个人的收入都是<span class="math inline">\(\bar{x}\)</span>，那么每个人的缺口就是<span class="math inline">\(\|x_i-\bar{x}\|\)</span>。这时我们可以计算出总的缺口占总收入的比例：</p>
 <p><span class="math display">\[\text{HI}=\dfrac{\sum_{i=1}^n\|x_i-\bar{x}\|}{2\sum_{i=1}^n{x_i}}\]</span></p>
-<p>这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以<span class="math inline">\(2\)</span>，其原因是<span class="math inline">\(x_i-\bar{x}&lt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和与<span class="math inline">\(x_i-\bar{x}&gt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“<a href="/post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中第一个表格中数据的Hoover指数，其结果为
+<p>这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以<span class="math inline">\(2\)</span>，其原因是<span class="math inline">\(x_i-\bar{x}&lt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和与<span class="math inline">\(x_i-\bar{x}&gt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“<a href="../../post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中第一个表格中数据的Hoover指数，其结果为
 <span class="math inline">\(0.206\)</span>。</p>
 
   
   <div class="read-more-link">
-    <a href="/post/2016/07/15/index-of-lorenz-curve/">Read More →</a>
+    <a href="../../post/2016/07/15/index-of-lorenz-curve/">Read More →</a>
   </div>
   
 </article><article class="post">
   <h1 class="post-title">
-    <a href="/post/2016/07/12/weighted-gini-coeficient/">对加权Gini系数的理解</a>
+    <a href="../../post/2016/07/12/weighted-gini-coeficient/">对加权Gini系数的理解</a>
   </h1>
   <time datetime="2016-07-12T00:00:00Z" class="post-date">2016年7月12日</time>
   
@@ -155,11 +181,11 @@
 </tbody>
 </table>
 <p>绘制的Lorenz曲线如下：</p>
-<p><img src="/post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png" width="672" /></p>
+<p><img src="../../post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png" width="672" /></p>
 
   
   <div class="read-more-link">
-    <a href="/post/2016/07/12/weighted-gini-coeficient/">Read More →</a>
+    <a href="../../post/2016/07/12/weighted-gini-coeficient/">Read More →</a>
   </div>
   
 </article>
@@ -168,11 +194,11 @@
 <ul class="pagination">
     
     <li class="page-item">
-        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+        <a href="../../" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
     <li class="page-item">
-    <a href="/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <a href="../../" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -185,7 +211,7 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    <li class="page-item"><a class="page-link" href="../../">1</a></li>
     
     
     
@@ -196,7 +222,7 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="/page/2/">2</a></li>
+    <li class="page-item active"><a class="page-link" href="../../page/2/">2</a></li>
     
     
     <li class="page-item disabled">
@@ -204,7 +230,7 @@
     </li>
     
     <li class="page-item">
-        <a href="/page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="../../page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -212,7 +238,7 @@
 
 </div>
     </main>
-<script src="/js/math-code.js"></script>
+<script src="../../js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     
   </body>
