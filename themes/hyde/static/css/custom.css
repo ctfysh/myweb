@@ -76,15 +76,6 @@ dl {
 
 
 /* add by ctfysh */
-body,ul {     /*组合选择器*/
-    list-style: none;    /*清除列表默认样式*/
-    padding: 0;      /*清除padding*/
-    margin: 0;
-}
-        
-li{
-    float: left;
-}
 
 ul.pagination {
     display: inline-block;
