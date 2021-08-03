@@ -3,7 +3,7 @@
 <head>
   <link href="//gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.57.2" />
+  <meta name="generator" content="Hugo 0.86.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,19 +11,19 @@
   <title>Catfish &middot; Tiger&#39;s home</title>
 
   
-  <link type="text/css" rel="stylesheet" href="../../css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="../../css/poole.css">
-  <link type="text/css" rel="stylesheet" href="../../css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="../../css/hyde.css">
-  <link type="text/css" rel="stylesheet" href="../../css/custom.css">
-    <link type="text/css" rel="stylesheet" href="../../css/fonts.css">
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../catfish.png">
-  <link rel="shortcut icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
+  <link rel="shortcut icon" href="/favicon.ico">
 
   
-  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
   
 
 
@@ -52,7 +52,7 @@
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="../../"><h1>Catfish</h1></a>
+      <a href="/"><h1>Catfish</h1></a>
       <p class="lead">
        R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
       </p>
@@ -61,8 +61,8 @@
     <nav class="sidebar-nav">
       
       
-        <a class="sidebar-nav-item active" href="../../">Home</a>
-        <a class="sidebar-nav-item " href="../../about/"> About </a><a class="sidebar-nav-item " href="../../post/"> Archives </a><a class="sidebar-nav-item " href="../../categories/"> Categories </a><a class="sidebar-nav-item " href="../../resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+        <a class="sidebar-nav-item active" href="/">Home</a>
+        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
     </nav>
 
     
@@ -74,7 +74,35 @@
 
 <article class="post">
   <h1 class="post-title">
-    <a href="../../post/2016/08/27/sfc-package-manual/">sfc软件包中文说明</a>
+    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">基于泰勒展开的不确定性传递</a>
+  </h1>
+  <time datetime="2016-10-07T00:00:00Z" class="post-date">2016年10月7日</time>
+  
+
+
+<div id="section" class="section level1">
+<h1>1 两个输入变量</h1>
+<p>假设随机变量<span class="math inline">\(Z\)</span>是随机变量<span class="math inline">\(X\)</span>和随机变量<span class="math inline">\(Y\)</span>的函数，函数关系如下</p>
+<p><span class="math display">\[Z=f(X,Y)\]</span></p>
+<p>其中<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的均值分别为<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>，方差分别为<span class="math inline">\(D_{X}\)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>和<span class="math inline">\(D_{Y}\)</span>，协方差为<span class="math inline">\(D_{XY}\)</span>。对<span class="math inline">\(Z\)</span>进行关于<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>泰勒展开可以得到</p>
+<p><span class="math display">\[Z=f(\overline{X},\overline{Y})+f_{X}^{\prime}(\overline{X},\overline{Y})(X-\overline{X})+f_{Y}^{\prime}(\overline{X},\overline{Y})(Y-\overline{Y})+o(X,Y)\]</span></p>
+<p>如果忽略高阶项<span class="math inline">\(o(X,Y)\)</span>，那么根据随机变量求和的期望和方差计算公式</p>
+<p><span class="math display">\[\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\]</span></p>
+<p>和</p>
+<p><span class="math display">\[\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\text{cov}(X,Y)\]</span></p>
+<p>可以得到<span class="math inline">\(Z\)</span>的期望值与方差值分别如下</p>
+<p><span class="math display">\[\overline{Z}=f(\overline{X},\overline{Y})\]</span></p>
+<p>和</p>
+<p><span class="math display">\[D_{Z}=f_{X}^{\prime}(\overline{X},\overline{Y})^{2}D_{X}+f_{Y}^{\prime}(\overline{X},\overline{Y})^{2}D_{Y}+2f_{X}^{\prime}(\overline{X},\overline{Y})f_{Y}^{\prime}(\overline{X},\overline{Y})D_{XY}\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="/post/2016/08/27/sfc-package-manual/">sfc软件包中文说明</a>
   </h1>
   <time datetime="2016-08-27T00:00:00Z" class="post-date">2016年8月27日</time>
   
@@ -95,150 +123,58 @@ devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
 
   
   <div class="read-more-link">
-    <a href="../../post/2016/08/27/sfc-package-manual/">Read More →</a>
+    <a href="/post/2016/08/27/sfc-package-manual/">Read More →</a>
   </div>
   
 </article><article class="post">
   <h1 class="post-title">
-    <a href="../../post/2016/07/15/index-of-lorenz-curve/">与Lorenz曲线相关的指标</a>
+    <a href="/post/2016/07/15/index-of-lorenz-curve/">与Lorenz曲线相关的指标</a>
   </h1>
   <time datetime="2016-07-15T00:00:00Z" class="post-date">2016年7月15日</time>
   
 
 
-<p>在前面一篇博客“<a href="../../post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。</p>
+<p>在前面一篇博客“<a href="/post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中，我们已经对Lorenz曲线的构造方法进行了探讨，当时的主要目的是计算加权Gini系数。事实上，Gini系数并不能表现出Lorenz曲线的全部信息，因为同一个Gini系数可能对应不同的Lorenz曲线。为了进一步挖掘Lorenz曲线的信息，Damgaard等人<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>提出了Lorenz不对称系数，用来说明不公平性到底是由于低收入的人群占比太高导致的，还是由于少量人群占据了大量的收入所致。另外，学者还提出了Hoover指数(或者称为Ricci-Schutz系数以及Robin Hood指数)，用来分析到底有多大比例的收入需要再分配才能实现“绝对公平”。由于Hoover指数相对比较简单，这里先探讨Hoover指数，然后再对Lorenz不对称系数进行说明。</p>
 <div id="hoover" class="section level1">
 <h1>1 Hoover指数</h1>
 <p>Hoover指数的想法是十分简单的，假设有<span class="math inline">\(n\)</span>个人的收入分别为<span class="math inline">\(x_1,x_2,\cdots,x_n\)</span>，其平均数为<span class="math inline">\(\bar{x}\)</span>，考虑到最公平的分配方式是这<span class="math inline">\(n\)</span>个人的收入都是<span class="math inline">\(\bar{x}\)</span>，那么每个人的缺口就是<span class="math inline">\(\|x_i-\bar{x}\|\)</span>。这时我们可以计算出总的缺口占总收入的比例：</p>
 <p><span class="math display">\[\text{HI}=\dfrac{\sum_{i=1}^n\|x_i-\bar{x}\|}{2\sum_{i=1}^n{x_i}}\]</span></p>
-<p>这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以<span class="math inline">\(2\)</span>，其原因是<span class="math inline">\(x_i-\bar{x}&lt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和与<span class="math inline">\(x_i-\bar{x}&gt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“<a href="../../post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中第一个表格中数据的Hoover指数，其结果为
+<p>这个比例就是Hoover指数。在Hoover指数的计算公式中需要除以<span class="math inline">\(2\)</span>，其原因是<span class="math inline">\(x_i-\bar{x}&lt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和与<span class="math inline">\(x_i-\bar{x}&gt;0\)</span>的<span class="math inline">\(\|x_i-\bar{x}\|\)</span>的总和相等，也就是说高于平均收入的人群需要拿出的收入的总和等于低于平均收入的人群需要获得的收入的总和时才能实现“绝对公平”。按照这种方式，我们很容易就能计算出“<a href="/post/2016/07/12/weighted-Gini-coeficient/">对加权Gini系数的理解</a>”中第一个表格中数据的Hoover指数，其结果为
 <span class="math inline">\(0.206\)</span>。</p>
 
   
   <div class="read-more-link">
-    <a href="../../post/2016/07/15/index-of-lorenz-curve/">Read More →</a>
-  </div>
-  
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="../../post/2016/07/12/weighted-gini-coeficient/">对加权Gini系数的理解</a>
-  </h1>
-  <time datetime="2016-07-12T00:00:00Z" class="post-date">2016年7月12日</time>
-  
-
-
-<div id="gini" class="section level1">
-<h1>1 Gini系数</h1>
-<p>Gini系数是研究不公平性(或者说公平性)的一个重要指标。它的计算可以通过Lorenz曲线来实现。假如我们研究一个群体内部收入分配的公平性问题，那么首先可以刻画这个群体内部收入分配的Lorenz曲线，具体方式如下：假设这个群体内部共有<span class="math inline">\(n\)</span>个人，每个人的收入分别为<span class="math inline">\(x_1,x_2,\cdots,x_n\)</span>，然后我们可以对这<span class="math inline">\(n\)</span>个人的收入按照从小到大的顺序进行排序，得到<span class="math inline">\(x_１^\prime,x_2^\prime,\cdots,x_n^\prime\)</span>，这时我们可以构造一组坐标<span class="math inline">\((h/n,L_h/L_n)\)</span>，这里<span class="math inline">\(h=0,1,\cdots,n\)</span>，<span class="math inline">\(L_0=0\)</span>，<span class="math inline">\(L_h=\sum_{i=0}^hx_i^\prime\)</span>。我们将这些坐标点绘制在平面直角坐标系中并依次相连，所得到的曲线就是Lorenz曲线。为了说明这一过程，假设<span class="math inline">\(n=10\)</span>，具体的收入状况如下表所示：</p>
-<table>
-<thead>
-<tr class="header">
-<th align="right">id</th>
-<th align="right">income</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="right">28.76</td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="right">78.83</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">40.90</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">88.30</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">94.05</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">4.56</td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">52.81</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">89.24</td>
-</tr>
-<tr class="odd">
-<td align="right">9</td>
-<td align="right">55.14</td>
-</tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="right">45.66</td>
-</tr>
-</tbody>
-</table>
-<p>绘制的Lorenz曲线如下：</p>
-<p><img src="../../post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png" width="672" /></p>
-
-  
-  <div class="read-more-link">
-    <a href="../../post/2016/07/12/weighted-gini-coeficient/">Read More →</a>
+    <a href="/post/2016/07/15/index-of-lorenz-curve/">Read More →</a>
   </div>
   
 </article>
 
-
-<ul class="pagination">
-    
-    <li class="page-item">
-        <a href="../../" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-    </li>
-    
-    <li class="page-item">
-    <a href="../../" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="../../">1</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item active"><a class="page-link" href="../../page/2/">2</a></li>
-    
-    
-    <li class="page-item disabled">
-    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-    </li>
-    
-    <li class="page-item">
-        <a href="../../page/2/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-    </li>
-    
-</ul>
-
-
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
 </div>
     </main>
-<script src="../../js/math-code.js"></script>
+<script src="/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     
   </body>

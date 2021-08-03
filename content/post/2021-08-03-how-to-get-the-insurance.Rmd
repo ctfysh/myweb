@@ -1,0 +1,166 @@
+---
+title: "整取？还是零取？"
+comments: yes
+date: '2021-08-03'
+layout: post
+published: yes
+slug: how to get the insurance
+categories:
+  - R
+  - insurance
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# 1 基本原理
+
+假设一次性可以领取的金额为$A$，分月领取的金额为$B$，领取的时间为$t$年，银行的年利率为$r$，首先根据复利公式可以计算出月利率$r_0$满足如下公式：
+
+$$
+1+r=(1+r_0)^{12} 
+$$
+也就是说
+
+$$
+r_0=\sqrt[12]{1+r}-1
+$$
+
+在此基础上，不难得知，如果将钱一次性取出并存入银行，$t$年后总的收益（本息和）为
+
+$$
+X=A(1+r)^t=A(1+r_0)^{12t}
+$$
+
+另外，如果每个月取出B并存入银行，那么第1个月取出的钱到$t$年后的总的收益是$B(1+r_0)^{12t}$，第2个月取出的钱到$t$年后的总的收益是$B(1+r_0)^{12t-1}$，……，最后一个月取出的钱到$t$年后的总的收益是$B(1+r_0)$，那么所有月份形成的总的收益为
+
+$$
+Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
+$$
+
+<!--more-->
+
+上式是首项为$a_1=B(1+r_0)$，项数为$n=12t$，公比为$q=1+r_0$的等比数列，其求和公式为
+
+$$
+S_n=a_1\cdot\dfrac{1-q^n}{1-q}
+$$
+那么，$Y$的结果为
+
+$$
+Y=B(1+r_0)\cdot\dfrac{1-(1+r_0)^{12t}}{1-(1+r_0)}=B(1+r_0)\cdot\dfrac{(1+r_0)^{12t}-1}{r_0}
+$$
+
+假设$t$年总的收益率为$R$，那么有
+
+$$
+1+R=(1+r)^t=(1+r_0)^{12t}
+$$
+
+在给定$t$的条件下
+
+$$
+R=(1+r)^t-1=(1+r_0)^{12t}-1
+$$
+
+代入到$X$和$Y$的计算公式中，分别为
+
+$$
+X=A(1+R)
+$$
+
+和
+
+$$
+Y=B(1+r_0)\cdot\dfrac{R}{r_0}
+$$
+
+（1）当$X<Y$时，
+
+$$
+A(1+R)<B(1+r_0)\cdot\dfrac{R}{r_0}
+$$
+
+（2）当$X>Y$时，
+
+$$
+A(1+R)>B(1+r_0)\cdot\dfrac{R}{r_0}
+$$
+
+（3）当$X=Y$时，
+
+$$
+A(1+R)=B(1+r_0)\cdot\dfrac{R}{r_0}
+$$
+
+可以计算出累积收益率为
+
+$$
+R=\dfrac{Ar_0}{B(1+r_0)-Ar_0}
+$$
+
+当计算完累积收益率后，则可以计算二者相等时的年限，根据$1+R=(1+r)^t$，两边同时取对数（任意底数）
+
+$$
+\log(1+R)=\log[(1+r)^t]=t\log(1+r)
+$$
+
+那么二者相等时收益年限为
+
+$$
+t=\dfrac{\log(1+R)}{\log(1+r)}=\dfrac{\log(1+R)}{12\log(1+r_0)}
+$$
+
+# 2 算例演示
+
+假设一次性可以领取的金额为$A=10000$，分月领取的金额为$B=100$，银行的年化利率为$r=0.03$，那么
+
+```{r}
+library(tidyverse)
+A <- 10000
+B <- 100
+r <- 0.03
+fX <- function(t) {
+  A * (1 + r) ^ t
+}
+fY <- function(t) {
+  r0 <- (1 + r) ^ (1 / 12) - 1
+  B * (1 + r0) * ((1 + r) ^ t - 1) / r0
+}
+ft <- function(r) {
+  r0 <- (1 + r) ^ (1 / 12) - 1
+  R <- A * r0 / (B * (1 + r0) - A * r0)
+  log(1 + R) / log(1 + r)
+}
+# 作图
+ggplot(tibble(t = 1:30), aes(t)) +
+  geom_function(fun = fX, aes(color = "X")) +
+  geom_function(fun = fY, aes(color = "Y")) +
+  geom_point(aes(y = y),
+             data = tibble(t = ft(r), y = fX(t)),
+             size = 3,
+             shape = 1) +
+  theme_bw(base_size = 14) +
+  theme(legend.position = c(.1, .8))
+```
+
+另外，银行年利率$r$与$X=Y$时收益年限$t$之间的关系为
+
+```{r}
+ggplot(tibble(r = seq(0, 0.1, length.out = 101)), aes(r)) +
+  geom_function(fun = ft) + ylab("t") +
+  geom_point(aes(y = t),
+             data = tibble(r = r, t = ft(r)),
+             size = 3,
+             shape = 1,
+             color = "red") +
+  theme_bw(base_size = 14)
+```
+

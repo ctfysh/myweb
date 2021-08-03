@@ -3,7 +3,7 @@
 <head>
   <link href="//gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.57.2" />
+  <meta name="generator" content="Hugo 0.86.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +11,16 @@
   <title>如何绘制国旗？ &middot; Catfish</title>
 
   
-  <link type="text/css" rel="stylesheet" href="../../../../../css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="../../../../../css/poole.css">
-  <link type="text/css" rel="stylesheet" href="../../../../../css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="../../../../../css/hyde.css">
-  <link type="text/css" rel="stylesheet" href="../../../../../css/custom.css">
-    <link type="text/css" rel="stylesheet" href="../../../../../css/fonts.css">
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../../catfish.png">
-  <link rel="shortcut icon" href="../../../../../favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
+  <link rel="shortcut icon" href="/favicon.ico">
 
   
   
@@ -51,7 +51,7 @@
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="../../../../../"><h1>Catfish</h1></a>
+      <a href="/"><h1>Catfish</h1></a>
       <p class="lead">
        R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
       </p>
@@ -60,8 +60,8 @@
     <nav class="sidebar-nav">
       
       
-        <a class="sidebar-nav-item " href="../../../../../">Home</a>
-        <a class="sidebar-nav-item " href="../../../../../about/"> About </a><a class="sidebar-nav-item " href="../../../../../post/"> Archives </a><a class="sidebar-nav-item " href="../../../../../categories/"> Categories </a><a class="sidebar-nav-item " href="../../../../../resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+        <a class="sidebar-nav-item " href="/">Home</a>
+        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
     </nav>
 
     
@@ -111,7 +111,7 @@ star &lt;- function(pt = c(0, 0),
 <p>如果配上颜色（RGB:252,209,022或者#FCD116）可以得到如下的图</p>
 <pre class="r"><code>star() %&gt;% list() %&gt;% st_polygon() %&gt;%
   ggplot() + geom_sf(fill = yellow) + theme_void()</code></pre>
-<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>同样的方式，我们很容易得到旗面矩形的绘制数据：</p>
 <pre class="r"><code>## 矩形坐标
 sq &lt;- function(pt = c(0, 0),
@@ -128,12 +128,12 @@ sq &lt;- function(pt = c(0, 0),
 <p>旗面长宽比为3:2，如果配上颜色（RGB:206,17,38或者#CE1126）可以得到如下的图</p>
 <pre class="r"><code>sq(c(1, 0), w2l = 2 / 3) %&gt;% list() %&gt;% st_polygon() %&gt;%
   ggplot() + geom_sf(fill = red) + theme_void()</code></pre>
-<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="section-2" class="section level1">
 <h1>3 五角星的大小、位置和角度</h1>
 <p>我们知道，五星红旗最大的一颗五角星象征着中国共产党，其余四颗同样大小的分别象征着中国共产党领导下的全国各族人民。每个五角星的大小、位置和角度可以参照如下的墨迹图。从墨迹图不难看出：国旗旗面被均分为4份，其中左上部分又被分成<span class="math inline">\(10\times 15\)</span>个网格。大五角星外接圆半径为3个格子的长度，而小五角星外接圆半径为1个格子的长度。每个小五角星的一个角刚好指向大五角星的中心，即位于大小五角星中心的连线上。如果假设旗面中心的坐标为<span class="math inline">\((1.5, 0)\)</span>，旗面的长宽分别为3和2，那么每个小格子的长度为0.1。按照这种方式，我们可以分别写出每个五角星的直角坐标。另外，五角星的旋转角度可以用反余弦函数<span class="math inline">\(\arctan\)</span>计算出来。</p>
-<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="section-3" class="section level1">
 <h1>4 五星红旗的绘制</h1>
@@ -152,7 +152,7 @@ p &lt;- list(list(sq(c(1.5, 0), 1.5, 2 / 3)),
   theme(legend.position = &quot;none&quot;) +
   scale_fill_manual(values = c(red, yellow)) +
   scale_color_manual(values = c(red, yellow))</code></pre>
-<p><img src="../../../../../post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2019-10-01-how-to-make-national-flag_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>由于<code>sf</code>包本来是一种处理GIS数据的软件包，同时我们也可以将上述绘图结果以GIS数据格式输出，代码如下</p>
 <pre class="r"><code>st_write(p, &quot;flag.shp&quot;)</code></pre>
 <p>这时，我们就可以在ArcGIS或者QGIS等GIS软件平台上做出中国国旗了。</p>
@@ -162,7 +162,7 @@ p &lt;- list(list(sq(c(1.5, 0), 1.5, 2 / 3)),
 
 
     </main>
-<script src="../../../../../js/math-code.js"></script>
+<script src="/js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     
   </body>

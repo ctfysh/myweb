@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.86.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Catfish &middot; Tiger&#39;s home</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Catfish" />
+  
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+</head>
+
+  <body class="theme-base-0d ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Catfish</h1></a>
+      <p class="lead">
+       R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      
+      
+        <a class="sidebar-nav-item active" href="/">Home</a>
+        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+    </nav>
+
+    
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="posts">
+
+<article class="post">
+  <h1 class="post-title">
+    <a href="/post/2016/07/12/weighted-gini-coeficient/">对加权Gini系数的理解</a>
+  </h1>
+  <time datetime="2016-07-12T00:00:00Z" class="post-date">2016年7月12日</time>
+  
+
+
+<div id="gini" class="section level1">
+<h1>1 Gini系数</h1>
+<p>Gini系数是研究不公平性(或者说公平性)的一个重要指标。它的计算可以通过Lorenz曲线来实现。假如我们研究一个群体内部收入分配的公平性问题，那么首先可以刻画这个群体内部收入分配的Lorenz曲线，具体方式如下：假设这个群体内部共有<span class="math inline">\(n\)</span>个人，每个人的收入分别为<span class="math inline">\(x_1,x_2,\cdots,x_n\)</span>，然后我们可以对这<span class="math inline">\(n\)</span>个人的收入按照从小到大的顺序进行排序，得到<span class="math inline">\(x_１^\prime,x_2^\prime,\cdots,x_n^\prime\)</span>，这时我们可以构造一组坐标<span class="math inline">\((h/n,L_h/L_n)\)</span>，这里<span class="math inline">\(h=0,1,\cdots,n\)</span>，<span class="math inline">\(L_0=0\)</span>，<span class="math inline">\(L_h=\sum_{i=0}^hx_i^\prime\)</span>。我们将这些坐标点绘制在平面直角坐标系中并依次相连，所得到的曲线就是Lorenz曲线。为了说明这一过程，假设<span class="math inline">\(n=10\)</span>，具体的收入状况如下表所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+<th align="right">income</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">28.76</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">78.83</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">40.90</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">88.30</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">94.05</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">4.56</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">52.81</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">89.24</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">55.14</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">45.66</td>
+</tr>
+</tbody>
+</table>
+<p>绘制的Lorenz曲线如下：</p>
+<p><img src="/post/2016-07-12-weighted-Gini-coeficient_files/figure-html/income_lorenz-1.png" width="672" /></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2016/07/12/weighted-gini-coeficient/">Read More →</a>
+  </div>
+  
+</article>
+
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item">
+        <a href="/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item active">
+        <a href="#" aria-current="page" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item disabled">
+        <a href="#" aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul>
+</div>
+    </main>
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+  </body>
+</html>

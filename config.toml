@@ -10,10 +10,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     title = "Tiger's home"
-	description = "R is the brush, math is the pigment, nature is the scenery, and science is the picture."
-	themeColor = "theme-base-0d"
-	dateformat = "2006年1月2日"
-	MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+	  description = "R is the brush, math is the pigment, nature is the scenery, and science is the picture."
+	  themeColor = "theme-base-0d"
+	  dateformat = "2006年1月2日"
+	  MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
     # https://highlightjs.org
     highlightjs = true
@@ -44,3 +44,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "GitHub"
     weight = 5
     url = "https://github.com/ctfysh"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

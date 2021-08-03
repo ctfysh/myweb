@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>insurance on Catfish</title>
+    <link>/categories/insurance/</link>
+    <description>Recent content in insurance on Catfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/insurance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整取？还是零取？</title>
+      <link>/post/2021/08/03/how-to-get-the-insurance/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/08/03/how-to-get-the-insurance/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;基本原理&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 基本原理&lt;/h1&gt;
+&lt;p&gt;假设一次性可以领取的金额为&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;，分月领取的金额为&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;，领取的时间为&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;年，银行的年利率为&lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;，首先根据复利公式可以计算出月利率&lt;span class=&#34;math inline&#34;&gt;\(r_0\)&lt;/span&gt;满足如下公式：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+1+r=(1+r_0)^{12} 
+\]&lt;/span&gt;
+也就是说&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r_0=\sqrt[12]{1+r}-1
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在此基础上，不难得知，如果将钱一次性取出并存入银行，&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;年后总的收益（本息和）为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+X=A(1+r)^t=A(1+r_0)^{12t}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;另外，如果每个月取出B并存入银行，那么第1个月取出的钱到&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;年后的总的收益是&lt;span class=&#34;math inline&#34;&gt;\(B(1+r_0)^{12t}\)&lt;/span&gt;，第2个月取出的钱到&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;年后的总的收益是&lt;span class=&#34;math inline&#34;&gt;\(B(1+r_0)^{12t-1}\)&lt;/span&gt;，……，最后一个月取出的钱到&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;年后的总的收益是&lt;span class=&#34;math inline&#34;&gt;\(B(1+r_0)\)&lt;/span&gt;，那么所有月份形成的总的收益为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
+\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
