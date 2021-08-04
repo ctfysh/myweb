@@ -154,7 +154,7 @@ ggplot(tibble(t = 1:30), aes(t)) +
 另外，银行年利率$r$与$X=Y$时收益年限$t$之间的关系为
 
 ```{r}
-ggplot(tibble(r = seq(0, 0.1, length.out = 101)), aes(r)) +
+ggplot(tibble(r = c(0, 0.1)), aes(r)) +
   geom_function(fun = ft) + ylab("t") +
   geom_point(aes(y = t),
              data = tibble(r = r, t = ft(r)),

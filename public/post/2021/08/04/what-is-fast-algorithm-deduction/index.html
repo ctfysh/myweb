@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.86.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>什么是速算扣除数？ &middot; Catfish</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+</head>
+
+  <body class="theme-base-0d ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Catfish</h1></a>
+      <p class="lead">
+       R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      
+      
+        <a class="sidebar-nav-item " href="/">Home</a>
+        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+    </nav>
+
+    
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>什么是速算扣除数？</h1>
+  
+  <time datetime=2021-08-04T00:00:00Z class="post-date">2021年8月4日</time>
+  
+  
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>在计算个人所得税的时候，往往会涉及到一个概念，叫做“速算扣除数”。大家知道，我们的税率是分段计算的，从函数的角度来看，就是一个分段函数，那么我们直接通过分段函数的性质就可以算税了，为啥要提出一个“速算扣除数”来呢？又或者说所谓的“速算”又体现在什么地方呢？</p>
+<p>为了弄明白这个问题，我们先了解一下目前个税的相关规定。首先，个税是按月缴纳的，这个就跟工资按月发放一样。其次，个税有一个起征点，目前就是5000元。再次，个税的应纳税所得额是当月收入（工资加上一些其他收入）在扣除五险一金扣缴的那部分以及养老、子女教育等附加的基础上超出起征点的那一部分。最后，个税采用的是按年累计计税的方式进行计算的，当累积的应纳税金额不超过36000元时，按3%来计税；超出36000元部分但不足144000元的，按10%来计税；超出144000元部分但不足300000元的，按20%来计税；超出300000元部分但不足420000元的，按25%来计税；超出420000元部分但不足660000元的，按30%来计税；超出660000元部分但不足960000元的，按35%来计税；超出960000元部分的，按45%来计税。</p>
+<p>假设每个月的应纳税所得额分别是<span class="math inline">\(x_1,x_2,\cdots,x_{12}\)</span>，那么每个月累计的应纳税金额分别是<span class="math inline">\(x_1,x_1+x_2,\cdots,\sum_{i=1}^kx_i,\cdots,\sum_{i=1}^{12}x_i\)</span>，则第<span class="math inline">\(k\)</span>月所采用的税率等级为</p>
+<p><span class="math display">\[
+r_{k}=\begin{cases}
+0.03, &amp; 0&lt;\sum_{i=1}^{k}x_{i}\le36000\\
+0.10, &amp; 36000&lt;\sum_{i=1}^{k}x_{i}\le144000\\
+0.20, &amp; 144000&lt;\sum_{i=1}^{k}x_{i}\le300000\\
+0.25, &amp; 300000&lt;\sum_{i=1}^{k}x_{i}\le420000\\
+0.30, &amp; 420000&lt;\sum_{i=1}^{k}x_{i}\le660000\\
+0.35, &amp; 660000&lt;\sum_{i=1}^{k}x_{i}\le96000\\
+0.45, &amp; 960000&lt;\sum_{i=1}^{k}x_{i}\le+\infty
+\end{cases}
+\]</span></p>
+<p>一般地，上式可以写成</p>
+<p><span class="math display">\[
+r_k=r(\sum_{i=1}^{k}x_{i})=\sum_l[\gamma_l\cdot I(a_{l-1}&lt;\sum_{i=1}^{k}x_{i}\le a_l)]
+\]</span></p>
+
+  
+  <p>这里，<span class="math inline">\(\gamma_l\)</span>为第<span class="math inline">\(l\)</span>级的税率，<span class="math inline">\(I(x)\)</span>为示性函数，即</p>
+<p><span class="math display">\[
+I(x)=\begin{cases}
+1, &amp; x\text{为真}\\
+0, &amp; x\text{为假}
+\end{cases}
+\]</span></p>
+<p>税率的阶梯函数图如下：</p>
+<p><img src="/post/2021-08-04-what-is-fast-algorithm-deduction_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>另外，假设<span class="math inline">\(a_{m-1}&lt;\sum_{i=1}^{k}x_{i}\le a_m\)</span>，那么累计应纳税额的计算公式为</p>
+<p><span class="math display">\[
+\begin{align*}
+\sigma_{k} &amp; =\sigma(\sum_{i=1}^{k}x_{i})=\int_{0}^{\sum_{i=1}^{k}x_{i}}r_{k}\text{d}t\\
+ &amp; =\int_{0}^{a_{1}}r_{k}\text{d}t+\int_{a_{1}}^{a_{2}}r_{k}\text{d}t+\cdots+\int_{a_{m-1}}^{\sum_{i=1}^{k}x_{i}}r_{k}\text{d}t\\
+ &amp; =\gamma_{1}a_{1}+\gamma_{2}(a_{2}-a_{1})+\cdots+\gamma_{m}(\sum_{i=1}^{k}x_{i}-a_{m-1})\\
+ &amp; =\gamma_{m}\sum_{i=1}^{k}x_{i}-a_{m-1}(\gamma_{m}-\gamma_{m-1})-\cdots-a_{1}(\gamma_{2}-\gamma_{1})
+\end{align*}
+\]</span></p>
+<p>上式中<span class="math inline">\(a_{1}(\gamma_{2}-\gamma_{1})\)</span>一直到<span class="math inline">\(a_{m-1}(\gamma_{m}-\gamma_{m-1})\)</span>都是常数，如果记<span class="math inline">\(b_1=0\)</span>，<span class="math inline">\(b_2=a_{1}(\gamma_{2}-\gamma_{1})+b_1=a_{1}(\gamma_{2}-\gamma_{1})\)</span>，<span class="math inline">\(b_3=a_{2}(\gamma_{3}-\gamma_{2})+b_2=a_{2}(\gamma_{3}-\gamma_{2})+a_{1}(\gamma_{2}-\gamma_{1})\)</span>，那么依次类推有如下递推公式</p>
+<p><span class="math display">\[
+b_m=a_{m-1}(\gamma_{m}-\gamma_{m-1})+b_{m-1}
+\]</span></p>
+<p>这里的<span class="math inline">\(b_m\)</span>就是速算扣除数。那么很容易验证，第1级速算扣除数为0，第2级速算扣除数为<span class="math inline">\(b_2=a_{1}(\gamma_{2}-\gamma_{1})+b_1=36000\times(0.1-0.03)+0=2520\)</span>，第3级速算扣除数为<span class="math inline">\(b_3=a_{2}(\gamma_{3}-\gamma_{2})+b_2=144000\times(0.2-0.1)+2520=16920\)</span>，依次类推，具体如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">等级</th>
+<th align="right">速算扣除数（元）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2520</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">16920</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">31920</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">52920</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">85920</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">181920</td>
+</tr>
+</tbody>
+</table>
+<p>在速算扣除数的帮助下，<span class="math inline">\(\sigma_k\)</span>可以写为</p>
+<p><span class="math display">\[
+\sigma_k=\gamma_{m}\sum_{i=1}^{k}x_{i}-b_m
+\]</span></p>
+<p>那么，累计应纳税额的函数图如下：</p>
+<p><img src="/post/2021-08-04-what-is-fast-algorithm-deduction_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>假设每个月应纳税额分别是<span class="math inline">\(y_1,y_2,\cdots,y_{12}\)</span>，那么有</p>
+<p><span class="math display">\[
+y_k=\sigma_k-\sigma_{k-1}=\sigma(\sum_{i=1}^{k}x_{i})-\sigma(\sum_{i=1}^{k-1}x_{i})
+\]</span></p>
+<p>假如每个月的应纳税所得额均为20000元，那么第1个月的应纳税额为<span class="math inline">\(20000\times 0.03=600\)</span>，第2个月的应纳税额为<span class="math inline">\(20000\times 2\times 0.1-2520-600=880\)</span>，第3个月的应纳税额为<span class="math inline">\(20000\times 3\times 0.1-2520-600-880=2000\)</span>，依次类推，具体如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">月份</th>
+<th align="right">应纳税额（元）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">600</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">880</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2000</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2000</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">2000</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">2000</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">2000</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">3600</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">4000</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">4000</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">4000</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="right">4000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+    </main>
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+  </body>
+</html>

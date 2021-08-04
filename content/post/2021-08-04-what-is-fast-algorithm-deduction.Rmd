@@ -1,0 +1,152 @@
+---
+title: "什么是速算扣除数？"
+comments: yes
+date: '2021-08-04'
+layout: post
+published: yes
+slug: what is fast algorithm deduction
+categories:
+  - R
+  - tax
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+在计算个人所得税的时候，往往会涉及到一个概念，叫做“速算扣除数”。大家知道，我们的税率是分段计算的，从函数的角度来看，就是一个分段函数，那么我们直接通过分段函数的性质就可以算税了，为啥要提出一个“速算扣除数”来呢？又或者说所谓的“速算”又体现在什么地方呢？
+
+为了弄明白这个问题，我们先了解一下目前个税的相关规定。首先，个税是按月缴纳的，这个就跟工资按月发放一样。其次，个税有一个起征点，目前就是5000元。再次，个税的应纳税所得额是当月收入（工资加上一些其他收入）在扣除五险一金扣缴的那部分以及养老、子女教育等附加的基础上超出起征点的那一部分。最后，个税采用的是按年累计计税的方式进行计算的，当累积的应纳税金额不超过36000元时，按3%来计税；超出36000元部分但不足144000元的，按10%来计税；超出144000元部分但不足300000元的，按20%来计税；超出300000元部分但不足420000元的，按25%来计税；超出420000元部分但不足660000元的，按30%来计税；超出660000元部分但不足960000元的，按35%来计税；超出960000元部分的，按45%来计税。
+
+假设每个月的应纳税所得额分别是$x_1,x_2,\cdots,x_{12}$，那么每个月累计的应纳税金额分别是$x_1,x_1+x_2,\cdots,\sum_{i=1}^kx_i,\cdots,\sum_{i=1}^{12}x_i$，则第$k$月所采用的税率等级为
+
+$$
+r_{k}=\begin{cases}
+0.03, & 0<\sum_{i=1}^{k}x_{i}\le36000\\
+0.10, & 36000<\sum_{i=1}^{k}x_{i}\le144000\\
+0.20, & 144000<\sum_{i=1}^{k}x_{i}\le300000\\
+0.25, & 300000<\sum_{i=1}^{k}x_{i}\le420000\\
+0.30, & 420000<\sum_{i=1}^{k}x_{i}\le660000\\
+0.35, & 660000<\sum_{i=1}^{k}x_{i}\le96000\\
+0.45, & 960000<\sum_{i=1}^{k}x_{i}\le+\infty
+\end{cases}
+$$
+
+一般地，上式可以写成
+
+$$
+r_k=r(\sum_{i=1}^{k}x_{i})=\sum_l[\gamma_l\cdot I(a_{l-1}<\sum_{i=1}^{k}x_{i}\le a_l)]
+$$
+
+<!--more-->
+
+这里，$\gamma_l$为第$l$级的税率，$I(x)$为示性函数，即
+
+$$
+I(x)=\begin{cases}
+1, & x\text{为真}\\
+0, & x\text{为假}
+\end{cases}
+$$
+
+税率的阶梯函数图如下：
+
+```{r}
+library(tidyverse)
+g <- c(0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45)
+a <- c(3.6, 14.4, 30, 42, 66, 96)
+al <- c(0, a)
+au <- c(a, Inf)
+fr <- function(x) {
+  sum(g * (x > al) * (x <= au))
+}
+frs <- function(x) {
+  map(x, fr) %>% unlist()
+}
+ggplot(tibble(x = c(0, 120)), aes(x)) +
+  geom_function(fun = frs) +
+  xlab("累计应纳税所得额（万元）") + ylab("税率") +
+  theme_bw(base_size = 14, base_family = "Hei")
+```
+
+另外，假设$a_{m-1}<\sum_{i=1}^{k}x_{i}\le a_m$，那么累计应纳税额的计算公式为
+
+$$
+\begin{align*}
+\sigma_{k} & =\sigma(\sum_{i=1}^{k}x_{i})=\int_{0}^{\sum_{i=1}^{k}x_{i}}r_{k}\text{d}t\\
+ & =\int_{0}^{a_{1}}r_{k}\text{d}t+\int_{a_{1}}^{a_{2}}r_{k}\text{d}t+\cdots+\int_{a_{m-1}}^{\sum_{i=1}^{k}x_{i}}r_{k}\text{d}t\\
+ & =\gamma_{1}a_{1}+\gamma_{2}(a_{2}-a_{1})+\cdots+\gamma_{m}(\sum_{i=1}^{k}x_{i}-a_{m-1})\\
+ & =\gamma_{m}\sum_{i=1}^{k}x_{i}-a_{m-1}(\gamma_{m}-\gamma_{m-1})-\cdots-a_{1}(\gamma_{2}-\gamma_{1})
+\end{align*}
+$$
+
+上式中$a_{1}(\gamma_{2}-\gamma_{1})$一直到$a_{m-1}(\gamma_{m}-\gamma_{m-1})$都是常数，如果记$b_1=0$，$b_2=a_{1}(\gamma_{2}-\gamma_{1})+b_1=a_{1}(\gamma_{2}-\gamma_{1})$，$b_3=a_{2}(\gamma_{3}-\gamma_{2})+b_2=a_{2}(\gamma_{3}-\gamma_{2})+a_{1}(\gamma_{2}-\gamma_{1})$，那么依次类推有如下递推公式
+
+$$
+b_m=a_{m-1}(\gamma_{m}-\gamma_{m-1})+b_{m-1}
+$$
+
+这里的$b_m$就是速算扣除数。那么很容易验证，第1级速算扣除数为0，第2级速算扣除数为$b_2=a_{1}(\gamma_{2}-\gamma_{1})+b_1=36000\times(0.1-0.03)+0=2520$，第3级速算扣除数为$b_3=a_{2}(\gamma_{3}-\gamma_{2})+b_2=144000\times(0.2-0.1)+2520=16920$，依次类推，具体如下：
+
+```{r}
+# 速算扣除数
+b <- cumsum((g - lag(g, default = 0)) * al)
+tibble(`等级` = seq_along(b),
+       `速算扣除数（元）` = b * 1e4) %>%
+  kable()
+```
+
+在速算扣除数的帮助下，$\sigma_k$可以写为
+
+$$
+\sigma_k=\gamma_{m}\sum_{i=1}^{k}x_{i}-b_m
+$$
+
+那么，累计应纳税额的函数图如下：
+
+```{r}
+fs <- function(x) {
+  sum((g * x - b) * (x > al) * (x <= au))
+}
+fss <- function(x) {
+  map(x, fs) %>% unlist()
+}
+ggplot(tibble(x = c(0, 120)), aes(x)) +
+  geom_function(fun = fss) +
+  geom_point(aes(y = y),
+             data = tibble(x = a, y = fss(x)),
+             size = 3,
+             shape = 1,
+             color = "red") +
+  xlab("累计应纳税所得额（万元）") +
+  ylab("累计应纳税额（万元）") +
+  theme_bw(base_size = 14, base_family = "Hei")
+```
+
+
+假设每个月应纳税额分别是$y_1,y_2,\cdots,y_{12}$，那么有
+
+$$
+y_k=\sigma_k-\sigma_{k-1}=\sigma(\sum_{i=1}^{k}x_{i})-\sigma(\sum_{i=1}^{k-1}x_{i})
+$$
+
+假如每个月的应纳税所得额均为20000元，那么第1个月的应纳税额为$20000\times 0.03=600$，第2个月的应纳税额为$20000\times 2\times 0.1-2520-600=880$，第3个月的应纳税额为$20000\times 3\times 0.1-2520-600-880=2000$，依次类推，具体如下：
+
+```{r}
+d <- tibble(t = 1:12,
+            y = diff(c(0, fss(t * 2))) * 1e4)
+d %>% set_names(c("月份", "应纳税额（元）")) %>% kable()
+```
+
+
+
+
+
+
+

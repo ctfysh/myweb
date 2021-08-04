@@ -6,7 +6,38 @@
     <description>Recent content in Posts on Catfish</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>什么是速算扣除数？</title>
+      <link>/post/2021/08/04/what-is-fast-algorithm-deduction/</link>
+      <pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/08/04/what-is-fast-algorithm-deduction/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;在计算个人所得税的时候，往往会涉及到一个概念，叫做“速算扣除数”。大家知道，我们的税率是分段计算的，从函数的角度来看，就是一个分段函数，那么我们直接通过分段函数的性质就可以算税了，为啥要提出一个“速算扣除数”来呢？又或者说所谓的“速算”又体现在什么地方呢？&lt;/p&gt;
+&lt;p&gt;为了弄明白这个问题，我们先了解一下目前个税的相关规定。首先，个税是按月缴纳的，这个就跟工资按月发放一样。其次，个税有一个起征点，目前就是5000元。再次，个税的应纳税所得额是当月收入（工资加上一些其他收入）在扣除五险一金扣缴的那部分以及养老、子女教育等附加的基础上超出起征点的那一部分。最后，个税采用的是按年累计计税的方式进行计算的，当累积的应纳税金额不超过36000元时，按3%来计税；超出36000元部分但不足144000元的，按10%来计税；超出144000元部分但不足300000元的，按20%来计税；超出300000元部分但不足420000元的，按25%来计税；超出420000元部分但不足660000元的，按30%来计税；超出660000元部分但不足960000元的，按35%来计税；超出960000元部分的，按45%来计税。&lt;/p&gt;
+&lt;p&gt;假设每个月的应纳税所得额分别是&lt;span class=&#34;math inline&#34;&gt;\(x_1,x_2,\cdots,x_{12}\)&lt;/span&gt;，那么每个月累计的应纳税金额分别是&lt;span class=&#34;math inline&#34;&gt;\(x_1,x_1+x_2,\cdots,\sum_{i=1}^kx_i,\cdots,\sum_{i=1}^{12}x_i\)&lt;/span&gt;，则第&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;月所采用的税率等级为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r_{k}=\begin{cases}
+0.03, &amp;amp; 0&amp;lt;\sum_{i=1}^{k}x_{i}\le36000\\
+0.10, &amp;amp; 36000&amp;lt;\sum_{i=1}^{k}x_{i}\le144000\\
+0.20, &amp;amp; 144000&amp;lt;\sum_{i=1}^{k}x_{i}\le300000\\
+0.25, &amp;amp; 300000&amp;lt;\sum_{i=1}^{k}x_{i}\le420000\\
+0.30, &amp;amp; 420000&amp;lt;\sum_{i=1}^{k}x_{i}\le660000\\
+0.35, &amp;amp; 660000&amp;lt;\sum_{i=1}^{k}x_{i}\le96000\\
+0.45, &amp;amp; 960000&amp;lt;\sum_{i=1}^{k}x_{i}\le+\infty
+\end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;一般地，上式可以写成&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r_k=r(\sum_{i=1}^{k}x_{i})=\sum_l[\gamma_l\cdot I(a_{l-1}&amp;lt;\sum_{i=1}^{k}x_{i}\le a_l)]
+\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>整取？还是零取？</title>
       <link>/post/2021/08/03/how-to-get-the-insurance/</link>

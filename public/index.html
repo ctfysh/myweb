@@ -74,6 +74,39 @@
 
 <article class="post">
   <h1 class="post-title">
+    <a href="/post/2021/08/04/what-is-fast-algorithm-deduction/">什么是速算扣除数？</a>
+  </h1>
+  <time datetime="2021-08-04T00:00:00Z" class="post-date">2021年8月4日</time>
+  
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>在计算个人所得税的时候，往往会涉及到一个概念，叫做“速算扣除数”。大家知道，我们的税率是分段计算的，从函数的角度来看，就是一个分段函数，那么我们直接通过分段函数的性质就可以算税了，为啥要提出一个“速算扣除数”来呢？又或者说所谓的“速算”又体现在什么地方呢？</p>
+<p>为了弄明白这个问题，我们先了解一下目前个税的相关规定。首先，个税是按月缴纳的，这个就跟工资按月发放一样。其次，个税有一个起征点，目前就是5000元。再次，个税的应纳税所得额是当月收入（工资加上一些其他收入）在扣除五险一金扣缴的那部分以及养老、子女教育等附加的基础上超出起征点的那一部分。最后，个税采用的是按年累计计税的方式进行计算的，当累积的应纳税金额不超过36000元时，按3%来计税；超出36000元部分但不足144000元的，按10%来计税；超出144000元部分但不足300000元的，按20%来计税；超出300000元部分但不足420000元的，按25%来计税；超出420000元部分但不足660000元的，按30%来计税；超出660000元部分但不足960000元的，按35%来计税；超出960000元部分的，按45%来计税。</p>
+<p>假设每个月的应纳税所得额分别是<span class="math inline">\(x_1,x_2,\cdots,x_{12}\)</span>，那么每个月累计的应纳税金额分别是<span class="math inline">\(x_1,x_1+x_2,\cdots,\sum_{i=1}^kx_i,\cdots,\sum_{i=1}^{12}x_i\)</span>，则第<span class="math inline">\(k\)</span>月所采用的税率等级为</p>
+<p><span class="math display">\[
+r_{k}=\begin{cases}
+0.03, &amp; 0&lt;\sum_{i=1}^{k}x_{i}\le36000\\
+0.10, &amp; 36000&lt;\sum_{i=1}^{k}x_{i}\le144000\\
+0.20, &amp; 144000&lt;\sum_{i=1}^{k}x_{i}\le300000\\
+0.25, &amp; 300000&lt;\sum_{i=1}^{k}x_{i}\le420000\\
+0.30, &amp; 420000&lt;\sum_{i=1}^{k}x_{i}\le660000\\
+0.35, &amp; 660000&lt;\sum_{i=1}^{k}x_{i}\le96000\\
+0.45, &amp; 960000&lt;\sum_{i=1}^{k}x_{i}\le+\infty
+\end{cases}
+\]</span></p>
+<p>一般地，上式可以写成</p>
+<p><span class="math display">\[
+r_k=r(\sum_{i=1}^{k}x_{i})=\sum_l[\gamma_l\cdot I(a_{l-1}&lt;\sum_{i=1}^{k}x_{i}\le a_l)]
+\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2021/08/04/what-is-fast-algorithm-deduction/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="/post/2021/08/03/how-to-get-the-insurance/">整取？还是零取？</a>
   </h1>
   <time datetime="2021-08-03T00:00:00Z" class="post-date">2021年8月3日</time>
@@ -127,140 +160,6 @@ Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
   
   <div class="read-more-link">
     <a href="/post/2019/10/01/how-to-make-national-flag/">Read More →</a>
-  </div>
-  
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="/post/2017/02/06/tables-package-usage/">生产复杂表格的R软件包：tables</a>
-  </h1>
-  <time datetime="2017-02-06T00:00:00Z" class="post-date">2017年2月6日</time>
-  
-
-
-<p>数据的输入输出一直是数据处理比较重要的问题。我们常见的数据表格的表头设计一般都比较复杂，存在着表头套表头的现象，而这种表格的结构对于一个数据分析软件来说是没法理解的。数据软件所能理解的表格是那种标准化的表格，也就是第一行是字段名（也就是变量名），从第二行到表格结束就是具体的内容（也就是变量的取值，或者叫实例）。这样除去第一行后，每一行表示一个实例（统计上叫一个观测，或者某个对象的属性），每一列表示一个变量的取值。如我们经常用到的<code>iris</code>数据表（为了简便，随机从每个Species类别中选取了1个数据）：</p>
-<table>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.1</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.6</td>
-<td align="right">2.9</td>
-<td align="right">3.6</td>
-<td align="right">1.3</td>
-<td align="left">versicolor</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">2.5</td>
-<td align="right">5.0</td>
-<td align="right">2.0</td>
-<td align="left">virginica</td>
-</tr>
-</tbody>
-</table>
-<p>实际上，在R中我们一般以<code>data.frame</code>的形式储存数据，实际上所面对的就是上面这种数据表格。这种数据表格对于编程人员来说很实用很方便，但对于一般人而言，就会觉得很不直观，比如我们将上面表格中的<code>iris</code>数据等价地变换一下，就会发现这样的问题：</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Species</th>
-<th align="left">Type</th>
-<th align="left">Shape</th>
-<th align="right">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">setosa</td>
-<td align="left">Sepal</td>
-<td align="left">Length</td>
-<td align="right">4.8</td>
-</tr>
-<tr class="even">
-<td align="left">versicolor</td>
-<td align="left">Sepal</td>
-<td align="left">Length</td>
-<td align="right">5.6</td>
-</tr>
-<tr class="odd">
-<td align="left">virginica</td>
-<td align="left">Sepal</td>
-<td align="left">Length</td>
-<td align="right">5.7</td>
-</tr>
-<tr class="even">
-<td align="left">setosa</td>
-<td align="left">Sepal</td>
-<td align="left">Width</td>
-<td align="right">3.1</td>
-</tr>
-<tr class="odd">
-<td align="left">versicolor</td>
-<td align="left">Sepal</td>
-<td align="left">Width</td>
-<td align="right">2.9</td>
-</tr>
-<tr class="even">
-<td align="left">virginica</td>
-<td align="left">Sepal</td>
-<td align="left">Width</td>
-<td align="right">2.5</td>
-</tr>
-<tr class="odd">
-<td align="left">setosa</td>
-<td align="left">Petal</td>
-<td align="left">Length</td>
-<td align="right">1.6</td>
-</tr>
-<tr class="even">
-<td align="left">versicolor</td>
-<td align="left">Petal</td>
-<td align="left">Length</td>
-<td align="right">3.6</td>
-</tr>
-<tr class="odd">
-<td align="left">virginica</td>
-<td align="left">Petal</td>
-<td align="left">Length</td>
-<td align="right">5.0</td>
-</tr>
-<tr class="even">
-<td align="left">setosa</td>
-<td align="left">Petal</td>
-<td align="left">Width</td>
-<td align="right">0.2</td>
-</tr>
-<tr class="odd">
-<td align="left">versicolor</td>
-<td align="left">Petal</td>
-<td align="left">Width</td>
-<td align="right">1.3</td>
-</tr>
-<tr class="even">
-<td align="left">virginica</td>
-<td align="left">Petal</td>
-<td align="left">Width</td>
-<td align="right">2.0</td>
-</tr>
-</tbody>
-</table>
-
-  
-  <div class="read-more-link">
-    <a href="/post/2017/02/06/tables-package-usage/">Read More →</a>
   </div>
   
 </article>
