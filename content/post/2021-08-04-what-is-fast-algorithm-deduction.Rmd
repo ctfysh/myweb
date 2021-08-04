@@ -63,6 +63,50 @@ g <- c(0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45)
 a <- c(3.6, 14.4, 30, 42, 66, 96)
 al <- c(0, a)
 au <- c(a, Inf)
+d <- tibble(g = c(g, 0.45), a = c(0, a, 120))
+d1 <- d %>% filter(g <= 0.3)
+d2 <- bind_rows(old = d1,
+                new = d1 %>% mutate(g = lag(g)),
+                .id = "source") %>%
+  arrange(a, source) %>%
+  bind_rows(tibble(source = "new", a = 60, g = 0.3))
+
+ggplot(d) + aes(a, g) + geom_step() +
+  geom_ribbon(aes(ymin = 0, ymax = g, fill = "累计应纳税额"),
+              data = d2,
+              alpha = .1) +
+  geom_ribbon(aes(ymin = g, ymax = .3, fill = "速算扣除数"),
+              data = d2,
+              alpha = .1) +
+  geom_segment(
+    aes(xend = 60, yend = 0.3),
+    data = tibble(a = c(0, 60), g = c(.3, 0)),
+    linetype = 2,
+    color = "red"
+  ) +
+  geom_point(
+    data = tibble(a = 60, g = 0.3),
+    size = 3,
+    shape = 1,
+    color = "blue"
+  ) +
+  xlab("累计应纳税所得额（万元）") + ylab("税率") +
+  scale_x_continuous(limits = c(0, 125),
+                     expand = c(0, 0),
+                     n.breaks = 12) +
+  scale_y_continuous(limits = c(0, .5), expand = c(0, 0)) +
+  cowplot::theme_cowplot(font_family = "Hei") +
+  theme(legend.position = c(.05, .9)) +
+  guides(fill = guide_legend(title = NULL))
+```
+
+
+```{r, eval=FALSE}
+library(tidyverse)
+g <- c(0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45)
+a <- c(3.6, 14.4, 30, 42, 66, 96)
+al <- c(0, a)
+au <- c(a, Inf)
 fr <- function(x) {
   sum(g * (x > al) * (x <= au))
 }
@@ -126,7 +170,10 @@ ggplot(tibble(x = c(0, 120)), aes(x)) +
              color = "red") +
   xlab("累计应纳税所得额（万元）") +
   ylab("累计应纳税额（万元）") +
-  theme_bw(base_size = 14, base_family = "Hei")
+  scale_x_continuous(limits = c(0, 125),
+                     expand = c(0, 0),
+                     n.breaks = 12) +
+  cowplot::theme_cowplot(font_family = "Hei")
 ```
 
 
