@@ -122,7 +122,8 @@ X=A(1+R)
 <p>和</p>
 <p><span class="math display">\[
 Y=B(1+r_0)\cdot\dfrac{R}{r_0}
-\]</span></p>
+\]</span>
+那么，有如下三种情况：</p>
 <p>（1）当<span class="math inline">\(X&lt;Y\)</span>时，</p>
 <p><span class="math display">\[
 A(1+R)&lt;B(1+r_0)\cdot\dfrac{R}{r_0}
@@ -135,9 +136,21 @@ A(1+R)&gt;B(1+r_0)\cdot\dfrac{R}{r_0}
 <p><span class="math display">\[
 A(1+R)=B(1+r_0)\cdot\dfrac{R}{r_0}
 \]</span></p>
-<p>可以计算出累积收益率为</p>
+<p>可以计算出当<span class="math inline">\(X=Y\)</span>时的累积收益率为</p>
 <p><span class="math display">\[
 R=\dfrac{Ar_0}{B(1+r_0)-Ar_0}
+\]</span></p>
+<p>如果假设<span class="math inline">\(\alpha=A/B\)</span>，那么上式可以写为</p>
+<p><span class="math display">\[
+R=\dfrac{\alpha r_0}{(1+r_0)-\alpha r_0}
+\]</span></p>
+<p>考虑到<span class="math inline">\(r_0&gt;0\)</span>且<span class="math inline">\(R&gt;0\)</span>及<span class="math inline">\(\alpha&gt;0\)</span>，那么有</p>
+<p><span class="math display">\[
+0&lt;\alpha&lt;\dfrac{1}{r_0}+1
+\]</span>
+或者</p>
+<p><span class="math display">\[
+0&lt;r_0&lt;\dfrac{1}{\alpha-1}
 \]</span></p>
 <p>当计算完累积收益率后，则可以计算二者相等时的年限，根据<span class="math inline">\(1+R=(1+r)^t\)</span>，两边同时取对数（任意底数）</p>
 <p><span class="math display">\[
@@ -152,8 +165,10 @@ t=\dfrac{\log(1+R)}{\log(1+r)}=\dfrac{\log(1+R)}{12\log(1+r_0)}
 <h1>2 算例演示</h1>
 <p>假设一次性可以领取的金额为<span class="math inline">\(A=10000\)</span>，分月领取的金额为<span class="math inline">\(B=100\)</span>，银行的年化利率为<span class="math inline">\(r=0.03\)</span>，那么</p>
 <p><img src="/post/2021-08-03-how-to-get-the-insurance_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>另外，银行年利率<span class="math inline">\(r\)</span>与<span class="math inline">\(X=Y\)</span>时收益年限<span class="math inline">\(t\)</span>之间的关系为</p>
+<p>当<span class="math inline">\(\alpha=100\)</span>时，银行年利率<span class="math inline">\(r\)</span>与<span class="math inline">\(X=Y\)</span>时收益年限<span class="math inline">\(t\)</span>之间的关系为</p>
 <p><img src="/post/2021-08-03-how-to-get-the-insurance_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>当银行年利率<span class="math inline">\(r=0.03\)</span>时，<span class="math inline">\(\alpha\)</span>与<span class="math inline">\(X=Y\)</span>时收益年限<span class="math inline">\(t\)</span>之间的关系为</p>
+<p><img src="/post/2021-08-03-how-to-get-the-insurance_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 
 </div>

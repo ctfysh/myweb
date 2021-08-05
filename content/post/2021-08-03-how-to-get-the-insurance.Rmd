@@ -81,6 +81,7 @@ $$
 $$
 Y=B(1+r_0)\cdot\dfrac{R}{r_0}
 $$
+那么，有如下三种情况：
 
 （1）当$X<Y$时，
 
@@ -100,10 +101,27 @@ $$
 A(1+R)=B(1+r_0)\cdot\dfrac{R}{r_0}
 $$
 
-可以计算出累积收益率为
+可以计算出当$X=Y$时的累积收益率为
 
 $$
 R=\dfrac{Ar_0}{B(1+r_0)-Ar_0}
+$$
+
+如果假设$\alpha=A/B$，那么上式可以写为
+
+$$
+R=\dfrac{\alpha r_0}{(1+r_0)-\alpha r_0}
+$$
+
+考虑到$r_0>0$且$R>0$及$\alpha>0$，那么有
+
+$$
+0<\alpha<\dfrac{1}{r_0}+1
+$$
+或者
+
+$$
+0<r_0<\dfrac{1}{\alpha-1}
 $$
 
 当计算完累积收益率后，则可以计算二者相等时的年限，根据$1+R=(1+r)^t$，两边同时取对数（任意底数）
@@ -126,6 +144,7 @@ $$
 library(tidyverse)
 A <- 10000
 B <- 100
+a <- A / B
 r <- 0.03
 fX <- function(t) {
   A * (1 + r) ^ t
@@ -134,9 +153,9 @@ fY <- function(t) {
   r0 <- (1 + r) ^ (1 / 12) - 1
   B * (1 + r0) * ((1 + r) ^ t - 1) / r0
 }
-ft <- function(r) {
+ft <- function(r, a) {
   r0 <- (1 + r) ^ (1 / 12) - 1
-  R <- A * r0 / (B * (1 + r0) - A * r0)
+  R <- a * r0 / (1 + r0 - a * r0)
   log(1 + R) / log(1 + r)
 }
 # 作图
@@ -144,23 +163,43 @@ ggplot(tibble(t = 1:30), aes(t)) +
   geom_function(fun = fX, aes(color = "X")) +
   geom_function(fun = fY, aes(color = "Y")) +
   geom_point(aes(y = y),
-             data = tibble(t = ft(r), y = fX(t)),
+             data = tibble(t = ft(r, a), y = fX(t)),
              size = 3,
              shape = 1) +
   theme_bw(base_size = 14) +
-  theme(legend.position = c(.1, .8))
+  theme(legend.position = c(.1, .9)) +
+  guides(color = guide_legend(title = NULL))
 ```
 
-另外，银行年利率$r$与$X=Y$时收益年限$t$之间的关系为
+当$\alpha=100$时，银行年利率$r$与$X=Y$时收益年限$t$之间的关系为
 
 ```{r}
-ggplot(tibble(r = c(0, 0.1)), aes(r)) +
-  geom_function(fun = ft) + ylab("t") +
-  geom_point(aes(y = t),
-             data = tibble(r = r, t = ft(r)),
-             size = 3,
-             shape = 1,
-             color = "red") +
+ggplot(tibble(r = c(0, 0.13)), aes(r)) +
+  geom_function(fun = ft, args = list(a = a)) +
+  ylab("t") +
+  geom_point(
+    aes(y = t),
+    data = tibble(r = r, t = ft(r, a)),
+    size = 3,
+    shape = 1,
+    color = "red"
+  ) +
   theme_bw(base_size = 14)
+```
+
+当银行年利率$r=0.03$时，$\alpha$与$X=Y$时收益年限$t$之间的关系为
+
+```{r}
+ggplot(tibble(a = c(0, 410)), aes(a)) +
+    geom_function(fun = ft, args = list(r = r)) +
+    ylab("t") +
+    geom_point(
+        aes(y = t),
+        data = tibble(a = a, t = ft(r, a)),
+        size = 3,
+        shape = 1,
+        color = "red"
+    ) +
+    theme_bw(base_size = 14)
 ```
 
