@@ -186,13 +186,47 @@ $$
 假如每个月的应纳税所得额均为20000元，那么第1个月的应纳税额为$20000\times 0.03=600$，第2个月的应纳税额为$20000\times 2\times 0.1-2520-600=880$，第3个月的应纳税额为$20000\times 3\times 0.1-2520-600-880=2000$，依次类推，具体如下：
 
 ```{r}
-d <- tibble(t = 1:12,
+d0 <- tibble(t = 1:12,
             y = diff(c(0, fss(t * 2))) * 1e4)
-d %>% set_names(c("月份", "应纳税额（元）")) %>% kable()
+d0 %>% set_names(c("月份", "应纳税额（元）")) %>% kable()
 ```
 
+对应的算法如下图所示：
 
-
+```{r}
+d1 <- d %>% filter(g <= 0.2)
+d2 <- bind_rows(old = d1,
+                new = d1 %>% mutate(g = lag(g)),
+                .id = "source") %>%
+  arrange(a, source) %>%
+  bind_rows(tibble(source = "new", a = 24, g = 0.2))
+# 阶梯函数
+tf <- with(d, stepfun(a[c(2:7)], g[1:7], right = TRUE))
+# 作图
+d1 %>% bind_rows(tibble(a = 24, g = 0.2)) %>%
+  ggplot() + aes(a, g) + geom_step() +
+  geom_ribbon(aes(ymin = 0, ymax = g),
+              data = d2,
+              alpha = .1) +
+  geom_segment(aes(xend = a, yend = yd),
+               data = tibble(
+                 a = (1:12) * 2,
+                 g = 0,
+                 yd = tf(a)
+               ),
+               linetype = 2) +
+  geom_text(aes(label = paste0(1:12, "月")),
+            data = tibble(a = (1:12) * 2 - 1, g = .015),
+            family = "Hei") +
+  xlab("累计应纳税所得额（万元）") + ylab("税率") +
+  scale_x_continuous(limits = c(0, 25),
+                     expand = c(0, 0),
+                     n.breaks = 12) +
+  scale_y_continuous(limits = c(0, .22), expand = c(0, 0)) +
+  cowplot::theme_cowplot(font_family = "Hei") +
+  theme(legend.position = c(.05, .9)) +
+  guides(fill = guide_legend(title = NULL))
+```
 
 
 
