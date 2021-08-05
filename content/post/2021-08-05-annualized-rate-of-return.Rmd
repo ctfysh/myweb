@@ -1,0 +1,105 @@
+---
+title: 年化收益率
+comments: yes
+date: '2021-08-05'
+layout: post
+published: yes
+slug: annualized rate of return
+categories:
+  - R
+  - insurance
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+关于投资理财，有一个比较有意思的小问题，就是比如昨天赚了5%，今天亏了5%，那么总体是赚了？还是亏了？还是持平呢？换一种问法：昨天亏了5%，今天赚了5%，那结果又如何呢？这个问题的答案其实就是要算两天累计的收益率，其实很简单，就是$(1+5\%)(1-5\%)-1=-0.25\%$。由于乘法符合交换律，所以无论是先亏后赚，还是先赚后亏，其结果都是一样的，那就是总体是亏损的。那么，如果说亏了5%，要赚多少才能回本呢？这里假设第一天收益率是$r_1$，第二天的收益率是$r_2$，那么两天总的收益率为
+
+$$
+r=(1+r_1)(1+r_2)-1
+$$
+
+如果总体不亏不赢，那么$r=0$，也就是说
+
+$$
+r_2=-\dfrac{r_1}{1+r_1}
+$$
+
+当$r_1=-5\%$时，$r_2=-(-5\%)/(1-5\%)=5.26\%$，也就是说得要多赚0.26%才能赢回亏损。
+
+这里一直涉及到一个概念，就是“累计收益率”。一般来说，累计收益率$r$满足如下公式：
+
+$$
+r=\prod_{i=1}^n(1+r_i)-1
+$$
+
+<!--more-->
+
+如果每期的收益率都相同，记为$r_0$，代入上式可以得到
+
+$$
+r=(1+r_0)^n-1
+$$
+
+考虑到任何一个投资都存在一个理论上的每期平均收益率，那这个平均收益率可以通过以上两个公式计算出来，即
+
+$$
+r_0=\sqrt[n]{\prod_{i=1}^n(1+r_i)}-1=(1+r)^{\frac{1}{n}}-1
+$$
+
+如果每一天算作一期，那么此时的年化收益率$r_y$为
+
+$$
+r_y=(1+r_0)^{365}-1=(1+r)^{\frac{365}{n}}-1
+$$
+
+如果每个月算作一期，那么此时的年化收益率$r_y$为
+
+$$
+r_y=(1+r_0)^{12}-1=(1+r)^{\frac{12}{n}}-1
+$$
+
+下面做一个有趣的实验来验证一下以上公式的使用。假设每一天算作一期，一共投资了$n=1000$天，每天的投资收益率满足均匀分布$r_i\sim U(-0.1,0.1)$，那么在投资期内的年化收益率期望值是多少？分布是怎样的？本实验通过10000次Monte Carlo模拟得到如下结果：
+
+```{r}
+library(tidyverse)
+n <- 1000
+s <- 10000
+set.seed(12345)
+ri <- runif(n * s, -.1, .1) %>% matrix(nrow = s)
+r <- apply(1 + ri, 1, prod) - 1
+ry <- (1 + r) ^ (365 / n) - 1
+# 作图
+ggplot(tibble(x = ry), aes(x, after_stat(density))) +
+  geom_histogram(fill = "cornflowerblue",
+                 color = "white",
+                 alpha = .5) +
+  geom_density(color = "darkblue") +
+  geom_vline(xintercept = mean(ry),
+             color = "red",
+             linetype = 2) +
+  annotate(
+    "text",
+    label = expression(r[y] == -0.32),
+    x = 1,
+    y = 1,
+    size = 5,
+    colour = "red"
+  ) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  xlab(expression(r[y])) +
+  ggpubr::theme_pubr()
+```
+
+实验表明：**投资有风险，决策需谨慎！**
+
+
+

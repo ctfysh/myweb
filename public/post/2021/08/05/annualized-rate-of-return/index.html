@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.86.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>年化收益率 &middot; Catfish</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="/css/custom.css">
+    <link type="text/css" rel="stylesheet" href="/css/fonts.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/catfish.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+</head>
+
+  <body class="theme-base-0d ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="/"><h1>Catfish</h1></a>
+      <p class="lead">
+       R is the brush, math is the pigment, nature is the scenery, and science is the picture. 
+      </p>
+    </div>
+
+    <nav class="sidebar-nav">
+      
+      
+        <a class="sidebar-nav-item " href="/">Home</a>
+        <a class="sidebar-nav-item " href="/about/"> About </a><a class="sidebar-nav-item " href="/post/"> Archives </a><a class="sidebar-nav-item " href="/categories/"> Categories </a><a class="sidebar-nav-item " href="/resume/"> Resume </a><a class="sidebar-nav-item " href="https://github.com/ctfysh"> GitHub </a>
+    </nav>
+
+    
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>年化收益率</h1>
+  
+  <time datetime=2021-08-05T00:00:00Z class="post-date">2021年8月5日</time>
+  
+  
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>关于投资理财，有一个比较有意思的小问题，就是比如昨天赚了5%，今天亏了5%，那么总体是赚了？还是亏了？还是持平呢？换一种问法：昨天亏了5%，今天赚了5%，那结果又如何呢？这个问题的答案其实就是要算两天累计的收益率，其实很简单，就是<span class="math inline">\((1+5\%)(1-5\%)-1=-0.25\%\)</span>。由于乘法符合交换律，所以无论是先亏后赚，还是先赚后亏，其结果都是一样的，那就是总体是亏损的。那么，如果说亏了5%，要赚多少才能回本呢？这里假设第一天收益率是<span class="math inline">\(r_1\)</span>，第二天的收益率是<span class="math inline">\(r_2\)</span>，那么两天总的收益率为</p>
+<p><span class="math display">\[
+r=(1+r_1)(1+r_2)-1
+\]</span></p>
+<p>如果总体不亏不赢，那么<span class="math inline">\(r=0\)</span>，也就是说</p>
+<p><span class="math display">\[
+r_2=-\dfrac{r_1}{1+r_1}
+\]</span></p>
+<p>当<span class="math inline">\(r_1=-5\%\)</span>时，<span class="math inline">\(r_2=-(-5\%)/(1-5\%)=5.26\%\)</span>，也就是说得要多赚0.26%才能赢回亏损。</p>
+<p>这里一直涉及到一个概念，就是“累计收益率”。一般来说，累计收益率<span class="math inline">\(r\)</span>满足如下公式：</p>
+<p><span class="math display">\[
+r=\prod_{i=1}^n(1+r_i)-1
+\]</span></p>
+
+  
+  <p>如果每期的收益率都相同，记为<span class="math inline">\(r_0\)</span>，代入上式可以得到</p>
+<p><span class="math display">\[
+r=(1+r_0)^n-1
+\]</span></p>
+<p>考虑到任何一个投资都存在一个理论上的每期平均收益率，那这个平均收益率可以通过以上两个公式计算出来，即</p>
+<p><span class="math display">\[
+r_0=\sqrt[n]{\prod_{i=1}^n(1+r_i)}-1=(1+r)^{\frac{1}{n}}-1
+\]</span></p>
+<p>如果每一天算作一期，那么此时的年化收益率<span class="math inline">\(r_y\)</span>为</p>
+<p><span class="math display">\[
+r_y=(1+r_0)^{365}-1=(1+r)^{\frac{365}{n}}-1
+\]</span></p>
+<p>如果每个月算作一期，那么此时的年化收益率<span class="math inline">\(r_y\)</span>为</p>
+<p><span class="math display">\[
+r_y=(1+r_0)^{12}-1=(1+r)^{\frac{12}{n}}-1
+\]</span></p>
+<p>下面做一个有趣的实验来验证一下以上公式的使用。假设每一天算作一期，一共投资了<span class="math inline">\(n=1000\)</span>天，每天的投资收益率满足均匀分布<span class="math inline">\(r_i\sim U(-0.1,0.1)\)</span>，那么在投资期内的年化收益率期望值是多少？分布是怎样的？本实验通过10000次Monte Carlo模拟得到如下结果：</p>
+<p><img src="/post/2021-08-05-annualized-rate-of-return_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>实验表明：<strong>投资有风险，决策需谨慎！</strong></p>
+
+</div>
+
+
+    </main>
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+  </body>
+</html>

@@ -74,6 +74,32 @@
 
 <article class="post">
   <h1 class="post-title">
+    <a href="/post/2016/08/27/sfc-package-manual/">sfc软件包中文说明</a>
+  </h1>
+  <time datetime="2016-08-27T00:00:00Z" class="post-date">2016年8月27日</time>
+  
+
+
+<p><a href="https://cran.r-project.org/web/packages/sfc/index.html">sfc</a>软件包于2016年8月25日正式出现在<a href="https://cran.r-project.org/">CRAN</a>上，其主要功能是进行大规模物质流核算和不确定性分析。与传统物质流核算方法不同的是，sfc软件包是基于数据和模型分离的思想构建的。这种方法的优势在于能够把模型从复杂的数据结构中抽离出来，从而使研究者能够把注意力集中在模型的构建上，以避免复杂数据结构对建模过程的干扰。</p>
+<div id="sfc" class="section level1">
+<h1>1 安装sfc</h1>
+<p>sfc软件包依赖于dplyr、tidyr、triangle、zoo、sna等R软件包，因此在R平台上安装sfc之前，最好先安装好这些依赖的软件包。sfc软件包可以用如下方式安装：</p>
+<pre class="r"><code>install.packages(&quot;sfc&quot;)</code></pre>
+<p>如果要安装sfc软件包的最新开发版，则可以通过以下方式：</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;ctfysh/sfc&quot;)</code></pre>
+</div>
+<div id="data" class="section level1">
+<h1>2 数据文件</h1>
+<p>物质流核算涉及的数据的类型多且量大，同时数据存在着一定的不确定性，所以需要有一种既简单直观又易于被模型所有调用的数据格式，来管理这些数据。表1就是sfc软件包为了物质流核算所设计的一种数据文件格式，以.csv的形式存储，或者直接以数据框(data frame)的形式存在于内存中，供sfc软件包中的<code>sfc</code>函数调用。</p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2016/08/27/sfc-package-manual/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="/post/2016/07/15/index-of-lorenz-curve/">与Lorenz曲线相关的指标</a>
   </h1>
   <time datetime="2016-07-15T00:00:00Z" class="post-date">2016年7月15日</time>

@@ -74,6 +74,34 @@
 
 <article class="post">
   <h1 class="post-title">
+    <a href="/post/2021/08/05/annualized-rate-of-return/">年化收益率</a>
+  </h1>
+  <time datetime="2021-08-05T00:00:00Z" class="post-date">2021年8月5日</time>
+  
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>关于投资理财，有一个比较有意思的小问题，就是比如昨天赚了5%，今天亏了5%，那么总体是赚了？还是亏了？还是持平呢？换一种问法：昨天亏了5%，今天赚了5%，那结果又如何呢？这个问题的答案其实就是要算两天累计的收益率，其实很简单，就是<span class="math inline">\((1+5\%)(1-5\%)-1=-0.25\%\)</span>。由于乘法符合交换律，所以无论是先亏后赚，还是先赚后亏，其结果都是一样的，那就是总体是亏损的。那么，如果说亏了5%，要赚多少才能回本呢？这里假设第一天收益率是<span class="math inline">\(r_1\)</span>，第二天的收益率是<span class="math inline">\(r_2\)</span>，那么两天总的收益率为</p>
+<p><span class="math display">\[
+r=(1+r_1)(1+r_2)-1
+\]</span></p>
+<p>如果总体不亏不赢，那么<span class="math inline">\(r=0\)</span>，也就是说</p>
+<p><span class="math display">\[
+r_2=-\dfrac{r_1}{1+r_1}
+\]</span></p>
+<p>当<span class="math inline">\(r_1=-5\%\)</span>时，<span class="math inline">\(r_2=-(-5\%)/(1-5\%)=5.26\%\)</span>，也就是说得要多赚0.26%才能赢回亏损。</p>
+<p>这里一直涉及到一个概念，就是“累计收益率”。一般来说，累计收益率<span class="math inline">\(r\)</span>满足如下公式：</p>
+<p><span class="math display">\[
+r=\prod_{i=1}^n(1+r_i)-1
+\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2021/08/05/annualized-rate-of-return/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="/post/2021/08/04/what-is-fast-algorithm-deduction/">什么是速算扣除数？</a>
   </h1>
   <time datetime="2021-08-04T00:00:00Z" class="post-date">2021年8月4日</time>
@@ -136,30 +164,6 @@ Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
   
   <div class="read-more-link">
     <a href="/post/2021/08/03/how-to-get-the-insurance/">Read More →</a>
-  </div>
-  
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="/post/2019/10/01/how-to-make-national-flag/">如何绘制国旗？</a>
-  </h1>
-  <time datetime="2019-10-01T00:00:00Z" class="post-date">2019年10月1日</time>
-  
-
-
-<p>今天是新中国70华诞，是全中国人民最重要的节日。在这个特殊的日子，作为一个伪码农，我选择了这样一种方式，表达对祖国最诚挚的爱。</p>
-<div id="section" class="section level1">
-<h1>1 准备工作</h1>
-<p>“工欲善其事，必先利其器。”作为一个R的重度发烧友，用R绘图是一项基本技能。我们通常的绘图思路是先构图，然后绘制。然而，自从<code>tidyverse</code>包出现后，绘图与数据分析就紧密结合在一起。可以说，图形只是数据的一种可视化方式，所以在绘图前做好数据处理工作是十分必要的。那么，如何构建绘图的数据呢？答案很简单，就是利用<code>sf</code>包，因为它能够提供一个基于WKT的几何图形数据格式（见<a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">Simple Features for R</a>）。</p>
-<p>接下来，我们需要了解五星红旗的绘制标准，包括：国旗（GB 12982-2004）和国旗颜色标准样品（GB 12983-2004）。看过标准后我才发现，看似简单的国旗其实有许多细节需要注意：五角星的大小、位置、角度、颜色以及红旗旗面的尺寸与颜色都是有讲究的。</p>
-<p>在对绘图工具和绘图规范有了比较好的理解后，我们就可以着手绘图数据的设计与处理。</p>
-</div>
-<div id="section-1" class="section level1">
-<h1>2 五角星和旗面绘制</h1>
-<p>如何绘制五角星和旗面？对于一个熟悉WKT格式的人来说，这个问题可以转化为一个数据问题。我们可以用<code>LINESTRING</code>（多段线）或者<code>POLYGON</code>（多边形）这两种格式来处理数据，也就是确定好五角星和旗面矩形的每个顶点的横纵坐标并按顺序排列即可。为了保证线条闭合，必须首尾的横纵坐标是一致的。</p>
-
-  
-  <div class="read-more-link">
-    <a href="/post/2019/10/01/how-to-make-national-flag/">Read More →</a>
   </div>
   
 </article>

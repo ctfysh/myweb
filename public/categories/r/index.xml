@@ -6,7 +6,33 @@
     <description>Recent content in R on Catfish</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>年化收益率</title>
+      <link>/post/2021/08/05/annualized-rate-of-return/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/08/05/annualized-rate-of-return/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;关于投资理财，有一个比较有意思的小问题，就是比如昨天赚了5%，今天亏了5%，那么总体是赚了？还是亏了？还是持平呢？换一种问法：昨天亏了5%，今天赚了5%，那结果又如何呢？这个问题的答案其实就是要算两天累计的收益率，其实很简单，就是&lt;span class=&#34;math inline&#34;&gt;\((1+5\%)(1-5\%)-1=-0.25\%\)&lt;/span&gt;。由于乘法符合交换律，所以无论是先亏后赚，还是先赚后亏，其结果都是一样的，那就是总体是亏损的。那么，如果说亏了5%，要赚多少才能回本呢？这里假设第一天收益率是&lt;span class=&#34;math inline&#34;&gt;\(r_1\)&lt;/span&gt;，第二天的收益率是&lt;span class=&#34;math inline&#34;&gt;\(r_2\)&lt;/span&gt;，那么两天总的收益率为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r=(1+r_1)(1+r_2)-1
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果总体不亏不赢，那么&lt;span class=&#34;math inline&#34;&gt;\(r=0\)&lt;/span&gt;，也就是说&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r_2=-\dfrac{r_1}{1+r_1}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(r_1=-5\%\)&lt;/span&gt;时，&lt;span class=&#34;math inline&#34;&gt;\(r_2=-(-5\%)/(1-5\%)=5.26\%\)&lt;/span&gt;，也就是说得要多赚0.26%才能赢回亏损。&lt;/p&gt;
+&lt;p&gt;这里一直涉及到一个概念，就是“累计收益率”。一般来说，累计收益率&lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;满足如下公式：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+r=\prod_{i=1}^n(1+r_i)-1
+\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>什么是速算扣除数？</title>
       <link>/post/2021/08/04/what-is-fast-algorithm-deduction/</link>
