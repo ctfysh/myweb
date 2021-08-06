@@ -34,7 +34,7 @@ D_i=B+F_i=(\dfrac{1}{n}+\dfrac{n-i+1}{n}r)A
 <!--more-->
 <p>偿还的利息总和<span class="math inline">\(F_\Sigma\)</span>为</p>
 <p><span class="math display">\[
-F_\Sigma=\sum_{i=1}^nF_i=\dfrac{n+1}{2}rA
+F_\Sigma=\sum_{i=1}^nF_i=\left[\dfrac{n+1}{2}r\right]A
 \]</span></p>
 </div>
 <div id="等额本息" class="section level1">
@@ -44,26 +44,21 @@ F_\Sigma=\sum_{i=1}^nF_i=\dfrac{n+1}{2}rA
 \begin{align*}
 E_{i} &amp; =E_{i-1}(1+r)-D\\
  &amp; =A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D\\
- &amp; =A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]
+ &amp; =A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]\\
+ &amp; =A(1+r)^{i-1}-D\dfrac{(1+r)^{i-1}-1}{r}
 \end{align*}
 \]</span></p>
 <p>理论上，如果存在第<span class="math inline">\(n+1\)</span>期，那么第<span class="math inline">\(n+1\)</span>期偿还前的欠款<span class="math inline">\(E_{n+1}=0\)</span>，即满足如下条件</p>
 <p><span class="math display">\[
-A(1+r)^{n}-\sum_{i=1}^{n}[D(1+r)^{i-1}]=0
+A(1+r)^{n}-D\dfrac{(1+r)^{n}-1}{r}=0
 \]</span></p>
 <p>因此，有</p>
 <p><span class="math display">\[
-D=\dfrac{A(1+r)^{n}}{\sum_{i=1}^{n}(1+r)^{i-1}}=A\dfrac{r(1+r)^{n}}{(1+r)^{n}-1}
+D=A\dfrac{r(1+r)^{n}}{(1+r)^{n}-1}
 \]</span></p>
 <p>在此基础上可以计算出每期支付的利息：第1期的利息<span class="math inline">\(F_1=E_1r=Ar\)</span>；第2期的利息<span class="math inline">\(F_2=E_2r=[A(1+r)-D]r\)</span>，第3期的利息<span class="math inline">\(F_3=E_3r=[A(1+r)^2-D(1+r)-D]r\)</span>，……依次类推，第<span class="math inline">\(i\)</span>期的利息</p>
 <p><span class="math display">\[
-\begin{align*}
-F_{i} &amp; =E_{i}r\\
- &amp; =[A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D]r\\
- &amp; =\left\{A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]\right\}r\\
- &amp; =\left\{A(1+r)^{i-1}-D\dfrac{(1+r)^{i-1}-1}{r}\right\}r\\
- &amp; =Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]
-\end{align*}
+F_{i}=E_{i}r=Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]
 \]</span></p>
 <p>第<span class="math inline">\(i\)</span>期偿还的本金为</p>
 <p><span class="math display">\[
