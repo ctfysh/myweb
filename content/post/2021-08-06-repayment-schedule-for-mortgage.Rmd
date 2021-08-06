@@ -1,0 +1,165 @@
+---
+title: "等额本金与等额本息"
+comments: yes
+date: '2021-08-06'
+layout: post
+published: yes
+slug: repayment schedule for mortgage
+categories:
+  - R
+  - finance
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# 1 等额本金
+
+假设贷款额度为$A$，贷款期为$n$，每期利率为$r$，如果采用等额本金的方式还贷，那么每期偿还的本金$B$为定值，该值为
+
+$$
+B=\dfrac{A}{n}
+$$
+
+第1期偿还前的欠款$E_1=A$，那么第1期的利息$F_1=E_1r=Ar$；第2期偿还前的欠款$E_2=A-B$，那么第2期的利息$F_2=E_3r=(A-B)r$；第3期偿还前的欠款$E_3=A-2B$，那么第3期的利息$F_3=E_3r=(A-2B)r$；……依次类推，第$i$期偿还前的欠款$E_i$和利息$F_i$分别为：
+
+$$
+E_i=A-(i-1)B=\dfrac{n-i+1}{n}A
+$$
+
+和
+
+$$
+F_i=E_ir=\dfrac{n-i+1}{n}Ar
+$$
+
+那么，第$i$期的还款额（本金加利息）$D_i$可以计算为：
+
+$$
+D_i=B+F_i=(\dfrac{1}{n}+\dfrac{n-i+1}{n}r)A
+$$
+
+<!--more-->
+
+偿还的利息总和$F_\Sigma$为
+
+$$
+F_\Sigma=\sum_{i=1}^nF_i=\dfrac{n+1}{2}rA
+$$
+
+# 2 等额本息
+
+假设贷款额度为$A$，贷款期为$n$，每期利率为$r$，如果采用等额本金的方式还贷，那么每期偿还的本息和$D$为定值，在此条件下，第1期偿还前的欠款$E_1=A$，第2期偿还前的欠款$E_2=E_1(1+r)-D=A(1+r)-D$，第3期偿还前的欠款$E_3=E_2(1+r)-D=A(1+r)^2-D(1+r)-D$，……依次类推，第$i$期偿还前的欠款
+
+$$
+\begin{align*}
+E_{i} & =E_{i-1}(1+r)-D\\
+ & =A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D\\
+ & =A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]
+\end{align*}
+$$
+
+理论上，如果存在第$n+1$期，那么第$n+1$期偿还前的欠款$E_{n+1}=0$，即满足如下条件
+
+$$
+A(1+r)^{n}-\sum_{i=1}^{n}[D(1+r)^{i-1}]=0
+$$
+
+因此，有
+
+$$
+D=\dfrac{A(1+r)^{n}}{\sum_{i=1}^{n}(1+r)^{i-1}}=A\dfrac{r(1+r)^{n}}{(1+r)^{n}-1}
+$$
+
+在此基础上可以计算出每期支付的利息：第1期的利息$F_1=E_1r=Ar$；第2期的利息$F_2=E_2r=[A(1+r)-D]r$，第3期的利息$F_3=E_3r=[A(1+r)^2-D(1+r)-D]r$，……依次类推，第$i$期的利息
+
+$$
+\begin{align*}
+F_{i} & =E_{i}r\\
+ & =[A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D]r\\
+ & =\left\{A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]\right\}r\\
+ & =\left\{A(1+r)^{i-1}-D\dfrac{(1+r)^{i-1}-1}{r}\right\}r\\
+ & =Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]
+\end{align*}
+$$
+
+第$i$期偿还的本金为
+
+$$
+B_i=D-F_i=(D-Ar)(1+r)^{i-1}
+$$
+
+偿还的利息总和$F_\Sigma$为
+
+$$
+\begin{align*}
+F_\Sigma & =\sum_{i=1}^nF_i\\
+ & =\sum_{i=1}^n\left\{Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]\right\}\\
+ & =Ar\dfrac{(1+r)^{n}-1}{r}-D\left[\dfrac{(1+r)^{n}-1}{r}-n\right]\\
+ & =A[(1+r)^{n}-1]-A(1+r)^{n}+nD\\
+ & =nD-A\\
+ & =\left[\dfrac{nr(1+r)^{n}}{(1+r)^{n}-1}-1\right]A
+\end{align*}
+$$
+
+# 3 简单算例
+
+```{r}
+library(tidyverse)
+A <- 120
+ry <- 0.05
+ny <- 20
+n <- 12 * ny
+r <- (1 + ry) ^ (1 / 12) - 1
+# 等额本金
+d1 <- tibble(
+  B = A / n,
+  E = (n - 1:n + 1) / n * A,
+  F = E * r,
+  D = B + F
+) %>% mutate(id = row_number())
+# 等额本息
+d2 <- tibble(
+  D = A * r * (1 + r) ^ n / ((1 + r) ^ n - 1),
+  E = A * (1 + r) ^ (1:n - 1) -
+    D * ((1 + r) ^ (1:n - 1) - 1) / r,
+  F = E * r,
+  B = D - F
+) %>% mutate(id = row_number())
+# 等额本金利息和
+F1 <- (n + 1) / 2 * r * A
+# 等额本息利息和
+F2 <- n * A * r * (1 + r) ^ n / ((1 + r) ^ n - 1) - A
+```
+
+假设贷款`r A`万元，贷款年限为`r ny`年，贷款年利率为`r round(ry * 100, 2)`%，贷款按月还，那么贷款期$n=`r ny`\times12=`r n`$，月利率$r=\sqrt[12]{1+`r ry * 100`\%}-1=`r round(r * 100, 3)`\%$，如果按照等额本金还款，那每个月偿还本金为`r round(d1$B[1], 2)`万元，总共偿还利息`r round(F1, 2)`万元；如果按照等额本息还款，那每个月偿还本息和为`r round(d2$D[1], 2)`万元，总共偿还利息`r round(F2, 2)`万元。具体还款计划如下图所示：
+
+```{r}
+d <- d1 %>% mutate(type = "等额本金") %>%
+  bind_rows(d2 %>% mutate(type = "等额本息")) %>%
+  gather(var, value, -id, -type) %>%
+  mutate(var = recode(
+    var,
+    B = "本金",
+    F = "利息",
+    D = "本息和",
+    E = "上期欠款"
+  ))
+ggplot(d, aes(id, value, color = type)) + geom_line() +
+  facet_wrap(~ var, nrow = 2, scales = "free_y") +
+  xlab("期数") + ylab("金额（万元）") +
+  cowplot::theme_cowplot(font_family = "Hei") +
+  theme(legend.position = "top") +
+  guides(color = guide_legend(title = NULL))
+```
+
+
+
+

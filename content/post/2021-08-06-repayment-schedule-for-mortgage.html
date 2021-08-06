@@ -1,0 +1,88 @@
+---
+title: "等额本金与等额本息"
+comments: yes
+date: '2021-08-06'
+layout: post
+published: yes
+slug: repayment schedule for mortgage
+categories:
+  - R
+  - finance
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="等额本金" class="section level1">
+<h1>1 等额本金</h1>
+<p>假设贷款额度为<span class="math inline">\(A\)</span>，贷款期为<span class="math inline">\(n\)</span>，每期利率为<span class="math inline">\(r\)</span>，如果采用等额本金的方式还贷，那么每期偿还的本金<span class="math inline">\(B\)</span>为定值，该值为</p>
+<p><span class="math display">\[
+B=\dfrac{A}{n}
+\]</span></p>
+<p>第1期偿还前的欠款<span class="math inline">\(E_1=A\)</span>，那么第1期的利息<span class="math inline">\(F_1=E_1r=Ar\)</span>；第2期偿还前的欠款<span class="math inline">\(E_2=A-B\)</span>，那么第2期的利息<span class="math inline">\(F_2=E_3r=(A-B)r\)</span>；第3期偿还前的欠款<span class="math inline">\(E_3=A-2B\)</span>，那么第3期的利息<span class="math inline">\(F_3=E_3r=(A-2B)r\)</span>；……依次类推，第<span class="math inline">\(i\)</span>期偿还前的欠款<span class="math inline">\(E_i\)</span>和利息<span class="math inline">\(F_i\)</span>分别为：</p>
+<p><span class="math display">\[
+E_i=A-(i-1)B=\dfrac{n-i+1}{n}A
+\]</span></p>
+<p>和</p>
+<p><span class="math display">\[
+F_i=E_ir=\dfrac{n-i+1}{n}Ar
+\]</span></p>
+<p>那么，第<span class="math inline">\(i\)</span>期的还款额（本金加利息）<span class="math inline">\(D_i\)</span>可以计算为：</p>
+<p><span class="math display">\[
+D_i=B+F_i=(\dfrac{1}{n}+\dfrac{n-i+1}{n}r)A
+\]</span></p>
+<!--more-->
+<p>偿还的利息总和<span class="math inline">\(F_\Sigma\)</span>为</p>
+<p><span class="math display">\[
+F_\Sigma=\sum_{i=1}^nF_i=\dfrac{n+1}{2}rA
+\]</span></p>
+</div>
+<div id="等额本息" class="section level1">
+<h1>2 等额本息</h1>
+<p>假设贷款额度为<span class="math inline">\(A\)</span>，贷款期为<span class="math inline">\(n\)</span>，每期利率为<span class="math inline">\(r\)</span>，如果采用等额本金的方式还贷，那么每期偿还的本息和<span class="math inline">\(D\)</span>为定值，在此条件下，第1期偿还前的欠款<span class="math inline">\(E_1=A\)</span>，第2期偿还前的欠款<span class="math inline">\(E_2=E_1(1+r)-D=A(1+r)-D\)</span>，第3期偿还前的欠款<span class="math inline">\(E_3=E_2(1+r)-D=A(1+r)^2-D(1+r)-D\)</span>，……依次类推，第<span class="math inline">\(i\)</span>期偿还前的欠款</p>
+<p><span class="math display">\[
+\begin{align*}
+E_{i} &amp; =E_{i-1}(1+r)-D\\
+ &amp; =A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D\\
+ &amp; =A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]
+\end{align*}
+\]</span></p>
+<p>理论上，如果存在第<span class="math inline">\(n+1\)</span>期，那么第<span class="math inline">\(n+1\)</span>期偿还前的欠款<span class="math inline">\(E_{n+1}=0\)</span>，即满足如下条件</p>
+<p><span class="math display">\[
+A(1+r)^{n}-\sum_{i=1}^{n}[D(1+r)^{i-1}]=0
+\]</span></p>
+<p>因此，有</p>
+<p><span class="math display">\[
+D=\dfrac{A(1+r)^{n}}{\sum_{i=1}^{n}(1+r)^{i-1}}=A\dfrac{r(1+r)^{n}}{(1+r)^{n}-1}
+\]</span></p>
+<p>在此基础上可以计算出每期支付的利息：第1期的利息<span class="math inline">\(F_1=E_1r=Ar\)</span>；第2期的利息<span class="math inline">\(F_2=E_2r=[A(1+r)-D]r\)</span>，第3期的利息<span class="math inline">\(F_3=E_3r=[A(1+r)^2-D(1+r)-D]r\)</span>，……依次类推，第<span class="math inline">\(i\)</span>期的利息</p>
+<p><span class="math display">\[
+\begin{align*}
+F_{i} &amp; =E_{i}r\\
+ &amp; =[A(1+r)^{i-1}-D(1+r)^{i-2}-\cdots-D]r\\
+ &amp; =\left\{A(1+r)^{i-1}-\sum_{k=1}^{n-1}[D(1+r)^{k-1}]\right\}r\\
+ &amp; =\left\{A(1+r)^{i-1}-D\dfrac{(1+r)^{i-1}-1}{r}\right\}r\\
+ &amp; =Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]
+\end{align*}
+\]</span></p>
+<p>第<span class="math inline">\(i\)</span>期偿还的本金为</p>
+<p><span class="math display">\[
+B_i=D-F_i=(D-Ar)(1+r)^{i-1}
+\]</span></p>
+<p>偿还的利息总和<span class="math inline">\(F_\Sigma\)</span>为</p>
+<p><span class="math display">\[
+\begin{align*}
+F_\Sigma &amp; =\sum_{i=1}^nF_i\\
+ &amp; =\sum_{i=1}^n\left\{Ar(1+r)^{i-1}-D[(1+r)^{i-1}-1]\right\}\\
+ &amp; =Ar\dfrac{(1+r)^{n}-1}{r}-D\left[\dfrac{(1+r)^{n}-1}{r}-n\right]\\
+ &amp; =A[(1+r)^{n}-1]-A(1+r)^{n}+nD\\
+ &amp; =nD-A\\
+ &amp; =\left[\dfrac{nr(1+r)^{n}}{(1+r)^{n}-1}-1\right]A
+\end{align*}
+\]</span></p>
+</div>
+<div id="简单算例" class="section level1">
+<h1>3 简单算例</h1>
+<p>假设贷款120万元，贷款年限为20年，贷款年利率为5%，贷款按月还，那么贷款期<span class="math inline">\(n=20\times12=240\)</span>，月利率<span class="math inline">\(r=\sqrt[12]{1+5\%}-1=0.407\%\)</span>，如果按照等额本金还款，那每个月偿还本金为0.5万元，总共偿还利息58.91万元；如果按照等额本息还款，那每个月偿还本息和为0.78万元，总共偿还利息68.3万元。具体还款计划如下图所示：</p>
+<p><img src="/post/2021-08-06-repayment-schedule-for-mortgage_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>

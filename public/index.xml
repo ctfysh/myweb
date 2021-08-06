@@ -6,7 +6,38 @@
     <description>Recent content on Catfish</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>等额本金与等额本息</title>
+      <link>/post/2021/08/06/repayment-schedule-for-mortgage/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/08/06/repayment-schedule-for-mortgage/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;等额本金&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1 等额本金&lt;/h1&gt;
+&lt;p&gt;假设贷款额度为&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;，贷款期为&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;，每期利率为&lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;，如果采用等额本金的方式还贷，那么每期偿还的本金&lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt;为定值，该值为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+B=\dfrac{A}{n}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;第1期偿还前的欠款&lt;span class=&#34;math inline&#34;&gt;\(E_1=A\)&lt;/span&gt;，那么第1期的利息&lt;span class=&#34;math inline&#34;&gt;\(F_1=E_1r=Ar\)&lt;/span&gt;；第2期偿还前的欠款&lt;span class=&#34;math inline&#34;&gt;\(E_2=A-B\)&lt;/span&gt;，那么第2期的利息&lt;span class=&#34;math inline&#34;&gt;\(F_2=E_3r=(A-B)r\)&lt;/span&gt;；第3期偿还前的欠款&lt;span class=&#34;math inline&#34;&gt;\(E_3=A-2B\)&lt;/span&gt;，那么第3期的利息&lt;span class=&#34;math inline&#34;&gt;\(F_3=E_3r=(A-2B)r\)&lt;/span&gt;；……依次类推，第&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;期偿还前的欠款&lt;span class=&#34;math inline&#34;&gt;\(E_i\)&lt;/span&gt;和利息&lt;span class=&#34;math inline&#34;&gt;\(F_i\)&lt;/span&gt;分别为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+E_i=A-(i-1)B=\dfrac{n-i+1}{n}A
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+F_i=E_ir=\dfrac{n-i+1}{n}Ar
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;那么，第&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;期的还款额（本金加利息）&lt;span class=&#34;math inline&#34;&gt;\(D_i\)&lt;/span&gt;可以计算为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+D_i=B+F_i=(\dfrac{1}{n}+\dfrac{n-i+1}{n}r)A
+\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>年化收益率</title>
       <link>/post/2021/08/05/annualized-rate-of-return/</link>

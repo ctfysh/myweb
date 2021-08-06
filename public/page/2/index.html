@@ -74,6 +74,39 @@
 
 <article class="post">
   <h1 class="post-title">
+    <a href="/post/2021/08/03/how-to-get-the-insurance/">整取？还是零取？</a>
+  </h1>
+  <time datetime="2021-08-03T00:00:00Z" class="post-date">2021年8月3日</time>
+  
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="基本原理" class="section level1">
+<h1>1 基本原理</h1>
+<p>假设一次性可以领取的金额为<span class="math inline">\(A\)</span>，分月领取的金额为<span class="math inline">\(B\)</span>，领取的时间为<span class="math inline">\(t\)</span>年，银行的年利率为<span class="math inline">\(r\)</span>，首先根据复利公式可以计算出月利率<span class="math inline">\(r_0\)</span>满足如下公式：</p>
+<p><span class="math display">\[
+1+r=(1+r_0)^{12} 
+\]</span>
+也就是说</p>
+<p><span class="math display">\[
+r_0=\sqrt[12]{1+r}-1
+\]</span></p>
+<p>在此基础上，不难得知，如果将钱一次性取出并存入银行，<span class="math inline">\(t\)</span>年后总的收益（本息和）为</p>
+<p><span class="math display">\[
+X=A(1+r)^t=A(1+r_0)^{12t}
+\]</span></p>
+<p>另外，如果每个月取出B并存入银行，那么第1个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)^{12t}\)</span>，第2个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)^{12t-1}\)</span>，……，最后一个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)\)</span>，那么所有月份形成的总的收益为</p>
+<p><span class="math display">\[
+Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
+\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2021/08/03/how-to-get-the-insurance/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="/post/2019/10/01/how-to-make-national-flag/">如何绘制国旗？</a>
   </h1>
   <time datetime="2019-10-01T00:00:00Z" class="post-date">2019年10月1日</time>
@@ -230,34 +263,6 @@
     <a href="/post/2017/02/06/tables-package-usage/">Read More →</a>
   </div>
   
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">基于泰勒展开的不确定性传递</a>
-  </h1>
-  <time datetime="2016-10-07T00:00:00Z" class="post-date">2016年10月7日</time>
-  
-
-
-<div id="section" class="section level1">
-<h1>1 两个输入变量</h1>
-<p>假设随机变量<span class="math inline">\(Z\)</span>是随机变量<span class="math inline">\(X\)</span>和随机变量<span class="math inline">\(Y\)</span>的函数，函数关系如下</p>
-<p><span class="math display">\[Z=f(X,Y)\]</span></p>
-<p>其中<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的均值分别为<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>，方差分别为<span class="math inline">\(D_{X}\)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>和<span class="math inline">\(D_{Y}\)</span>，协方差为<span class="math inline">\(D_{XY}\)</span>。对<span class="math inline">\(Z\)</span>进行关于<span class="math inline">\(\overline{X}\)</span>和<span class="math inline">\(\overline{Y}\)</span>泰勒展开可以得到</p>
-<p><span class="math display">\[Z=f(\overline{X},\overline{Y})+f_{X}^{\prime}(\overline{X},\overline{Y})(X-\overline{X})+f_{Y}^{\prime}(\overline{X},\overline{Y})(Y-\overline{Y})+o(X,Y)\]</span></p>
-<p>如果忽略高阶项<span class="math inline">\(o(X,Y)\)</span>，那么根据随机变量求和的期望和方差计算公式</p>
-<p><span class="math display">\[\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\]</span></p>
-<p>和</p>
-<p><span class="math display">\[\text{var}(X+Y)=\text{var}(X)+\text{var}(Y)+2\text{cov}(X,Y)\]</span></p>
-<p>可以得到<span class="math inline">\(Z\)</span>的期望值与方差值分别如下</p>
-<p><span class="math display">\[\overline{Z}=f(\overline{X},\overline{Y})\]</span></p>
-<p>和</p>
-<p><span class="math display">\[D_{Z}=f_{X}^{\prime}(\overline{X},\overline{Y})^{2}D_{X}+f_{Y}^{\prime}(\overline{X},\overline{Y})^{2}D_{Y}+2f_{X}^{\prime}(\overline{X},\overline{Y})f_{Y}^{\prime}(\overline{X},\overline{Y})D_{XY}\]</span></p>
-
-  
-  <div class="read-more-link">
-    <a href="/post/2016/10/07/taylor-series-for-uncertainty/">Read More →</a>
-  </div>
-  
 </article>
 
     <ul class="pagination pagination-default">
@@ -277,10 +282,13 @@
         <a href="/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
       </li>
       <li class="page-item">
+        <a href="/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
         <a href="/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
 </div>

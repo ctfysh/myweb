@@ -74,6 +74,39 @@
 
 <article class="post">
   <h1 class="post-title">
+    <a href="/post/2021/08/06/repayment-schedule-for-mortgage/">等额本金与等额本息</a>
+  </h1>
+  <time datetime="2021-08-06T00:00:00Z" class="post-date">2021年8月6日</time>
+  
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="等额本金" class="section level1">
+<h1>1 等额本金</h1>
+<p>假设贷款额度为<span class="math inline">\(A\)</span>，贷款期为<span class="math inline">\(n\)</span>，每期利率为<span class="math inline">\(r\)</span>，如果采用等额本金的方式还贷，那么每期偿还的本金<span class="math inline">\(B\)</span>为定值，该值为</p>
+<p><span class="math display">\[
+B=\dfrac{A}{n}
+\]</span></p>
+<p>第1期偿还前的欠款<span class="math inline">\(E_1=A\)</span>，那么第1期的利息<span class="math inline">\(F_1=E_1r=Ar\)</span>；第2期偿还前的欠款<span class="math inline">\(E_2=A-B\)</span>，那么第2期的利息<span class="math inline">\(F_2=E_3r=(A-B)r\)</span>；第3期偿还前的欠款<span class="math inline">\(E_3=A-2B\)</span>，那么第3期的利息<span class="math inline">\(F_3=E_3r=(A-2B)r\)</span>；……依次类推，第<span class="math inline">\(i\)</span>期偿还前的欠款<span class="math inline">\(E_i\)</span>和利息<span class="math inline">\(F_i\)</span>分别为：</p>
+<p><span class="math display">\[
+E_i=A-(i-1)B=\dfrac{n-i+1}{n}A
+\]</span></p>
+<p>和</p>
+<p><span class="math display">\[
+F_i=E_ir=\dfrac{n-i+1}{n}Ar
+\]</span></p>
+<p>那么，第<span class="math inline">\(i\)</span>期的还款额（本金加利息）<span class="math inline">\(D_i\)</span>可以计算为：</p>
+<p><span class="math display">\[
+D_i=B+F_i=(\dfrac{1}{n}+\dfrac{n-i+1}{n}r)A
+\]</span></p>
+
+  
+  <div class="read-more-link">
+    <a href="/post/2021/08/06/repayment-schedule-for-mortgage/">Read More →</a>
+  </div>
+  
+</article><article class="post">
+  <h1 class="post-title">
     <a href="/post/2021/08/05/annualized-rate-of-return/">年化收益率</a>
   </h1>
   <time datetime="2021-08-05T00:00:00Z" class="post-date">2021年8月5日</time>
@@ -133,39 +166,6 @@ r_k=r(\sum_{i=1}^{k}x_{i})=\sum_l[\gamma_l\cdot I(a_{l-1}&lt;\sum_{i=1}^{k}x_{i}
     <a href="/post/2021/08/04/what-is-fast-algorithm-deduction/">Read More →</a>
   </div>
   
-</article><article class="post">
-  <h1 class="post-title">
-    <a href="/post/2021/08/03/how-to-get-the-insurance/">整取？还是零取？</a>
-  </h1>
-  <time datetime="2021-08-03T00:00:00Z" class="post-date">2021年8月3日</time>
-  
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-
-
-<div id="基本原理" class="section level1">
-<h1>1 基本原理</h1>
-<p>假设一次性可以领取的金额为<span class="math inline">\(A\)</span>，分月领取的金额为<span class="math inline">\(B\)</span>，领取的时间为<span class="math inline">\(t\)</span>年，银行的年利率为<span class="math inline">\(r\)</span>，首先根据复利公式可以计算出月利率<span class="math inline">\(r_0\)</span>满足如下公式：</p>
-<p><span class="math display">\[
-1+r=(1+r_0)^{12} 
-\]</span>
-也就是说</p>
-<p><span class="math display">\[
-r_0=\sqrt[12]{1+r}-1
-\]</span></p>
-<p>在此基础上，不难得知，如果将钱一次性取出并存入银行，<span class="math inline">\(t\)</span>年后总的收益（本息和）为</p>
-<p><span class="math display">\[
-X=A(1+r)^t=A(1+r_0)^{12t}
-\]</span></p>
-<p>另外，如果每个月取出B并存入银行，那么第1个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)^{12t}\)</span>，第2个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)^{12t-1}\)</span>，……，最后一个月取出的钱到<span class="math inline">\(t\)</span>年后的总的收益是<span class="math inline">\(B(1+r_0)\)</span>，那么所有月份形成的总的收益为</p>
-<p><span class="math display">\[
-Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
-\]</span></p>
-
-  
-  <div class="read-more-link">
-    <a href="/post/2021/08/03/how-to-get-the-insurance/">Read More →</a>
-  </div>
-  
 </article>
 
     <ul class="pagination pagination-default">
@@ -185,10 +185,13 @@ Y=B(1+r_0)^{12t}+B(1+r_0)^{12t-1}+\cdots+B(1+r_0)=\sum_{i=1}^{12t}[B(1+r_0)^i]
         <a href="/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
       </li>
       <li class="page-item">
+        <a href="/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
         <a href="/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
       </li>
       <li class="page-item">
-        <a href="/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/4/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
     </ul>
 </div>

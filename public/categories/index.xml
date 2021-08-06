@@ -6,22 +6,31 @@
     <description>Recent content in Categories on Catfish</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>insurance</title>
-      <link>/categories/insurance/</link>
-      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <title>finance</title>
+      <link>/categories/finance/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>/categories/insurance/</guid>
+      <guid>/categories/finance/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
       <link>/categories/r/</link>
-      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>insurance</title>
+      <link>/categories/insurance/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/insurance/</guid>
       <description></description>
     </item>
     
