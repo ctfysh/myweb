@@ -81,3 +81,53 @@ F_\Sigma &amp; =\sum_{i=1}^nF_i\\
 <p>假设贷款120万元，贷款年限为20年，贷款年利率为5%，贷款按月还，那么贷款期<span class="math inline">\(n=20\times12=240\)</span>，月利率<span class="math inline">\(r=\sqrt[12]{1+5\%}-1=0.407\%\)</span>，如果按照等额本金还款，那每个月偿还本金为0.5万元，总共偿还利息58.91万元；如果按照等额本息还款，那每个月偿还本息和为0.78万元，总共偿还利息68.3万元。具体还款计划如下图所示：</p>
 <p><img src="/post/2021-08-06-repayment-schedule-for-mortgage_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
+<div id="小结" class="section level1">
+<h1>4 小结</h1>
+<p>在针对<span class="math inline">\(B_i\)</span>（本金）、<span class="math inline">\(F_i\)</span>（利息）、<span class="math inline">\(D_i\)</span>（本息和）、<span class="math inline">\(E_i\)</span>（上期欠款）分析的时候，需要把握住以下几个显而易见的条件（类似于欧式几何中的公理）：</p>
+<ul>
+<li>本息和的计算公式</li>
+</ul>
+<p><span class="math display">\[
+D_i=B_i+F_i
+\]</span></p>
+<ul>
+<li>利息的计算公式</li>
+</ul>
+<p><span class="math display">\[
+F_i=E_ir_i
+\]</span></p>
+<ul>
+<li>本金还款的递推公式</li>
+</ul>
+<p><span class="math display">\[
+E_{i+1}=E_i-B_i
+\]</span></p>
+<ul>
+<li>还款期公式</li>
+</ul>
+<p><span class="math display">\[
+E_{n+1}=0
+\]</span></p>
+<p>以上4个公式是等额本金和等额本息推导的基础。假设利率为固定值<span class="math inline">\(r_i=r\)</span>，贷款金额<span class="math inline">\(E_1=A\)</span>，对于等额本金而言，<span class="math inline">\(B_i=B\)</span>为定值，那么有</p>
+<p><span class="math display">\[
+E_i=E_1-\sum_{k=1}^{i-1}B_k=E_1-(i-1)B
+\]</span></p>
+<p>另外，根据<span class="math inline">\(E_{n+1}=0\)</span>，可以得到</p>
+<p><span class="math display">\[
+B=\dfrac{E_1}{n}=\dfrac{A}{n}
+\]</span></p>
+<p>对于等额本息而言，<span class="math inline">\(D_i=D\)</span>为定值，那么有</p>
+<p><span class="math display">\[
+\begin{align*}
+E_{i+1} &amp; =(1+r_i)E_i-D_i\\
+ &amp; =(1+r)E_i-D\\
+ &amp; =(1+r)^iE_1-\sum_{k=1}^{i}[D(1+r)^{k-1}]\\
+ &amp; =A(1+r)^i-D\dfrac{(1+r)^i-1}{r}
+\end{align*}
+\]</span></p>
+<p>同样，根据<span class="math inline">\(E_{n+1}=0\)</span>，可以得到</p>
+<p><span class="math display">\[
+D=A\dfrac{r(1+r)^{n}}{(1+r)^{n}-1}
+\]</span></p>
+<p>由此可见，只需要根据4个基本公式，在一定的假设条件下，我们就可以推导出后续的结果。</p>
+</div>
