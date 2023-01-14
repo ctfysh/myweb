@@ -7,13 +7,22 @@
       </p>
     </div>
 
-    <nav class="sidebar-nav">
-      {{ $currentPage := . }}
-      <!-- {{ print $currentPage.URL }}
-      {{ .Site.BaseURL }} -->
-        <a class="sidebar-nav-item {{ if (eq $currentPage.URL "/") }}active{{ end }}" href="{{ .Site.BaseURL }}">Home</a>
+    <!--<nav>
+      <ul class="sidebar-nav">
+        <li><a href="{{ .Site.BaseURL }}">Home</a> </li>
         {{ range .Site.Menus.main -}}
-          <a class="sidebar-nav-item {{ if (eq $currentPage.URL .URL) }}active{{ end }}" href="{{.URL}}"> {{ .Name }} </a>
+          <li><a href="{{.URL}}"> {{ .Name }} </a></li>
+        {{- end }}
+      </ul>
+    </nav> -->
+    
+    <nav class="sidebar-nav">
+      <!--{{ $currentPage := . }}
+      {{ print $currentPage.RelPermalink }}
+      {{ .Site.BaseURL }}-->
+        <a class="sidebar-nav-item {{ if (eq $currentPage.RelPermalink "/") }}active{{ end }}" href="{{ .Site.BaseURL }}">Home</a>
+        {{ range .Site.Menus.main -}}
+          <a class="sidebar-nav-item {{ if (eq $currentPage.RelPermalink .URL) }}active{{ end }}" href="{{.URL}}"> {{ .Name }} </a>
         {{- end }}
     </nav>
 

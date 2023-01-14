@@ -1,0 +1,101 @@
+---
+title: 收益率悖论
+comments: yes
+date: '2023-01-14'
+layout: post
+published: yes
+slug: return rate paradox
+categories:
+  - R
+  - finance
+---
+
+
+
+<div id="基本原理" class="section level1">
+<h1>1 基本原理</h1>
+<p>假设第<span class="math inline">\(i\)</span>期（<span class="math inline">\(i=1,\,2,\,\cdots\)</span>）投入资金为<span class="math inline">\(x_i\)</span>，期末后总的资金为<span class="math inline">\(y_i\)</span>，那么第<span class="math inline">\(i\)</span>期的<strong>当期收益率</strong>为</p>
+<p><span class="math display">\[
+r_i=\dfrac{y_i-x_i-y_{i-1}}{x_i+y_{i-1}}
+\]</span></p>
+<p>连续投资<span class="math inline">\(n\)</span>期，<strong>总收益率</strong><span class="math inline">\(R_n\)</span>为</p>
+<p><span class="math display">\[
+R_n=(1+r_1)(1+r_2)\cdots(1+r_n)-1=\prod_{i=1}^n(1+r_i)-1
+\]</span></p>
+<p>连续投资<span class="math inline">\(n\)</span>期，如果假设每一期的收益率都是<span class="math inline">\(\bar{r}\)</span>，该收益率为投资<span class="math inline">\(n\)</span>期的<strong>平均收益率</strong>，满足如下关系</p>
+<p><span class="math display">\[
+R_n=\underset{n}{\underbrace{(1+\bar{r})(1+\bar{r})\cdots(1+\bar{r})}}-1=(1+\bar{r})^n-1
+\]</span></p>
+<p>那么<strong>平均收益率</strong><span class="math inline">\(\bar{r}\)</span>的计算公式为</p>
+<p><span class="math display">\[
+\bar{r}=\sqrt[n]{1+R_n}-1=\sqrt[n]{\prod_{i=1}^n(1+r_i)}-1
+\]</span></p>
+<!--more-->
+<p>对于第<span class="math inline">\(i\)</span>期的投入资金<span class="math inline">\(x_i\)</span>，如果折现到第<span class="math inline">\(1\)</span>期，相当于在第<span class="math inline">\(1\)</span>期投资的金额<span class="math inline">\(\tilde{x}_i\)</span>为</p>
+<p><span class="math display">\[
+\tilde{x}_i=\dfrac{x_i}{1+R_{i-1}}=\dfrac{x_i}{\prod_{k=1}^i(1+r_{k-1})}
+\]</span></p>
+<p>这里<span class="math inline">\(\tilde{x}_1=x_1\)</span>，即<span class="math inline">\(R_0=r_0=0\)</span>。根据<span class="math inline">\(r_i\)</span>的计算公式，可以得知</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_i&amp;=(1+r_i)x_i+(1+r_i)y_{i-1}\\
+&amp;=(1+r_i)x_i+(1+r_i)[(1+r_{i-1})x_{i-1}+(1+r_{i-1})y_{i-2}]\\
+&amp;=(1+r_i)x_i+(1+r_i)(1+r_{i-1})x_{i-1}+\cdots+(1+r_i)\cdots(1+r_1)x_1\\
+&amp;=(1+r_i)\cdots(1+r_1)\cdot\\
+&amp;\qquad\left[\dfrac{x_i}{(1+r_{i-1})\cdots(1+r_1)}+\dfrac{x_{i-1}}{(1+r_{i-2})\cdots(1+r_1)}+\cdots+x_1\right]\\
+&amp;=(1+R_i)\sum_{k=1}^i\tilde{x}_k
+\end{aligned}
+\]</span></p>
+<p>当<span class="math inline">\(i=n\)</span>时</p>
+<p><span class="math display">\[
+R_n=\dfrac{y_n-\sum_{k=1}^n\tilde{x}_k}{\sum_{k=1}^n\tilde{x}_k}
+\]</span></p>
+<p>由此可知，对于<span class="math inline">\(n\)</span>期连续投资<span class="math inline">\(x_1,\,x_2,\,\cdots,\,x_n\)</span>，其<strong>总收益率</strong>就是把这<span class="math inline">\(n\)</span>期投资看成一个整体，把不同时期的投资折现到第<span class="math inline">\(1\)</span>期，即<span class="math inline">\(\tilde{x}_1,\,\tilde{x}_2,\,\cdots,\,\tilde{x}_n\)</span>，然后以此总规模<span class="math inline">\(\sum_{k=1}^n\tilde{x}_k\)</span>投资，并最终资金为<span class="math inline">\(y_n\)</span>时的收益率，该收益率与通过每一期收益率计算出来的总收益率是一致的。</p>
+</div>
+<div id="一个例子" class="section level1">
+<h1>2 一个例子</h1>
+<p>假设小明参与了一个投资，第一年投了1万元，年末账上资金为1.5万元，第二年又追投了1万元，年末账上资金为2万元，第三年又追投了1万元，年末账上资金为2.7万元，那么请问这3年的累积收益率是多少？</p>
+<p><strong>第一种算法</strong>：根据当期收益率来计算</p>
+<p>第一年的当期收益率<span class="math inline">\(r_1\)</span>为</p>
+<p><span class="math display">\[
+r_1=\dfrac{1.5-1}{1}\times 100\%=50\%
+\]</span></p>
+<p>第二年的当期收益率<span class="math inline">\(r_2\)</span>为</p>
+<p><span class="math display">\[
+r_2=\dfrac{2-(1.5+1)}{1.5+1}\times 100\%=-20\%
+\]</span></p>
+<p>第三年的当期收益率<span class="math inline">\(r_3\)</span>为</p>
+<p><span class="math display">\[
+r_3=\dfrac{2.7-(2+1)}{2+1}\times 100\%=-10\%
+\]</span></p>
+<p>所以，3期<strong>总收益率</strong>为</p>
+<p><span class="math display">\[
+R_3=(1+r_1)(1+r_2)(1+r_3)-1=(1+0.5)(1-0.2)(1-0.1)-1=8\%
+\]</span></p>
+<p>从以上结果上看似乎有些反直观，小明总共是投了3万元，但最后账户上只剩下了2.7万元，直观上看是亏损了0.3万元，但是算出来的<strong>总收益率</strong>却是正的，表明投资是盈利了。这种矛盾如何解释？且看第二种算法。</p>
+<p><strong>第二种算法</strong>：根据贴现率来计算</p>
+<p>第一年投资的贴现值<span class="math inline">\(\tilde{x}_1\)</span>为</p>
+<p><span class="math display">\[
+\tilde{x}_1=x_1=1
+\]</span></p>
+<p>第二年投资的贴现值<span class="math inline">\(\tilde{x}_2\)</span>为</p>
+<p><span class="math display">\[
+\tilde{x}_2=\dfrac{x_2}{1+r_1}=\dfrac{1}{1+0.5}=0.667
+\]</span></p>
+<p>第三年投资的贴现值<span class="math inline">\(\tilde{x}_3\)</span>为</p>
+<p><span class="math display">\[
+\tilde{x}_3=\dfrac{x_3}{(1+r_1)(1+r_2)}=\dfrac{1}{(1+0.5)(1-0.2)}=0.833
+\]</span></p>
+<p>所以，按照贴现值来算，3期总投资为</p>
+<p><span class="math display">\[
+\tilde{x}_1+\tilde{x}_2+\tilde{x}_3=1+0.667+0.833=2.5
+\]</span></p>
+<p>那么3期<strong>总收益率</strong>为</p>
+<p><span class="math display">\[
+R_3=\dfrac{y_3-(\tilde{x}_1+\tilde{x}_2+\tilde{x}_3)}{\tilde{x}_1+\tilde{x}_2+\tilde{x}_3}=\dfrac{2.7-2.5}{2.5}=8\%
+\]</span></p>
+<p>也就是说，按照贴现率来计算，小明的总投资是2.5万元（贴现到第1期），而不是表观上看到的3万元（考虑到不同时间上的投资同样的资金价值不同，因此不同时间上的投资不能直接进行加和），而到第3期期末账上的资金为2.7万元，那么<strong>总收益率</strong>就是正的。由此可见，<strong>总收益率</strong>是考虑了时间的价值后得到的结果，而不是按照如下方式计算的结果</p>
+<p><span class="math display">\[
+R_3\ne\dfrac{y_3-(x_1+x_2+x_3)}{x_1+x_2+x_3}=\dfrac{2.7-3}{3}=-10\%
+\]</span></p>
+</div>
