@@ -1,0 +1,126 @@
+---
+title: 降雨径流的分布特征是什么？
+comments: yes
+date: '2023-11-14'
+layout: post
+published: yes
+slug: distribution of rainfall and runoff
+categories: 
+  - R
+  - Model
+---
+
+
+
+<p>最近一直在看降雨径流相关的文献，突然发现居然看似平平的水量平衡分析，愣是给跟概率分布扯到一起了，觉得有些新奇。但是文献太老，有些还语焉不详，无法得知其细节。于是，带着猎奇的心态，我根据文献的介绍，推演了一下其中的原委。</p>
+<div id="计算的原理和方法" class="section level1">
+<h1>1 计算的原理和方法</h1>
+<p>假设一个地区的降雨量为<span class="math inline">\(P\)</span>，径流量为<span class="math inline">\(Q\)</span>，损失量为<span class="math inline">\(F\)</span>，那么根据水量平衡有</p>
+<p><span class="math display">\[
+P=Q+F
+\]</span></p>
+<p>由于<span class="math inline">\(P\)</span>、<span class="math inline">\(Q\)</span>、<span class="math inline">\(F\)</span>都为非负数，那么有<span class="math inline">\(0\le Q\le P\)</span>，<span class="math inline">\(0\le F\le P\)</span>。另外假设<span class="math inline">\(F\)</span>的分布函数为</p>
+<p><span class="math display">\[\mathcal{G}_F(x)=\mathbb{P}(F\le x)\]</span></p>
+<p>其概率密度函数为</p>
+<p><span class="math display">\[
+\mathcal{g}_F(x)=\dfrac{\text{d}\mathcal{G}_F(x)}{\text{d}x}
+\]</span></p>
+<p>那么对于<span class="math inline">\(Q\)</span>而言，其分布函数</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{G}_Q(x)&amp;=\mathbb{P}(Q\le x)=\mathbb{P}(P-F\le x)=\mathbb{P}(F\ge P-x)\\
+&amp;=1-\mathbb{P}(F\le P-x)=1-\mathcal{G}_F(P-x)
+\end{aligned}
+\]</span></p>
+<p>所以其概率密度函数为</p>
+<p><span class="math display">\[
+\mathcal{g}_Q(x)=\dfrac{\text{d}\mathcal{G}_Q(x)}{\text{d}x}=\mathcal{g}_F(P-x)
+\]</span></p>
+<!--more-->
+<p>那么<span class="math inline">\(Q\)</span>的期望值</p>
+<p><span class="math display">\[
+\bar{Q}=\int_0^Px\mathcal{g}_Q(x)\text{d}x=\int_0^Px\mathcal{g}_F(P-x)\text{d}x
+\]</span></p>
+<p>令<span class="math inline">\(y=P-x\)</span>，那么有</p>
+<p><span class="math display">\[
+\bar{Q}=\int_P^0(P-y)\mathcal{g}_F(y)\text{d}(P-y)=\int_0^P(P-y)\mathcal{g}_F(y)\text{d}y
+\]</span></p>
+<p>进而可以计算</p>
+<p><span class="math display">\[
+\begin{aligned}
+\dfrac{\text{d}\bar{Q}}{\text{d}P}&amp;=\dfrac{\text{d}}{\text{d}P}\int_0^P(P-y)\mathcal{g}_F(y)\text{d}y\\
+&amp;=\dfrac{\text{d}}{\text{d}P}\int_0^PP\mathcal{g}_F(y)\text{d}y-\dfrac{\text{d}}{\text{d}P}\int_0^Py\mathcal{g}_F(y)\text{d}y\\
+&amp;=\dfrac{\text{d}}{\text{d}P}[P\mathcal{G}_F(P)]-P\mathcal{g}_F(P)\\
+&amp;=\mathcal{G}_F(P)
+\end{aligned}
+\]</span></p>
+<p>根据概率密度的定义可以得到</p>
+<p><span class="math display">\[
+\dfrac{\text{d}^2\bar{Q}}{\text{d}P^2}=\dfrac{\text{d}\mathcal{G}_F(P)}{\text{d}P}=\mathcal{g}_F(P)
+\]</span></p>
+</div>
+<div id="基于scs-cn曲线的分析" class="section level1">
+<h1>2 基于SCS-CN曲线的分析</h1>
+<p>SCS-CN方法的核心假设是存在一个土壤储水量<span class="math inline">\(S\)</span>，使得</p>
+<p><span class="math display">\[
+\dfrac{Q}{P}=\dfrac{F}{S}
+\]</span></p>
+<p>进而可以得到</p>
+<p><span class="math display">\[
+Q=\dfrac{P^2}{P+S}
+\]</span></p>
+<p>这里，<span class="math inline">\(P\)</span>其实是有效降雨量<span class="math inline">\(P_e\)</span>。当<span class="math inline">\(P\)</span>为真实降雨量时，需要考虑到初损值<span class="math inline">\(I_a\)</span>，满足</p>
+<p><span class="math display">\[
+P=P_e+I_a
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+Q=\dfrac{(P-I_a)^2}{P-I_a+S}
+\]</span></p>
+<p>当<span class="math inline">\(I_a=\lambda S\)</span>且<span class="math inline">\(\lambda=0.2\)</span>时</p>
+<p><span class="math display">\[
+Q=\dfrac{(P-0.2S)^2}{P+0.8S}
+\]</span></p>
+<p>如果假设<span class="math inline">\(S=1\)</span>，那么可以做出<span class="math inline">\(Q\)</span>对<span class="math inline">\(P\)</span>的曲线图</p>
+<p><img src="/post/2023-11-14-distribution-of-rainfall-and-runoff_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>令<span class="math inline">\(Q^*=Q/S\)</span>、<span class="math inline">\(P^*=P/S\)</span>、<span class="math inline">\(F^*=F/S\)</span>，那么可以对<span class="math inline">\(P\)</span>、<span class="math inline">\(Q\)</span>、<span class="math inline">\(F\)</span>进行无量纲化，得到</p>
+<p><span class="math display">\[
+Q^*=\dfrac{(P^*-0.2)^2}{P^*+0.8}
+\]</span></p>
+<p>那么有</p>
+<p><span class="math display">\[
+\dfrac{\text{d}Q}{\text{d}P}=\dfrac{\text{d}Q^*}{\text{d}P^*}=1-(P^*+0.8)^{-2}=1-(P/S+0.8)^{-2}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+\mathcal{G}_F(x)=1-(x/S+0.8)^{-2}
+\]</span></p>
+<p>当<span class="math inline">\(S=1\)</span>时，分布函数<span class="math inline">\(\mathcal{G}_F(x)\)</span>的曲线形式如下</p>
+<p><img src="/post/2023-11-14-distribution-of-rainfall-and-runoff_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>另外，有</p>
+<p><span class="math display">\[
+\dfrac{\text{d}^2Q}{\text{d}P^2}=2S^{-1}(P/S+0.8)^{-3}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+\mathcal{g}_F(x)=2S^{-1}(x/S+0.8)^{-3}
+\]</span></p>
+<p>当<span class="math inline">\(S=1\)</span>时，概率密度函数<span class="math inline">\(\mathcal{g}_F(x)\)</span>的曲线形式如下</p>
+<p><img src="/post/2023-11-14-distribution-of-rainfall-and-runoff_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>这里<span class="math inline">\(x\ge0.2S\)</span>。此时，<span class="math inline">\(F\)</span>的期望值为</p>
+<p><span class="math display">\[
+\bar{F}=\int_{0.2S}^{+\infty}x\mathcal{g}_F(x)\text{d}x=\int_{0.2S}^{+\infty}2xS^{-1}(x/S+0.8)^{-3}\text{d}x=1.2S
+\]</span></p>
+<p>从<span class="math inline">\(F\)</span>的期望值可以看出，这里的<span class="math inline">\(F\)</span>是包含初损<span class="math inline">\(I_a=0.2S\)</span>的，即</p>
+<p><span class="math display">\[
+\bar{Q}=P-\bar{F}=P-1.2S=P-(I_a+S)=P_e-S
+\]</span></p>
+<p>另外，我们可以根据分布函数求出任意分位数对应的随机变量的取值，即通过<span class="math inline">\(\mathcal{G}_F(x)=0.5\)</span>可以得到</p>
+<p><span class="math display">\[
+1-(F_{0.5}/S+0.8)^{-2}=0.5
+\]</span></p>
+<p>那么，<span class="math inline">\(F\)</span>的中位数为</p>
+<p><span class="math display">\[
+F_{0.5}=(\sqrt{2}-0.8)S\approx0.6142S
+\]</span></p>
+</div>

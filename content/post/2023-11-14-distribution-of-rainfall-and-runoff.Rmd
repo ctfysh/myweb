@@ -1,0 +1,220 @@
+---
+title: 降雨径流的分布特征是什么？
+comments: yes
+date: '2023-11-14'
+layout: post
+published: yes
+slug: distribution of rainfall and runoff
+categories: 
+  - R
+  - Model
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  cache = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+最近一直在看降雨径流相关的文献，突然发现居然看似平平的水量平衡分析，愣是给跟概率分布扯到一起了，觉得有些新奇。但是文献太老，有些还语焉不详，无法得知其细节。于是，带着猎奇的心态，我根据文献的介绍，推演了一下其中的原委。
+
+# 1 计算的原理和方法
+
+假设一个地区的降雨量为$P$，径流量为$Q$，损失量为$F$，那么根据水量平衡有
+
+$$
+P=Q+F
+$$
+
+由于$P$、$Q$、$F$都为非负数，那么有$0\le Q\le P$，$0\le F\le P$。另外假设$F$的分布函数为
+
+$$\mathcal{G}_F(x)=\mathbb{P}(F\le x)$$
+
+其概率密度函数为
+
+$$
+\mathcal{g}_F(x)=\dfrac{\text{d}\mathcal{G}_F(x)}{\text{d}x}
+$$
+
+那么对于$Q$而言，其分布函数
+
+$$
+\begin{aligned}
+\mathcal{G}_Q(x)&=\mathbb{P}(Q\le x)=\mathbb{P}(P-F\le x)=\mathbb{P}(F\ge P-x)\\
+&=1-\mathbb{P}(F\le P-x)=1-\mathcal{G}_F(P-x)
+\end{aligned}
+$$
+
+所以其概率密度函数为
+
+$$
+\mathcal{g}_Q(x)=\dfrac{\text{d}\mathcal{G}_Q(x)}{\text{d}x}=\mathcal{g}_F(P-x)
+$$
+
+<!--more-->
+
+那么$Q$的期望值
+
+$$
+\bar{Q}=\int_0^Px\mathcal{g}_Q(x)\text{d}x=\int_0^Px\mathcal{g}_F(P-x)\text{d}x
+$$
+
+令$y=P-x$，那么有
+
+$$
+\bar{Q}=\int_P^0(P-y)\mathcal{g}_F(y)\text{d}(P-y)=\int_0^P(P-y)\mathcal{g}_F(y)\text{d}y
+$$
+
+进而可以计算
+
+$$
+\begin{aligned}
+\dfrac{\text{d}\bar{Q}}{\text{d}P}&=\dfrac{\text{d}}{\text{d}P}\int_0^P(P-y)\mathcal{g}_F(y)\text{d}y\\
+&=\dfrac{\text{d}}{\text{d}P}\int_0^PP\mathcal{g}_F(y)\text{d}y-\dfrac{\text{d}}{\text{d}P}\int_0^Py\mathcal{g}_F(y)\text{d}y\\
+&=\dfrac{\text{d}}{\text{d}P}[P\mathcal{G}_F(P)]-P\mathcal{g}_F(P)\\
+&=\mathcal{G}_F(P)
+\end{aligned}
+$$
+
+根据概率密度的定义可以得到
+
+$$
+\dfrac{\text{d}^2\bar{Q}}{\text{d}P^2}=\dfrac{\text{d}\mathcal{G}_F(P)}{\text{d}P}=\mathcal{g}_F(P)
+$$
+
+# 2 基于SCS-CN曲线的分析
+
+SCS-CN方法的核心假设是存在一个土壤储水量$S$，使得
+
+$$
+\dfrac{Q}{P}=\dfrac{F}{S}
+$$
+
+进而可以得到
+
+$$
+Q=\dfrac{P^2}{P+S}
+$$
+
+这里，$P$其实是有效降雨量$P_e$。当$P$为真实降雨量时，需要考虑到初损值$I_a$，满足
+
+$$
+P=P_e+I_a
+$$
+
+即
+
+$$
+Q=\dfrac{(P-I_a)^2}{P-I_a+S}
+$$
+
+当$I_a=\lambda S$且$\lambda=0.2$时
+
+$$
+Q=\dfrac{(P-0.2S)^2}{P+0.8S}
+$$
+
+如果假设$S=1$，那么可以做出$Q$对$P$的曲线图
+
+```{r}
+library(tidyverse)
+library(latex2exp)
+runoff <- function(rainfall) {
+  (rainfall - 0.2) ^ 2 / (rainfall + 0.8) * (rainfall >= 0.2)
+}
+ggplot(tibble(P = c(0, 5)), aes(x = P)) +
+  geom_function(fun = runoff, color = "red") +
+  geom_line(aes(y = P), linetype = 2) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  ylab("Q") + cowplot::theme_cowplot()
+```
+
+令$Q^*=Q/S$、$P^*=P/S$、$F^*=F/S$，那么可以对$P$、$Q$、$F$进行无量纲化，得到
+
+$$
+Q^*=\dfrac{(P^*-0.2)^2}{P^*+0.8}
+$$
+
+那么有
+
+$$
+\dfrac{\text{d}Q}{\text{d}P}=\dfrac{\text{d}Q^*}{\text{d}P^*}=1-(P^*+0.8)^{-2}=1-(P/S+0.8)^{-2}
+$$
+
+即
+
+$$
+\mathcal{G}_F(x)=1-(x/S+0.8)^{-2}
+$$
+
+当$S=1$时，分布函数$\mathcal{G}_F(x)$的曲线形式如下
+
+```{r}
+probfun <- function(loss) {
+  (1 - 1 / (loss + 0.8) ^ 2) * (loss >= 0.2)
+}
+ggplot(tibble(x = c(0, 5)), aes(x = x)) +
+  geom_function(fun = probfun, color = "red") +
+  geom_hline(yintercept = 1, linetype = 2) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  ylab(TeX(r"($G_F(x)$)")) + cowplot::theme_cowplot()
+```
+
+另外，有
+
+$$
+\dfrac{\text{d}^2Q}{\text{d}P^2}=2S^{-1}(P/S+0.8)^{-3}
+$$
+
+即
+
+$$
+\mathcal{g}_F(x)=2S^{-1}(x/S+0.8)^{-3}
+$$
+
+当$S=1$时，概率密度函数$\mathcal{g}_F(x)$的曲线形式如下
+
+```{r}
+denfun <- function(loss) {
+  (2 / (loss + 0.8) ^ 3) * (loss >= 0.2)
+}
+ggplot(tibble(x = c(0, 5)), aes(x = x)) +
+  geom_function(fun = denfun, color = "red") +
+  geom_vline(xintercept = 0.2, linetype = 2) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  ylab(TeX(r"($g_F(x)$)")) + cowplot::theme_cowplot()
+```
+
+这里$x\ge0.2S$。此时，$F$的期望值为
+
+$$
+\bar{F}=\int_{0.2S}^{+\infty}x\mathcal{g}_F(x)\text{d}x=\int_{0.2S}^{+\infty}2xS^{-1}(x/S+0.8)^{-3}\text{d}x=1.2S
+$$
+
+从$F$的期望值可以看出，这里的$F$是包含初损$I_a=0.2S$的，即
+
+$$
+\bar{Q}=P-\bar{F}=P-1.2S=P-(I_a+S)=P_e-S
+$$
+
+另外，我们可以根据分布函数求出任意分位数对应的随机变量的取值，即通过$\mathcal{G}_F(x)=0.5$可以得到
+
+$$
+1-(F_{0.5}/S+0.8)^{-2}=0.5
+$$
+
+那么，$F$的中位数为
+
+$$
+F_{0.5}=(\sqrt{2}-0.8)S\approx0.6142S
+$$
+
+
+
